@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :users
   resources :sessions
+  resources :competition_teams
 
   get 'logg_ut', to: 'sessions#destroy', as: 'logg_ut'
   get 'regsitrering', to: 'users#new', as: 'registrering'

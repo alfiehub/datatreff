@@ -1,0 +1,2 @@
+module CompetitionTeamsHelper
+end

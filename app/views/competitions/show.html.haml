@@ -16,17 +16,15 @@
           = t.users.first.mobile
         - if current_user == t.users.first
           %td
-            = link_to 'x'
+            = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete
+
   = semantic_form_for @competition do |f|
     = f.inputs :name do
-      = f.input :teams, as: :select, collection: current_user.teams.select{|t| !@competition.teams.include?(t)}
+      = f.input :teams, label: "Mine lag", as: :select, collection: current_user.teams.select{|t| !@competition.teams.include?(t)}
     = f.actions do
-      = f.action :submit, as: :button
-  = semantic_form_for @competition, method: 'delete' do |f|
-    = f.inputs :name do
-      = f.input :teams, as: :select, collection: current_user.teams.select{|t| @competition.teams.include?(t)}
-    = f.actions do
-      = f.action :submit
+      = f.action :submit, label: "Meld på", as: :button
+
+
 .col-md-6
   %table.table
     %thead
