@@ -10,11 +10,6 @@
       .page-header
         %h1
           = link_to 'Datatreff', root_path
-        - if !current_user.nil?
-          Du er logget inn som
-          = link_to current_user.username, user_path(current_user.id)
-          = link_to 'Logg ut?', logg_ut_path
-        - else
-          Du er ikke logget inn.
-          = link_to 'Logg inn?', logg_inn_path
+          = current_user.username
+        = render 'layouts/nav'
       = yield

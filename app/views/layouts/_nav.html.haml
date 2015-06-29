@@ -1,0 +1,12 @@
+%ul{class: "nav nav-tabs"}
+  %li.active{role: "presentation"}
+    = link_to "Hjem", root_path
+  %li{role: "presentation"}
+    = link_to "Teams", teams_path
+  %li
+    = link_to 'Competitions', competitions_path
+  %li
+    - if current_user.nil?
+      = link_to "Logg inn", logg_inn_path
+    - else
+      = link_to "Logg ut", logg_ut_path
