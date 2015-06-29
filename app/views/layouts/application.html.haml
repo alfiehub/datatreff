@@ -11,7 +11,7 @@
         %h1 Datatreff
         - if !current_user.nil?
           Du er logget inn som
-          = current_user.username
+          = link_to current_user.username, user_path(current_user.id)
           = link_to 'Logg ut?', logg_ut_path
         - else
           Du er ikke logget inn.

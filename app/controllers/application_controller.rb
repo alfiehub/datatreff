@@ -12,5 +12,14 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, flash: {danger: "Du er ikke logget inn!" } if current_user.nil?
   end
 
+  def authorize_admin
+    redirect_to root_path, flash: {danger: "Du har ikke rettigheter til å gjøre dette"} if !current_user.admin
+  end
+
+  def is_admin?
+    current_user.admin
+  end
+
+  helper_method :is_admin?
   helper_method :current_user
 end

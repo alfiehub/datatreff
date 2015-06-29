@@ -3,6 +3,7 @@
 = @user.name
 %br
 = @user.mobile
-%br
-= @user.email
+- if params[:id] == current_user.id || is_admin?
+  %br
+  = @user.email
 
