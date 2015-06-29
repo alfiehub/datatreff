@@ -1,0 +1,17 @@
+%h2
+  = @competition.name
+= @competition.admin_name
+= @competition.admin_mobile
+= @competition.admin_email
+= @competition.start_time
+%h3
+  Lag meldt på
+- @competition.teams.each do |t|
+  = t.name
+  %br
+
+= semantic_form_for @competition do |f|
+  = f.inputs :name do
+    = f.input :teams, as: :select, collection: current_user.teams
+  = f.actions do
+    = f.action :submit, as: :button
