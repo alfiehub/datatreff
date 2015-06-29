@@ -5,10 +5,15 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-  %h1 Datatreff
   %body
     .container
       .page-header
+        %h1 Datatreff
         - if !current_user.nil?
+          Du er logget inn som
           = current_user.username
+          = link_to 'Logg ut?', logg_ut_path
+        - else
+          Du er ikke logget inn.
+          = link_to 'Logg inn?', logg_inn_path
       = yield
