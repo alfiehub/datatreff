@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :competitions
   resources :teams
   resources :users
   resources :sessions
