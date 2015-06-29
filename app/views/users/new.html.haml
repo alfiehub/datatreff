@@ -1,0 +1,12 @@
+= semantic_form_for @user do |f|
+  - if @user.errors.any?
+    .error-message
+      Du gjorde noe feil.
+  = f.inputs :name => "User" do
+    = f.input :username
+    = f.input :email
+    = f.input :mobile
+    = f.input :password
+    = f.input :password_confirmation
+  = f.actions do
+    = f.action :submit, as: :button
