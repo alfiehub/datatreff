@@ -30,10 +30,10 @@ gem 'bcrypt', '~> 3.1.7'
 # HAML
 gem 'haml'
 gem 'haml-rails'
-gem 'formtastic-bootstrap'
 
 # Bootstrap
 gem 'bootstrap-sass'
+gem 'formtastic-bootstrap'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
