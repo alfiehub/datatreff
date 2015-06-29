@@ -13,10 +13,10 @@ class CompetitionsController < ApplicationController
 
   def update
     @competition = Competition.find(params[:id])
-    teams = competition_params[:team_ids]
+    teams = competition_params[:team_ids] + @competition.teams.pluck(:id)
     team = Team.find(teams[1])
-    puts teams
-    if teams.length <= 2 && @competition.update_attributes(competition_params) && team.users.pluck(:id).include?(current_user.id)
+
+    if team.users.pluck(:id).include?(current_user.id) && @competition.update_attribute(:team_ids, teams)
       redirect_to @competition
     else
       redirect_to @competition
@@ -31,6 +31,7 @@ class CompetitionsController < ApplicationController
       render "new"
     end
   end
+
   def competition_params
     params.require(:competition).permit(:name, :admin_name, :admin_mobile, :admin_email, :start_time, team_ids: [])
   end

@@ -1,17 +1,42 @@
 %h2
   = @competition.name
-= @competition.admin_name
-= @competition.admin_mobile
-= @competition.admin_email
-= @competition.start_time
-%h3
-  Lag meldt på
-- @competition.teams.each do |t|
-  = t.name
-  %br
-
-= semantic_form_for @competition do |f|
-  = f.inputs :name do
-    = f.input :teams, as: :select, collection: current_user.teams
-  = f.actions do
-    = f.action :submit, as: :button
+.col-md-6
+  %h3
+    Lag meldt på
+  %table.table
+    - @competition.teams.each do |t|
+      %tr
+        %td
+          = t.name
+        %td
+          = t.users.first.username
+        %td
+          = t.users.first.name
+        %td
+          = t.users.first.mobile
+        - if current_user == t.users.first
+          %td
+            = link_to 'x'
+  = semantic_form_for @competition do |f|
+    = f.inputs :name do
+      = f.input :teams, as: :select, collection: current_user.teams.select{|t| !@competition.teams.include?(t)}
+    = f.actions do
+      = f.action :submit, as: :button
+  = semantic_form_for @competition, method: 'delete' do |f|
+    = f.inputs :name do
+      = f.input :teams, as: :select, collection: current_user.teams.select{|t| @competition.teams.include?(t)}
+    = f.actions do
+      = f.action :submit
+.col-md-6
+  %table.table
+    %thead
+      %th Admin
+      %th Mobilnummer
+      %th Start
+    %tr
+      %td
+        = @competition.admin_name
+      %td
+        = @competition.admin_mobile
+      %td
+        = I18n.l @competition.start_time
