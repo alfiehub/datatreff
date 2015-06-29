@@ -1,0 +1,8 @@
+%h2
+  Logg inn
+= semantic_form_for 'user', url: sessions_path do |f|
+  = f.inputs do
+    = f.input :username, label: false, placeholder: "Brukernavn"
+    = f.input :password, label: false, placeholder: "Passord"
+  = f.actions do
+    = f.action :submit, as: :button, label: "Logg inn"
