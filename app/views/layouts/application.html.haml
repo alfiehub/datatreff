@@ -1,7 +1,14 @@
-%title Datatreff
-= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-= javascript_include_tag 'application', 'data-turbolinks-track' => true
-= csrf_meta_tags
+%html
+  %head
+    %title Datatreff
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
 
-%h1 Datatreff
-= yield
+  %h1 Datatreff
+  %body
+    .container
+      .page-header
+        - if !current_user.nil?
+          = current_user.username
+      = yield

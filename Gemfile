@@ -32,6 +32,9 @@ gem 'haml'
 gem 'haml-rails'
 gem 'formtastic-bootstrap'
 
+# Bootstrap
+gem 'bootstrap-sass'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
