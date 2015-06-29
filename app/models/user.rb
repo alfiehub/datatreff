@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates_uniqueness_of :username, :email, :mobile
 
+  has_many :user_teams
+  has_many :teams, through: :user_teams
+
+  validates_uniqueness_of :username, :email, :mobile
 end

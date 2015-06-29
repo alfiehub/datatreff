@@ -1,0 +1,9 @@
+= semantic_form_for @team do |f|
+  - if @team.errors.any?
+    .error-message
+      Du gjorde noe feil.
+  = f.inputs :name => "Team" do
+    = f.input :name
+    = f.input :users, as: :check_boxes
+  = f.actions do
+    = f.action :submit, as: :button
