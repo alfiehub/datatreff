@@ -1,3 +1,11 @@
-- @teams.each do |t|
-  = link_to t.name, t
-  %br
+.row
+  .col-md-6
+    %table.table
+      %h2
+        Mine lag
+        %span{class: "label label-primary"}
+          = link_to "Nytt lag", new_team_path, {style: "color:white;"}
+      - @teams.each do |t|
+        %tr
+          %td
+            = link_to t.name, t

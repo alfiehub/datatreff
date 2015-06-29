@@ -7,9 +7,9 @@
 
   %body
     .container
-      .page-header
-        %h1
-          = link_to 'Datatreff', root_path
+      %h1
+        = link_to 'Datatreff', root_path
+        - if !current_user.nil?
           = current_user.username
-        = render 'layouts/nav'
+      = render 'layouts/nav'
       = yield

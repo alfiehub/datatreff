@@ -4,3 +4,9 @@
 - @team.users.each do |u|
   = u.username
   %br
+
+= semantic_form_for @team do |f|
+  = f.inputs :name do
+    = f.input :users, collection: User.all.select{|u| !@team.users.include?(u)}
+  = f.actions do
+    = f.action :submit, as: :button
