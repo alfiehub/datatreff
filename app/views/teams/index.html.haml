@@ -9,3 +9,10 @@
         %tr
           %td
             = link_to t.name, t
+          - if is_admin? && !t.users.first.nil?
+            %td
+              = t.users.first.name
+            %td
+              = t.users.first.username
+            %td
+              = t.users.first.mobile

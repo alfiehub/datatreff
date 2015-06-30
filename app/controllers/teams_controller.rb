@@ -1,6 +1,10 @@
 class TeamsController < ApplicationController
   def index
-    @teams = Team.all
+    if is_admin?
+      @teams = Team.all
+    else
+      @teams = current_user.teams
+    end
   end
   def new
     @team = Team.new
@@ -8,7 +12,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    if current_user.nil? || !current_user.teams.include?(@team)
+    if !is_admin? && (current_user.nil? || !current_user.teams.include?(@team))
       redirect_to teams_path
     end
   end
@@ -24,7 +28,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     if @team.save
       @team.update_attribute(:user_ids, current_user.id)
-      redirect_to root_path, notice: "Laget ditt har blitt opprettet."
+      redirect_to @team, notice: "Laget ditt har blitt opprettet."
     else
       render "new"
     end
