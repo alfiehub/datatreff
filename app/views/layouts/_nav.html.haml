@@ -1,10 +1,17 @@
-%ul{class: "nav nav-tabs"}
-  %li.active{role: "presentation"}
-    = link_to "Hjem", root_path
-  %li{role: "presentation"}
-    = link_to "Teams", teams_path
+%ul{class: "nav nav-tabs nav-justified"}
   %li
-    = link_to 'Competitions', competitions_path
+    = link_to "Hjem", root_path
+  - if !current_user.nil?
+    %li
+      = link_to "Mine lag", teams_path
+  %li{class: "dropdown"}
+    %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
+      Konkurranser
+      %span{class: "caret"}
+    %ul{class: "dropdown-menu"}
+      - Competition.all.each do |c|
+        %li
+          = link_to c.name, c
   %li
     - if current_user.nil?
       = link_to "Logg inn", logg_inn_path
