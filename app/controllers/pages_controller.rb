@@ -23,9 +23,17 @@ class PagesController < ApplicationController
   end
 
   def edit
+    @page = Page.find_by_param(params[:id])
   end
 
   def update
+    @page = Page.find_by_param(params[:id])
+    if @page.update_attributes(page_params)
+      flash[:success] = "Du endret artikkelen."
+      redirect_to @page
+    else
+      render 'new'
+    end
   end
 
   private

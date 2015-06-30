@@ -1,4 +1,11 @@
 %h2
   = @page.title
+  - if is_admin?
+    %span{class: "label label-primary"}
+      = link_to "Endre artikkel", edit_page_path(@page),{style: "color:white;"}
 = @page.content
-= @page.user_id
+
+%br
+%br
+Skrevet av
+= @page.user.name

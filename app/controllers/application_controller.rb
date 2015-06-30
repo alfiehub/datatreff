@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin?
-    current_user.admin
+    !current_user.nil? && current_user.admin
   end
 
   helper_method :is_admin?
