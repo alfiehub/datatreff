@@ -1,6 +1,16 @@
 %ul{class: "nav nav-tabs nav-justified"}
   %li
     = link_to "Hjem", root_path
+
+  %li{class: "dropdown"}
+    %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
+      Informasjon
+      %span{class: "caret"}
+    %ul{class: "dropdown-menu"}
+      - Page.all{|p| p.main_menu}.each do |p|
+        %li
+          = link_to p.title, p
+
   - if !current_user.nil?
     %li
       = link_to "Mine lag", teams_path

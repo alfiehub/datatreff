@@ -1,0 +1,7 @@
+= semantic_form_for @page do |f|
+  = f.inputs do
+    = f.input :title, label: "Tittel"
+    = f.input :content, label: "Tekst"
+    = f.input :main_menu, as: :radio, label: "Synlig på hovedmenyen?", collection: ["Ja", "Nei"]
+  = f.actions do
+    = f.action :submit, label: "Opprett"

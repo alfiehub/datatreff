@@ -6,5 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :competitions, through: :teams
 
+  has_many :pages
+
   validates_uniqueness_of :username, :email, :mobile
 end
