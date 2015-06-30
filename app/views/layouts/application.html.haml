@@ -12,4 +12,6 @@
         - if !current_user.nil?
           = current_user.username
       = render 'layouts/nav'
+      = render 'layouts/notice'
       = yield
+    = render 'layouts/footer'

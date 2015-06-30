@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_filter :authorize
   def index
     if is_admin?
       @teams = Team.all
@@ -6,6 +7,7 @@ class TeamsController < ApplicationController
       @teams = current_user.teams
     end
   end
+
   def new
     @team = Team.new
   end
@@ -21,6 +23,7 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     users = params[:team][:user_ids] + @team.users.pluck(:id)
     @team.update_attribute(:user_ids, users)
+    flash[:success] = "Du la til en bruker!"
     redirect_to @team
   end
 

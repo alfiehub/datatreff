@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    redirect_to login_path, flash: {danger: "Du er ikke logget inn!" } if current_user.nil?
+    redirect_to logg_inn_path, flash: {danger: "Du er ikke logget inn!" } if current_user.nil?
   end
 
   def authorize_admin

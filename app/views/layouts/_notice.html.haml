@@ -1,0 +1,4 @@
+- if flash.any?
+  - flash.each do |type, message|
+    .alert{ class: 'alert-'+type.to_s}
+      = message

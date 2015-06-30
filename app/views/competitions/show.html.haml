@@ -2,8 +2,13 @@
   = @competition.name
 .col-md-6
   %h3
-    Lag meldt på
+    Lag påmeldt
   %table.table
+    %thead
+      %th Lagnavn
+      %th Brukernavn
+      %th Navn
+      %th Mobilnummer
     - @competition.teams.each do |t|
       %tr
         %td
@@ -18,17 +23,20 @@
           %td
             = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete
 
-  = semantic_form_for @competition do |f|
-    = f.inputs :name do
-      = f.input :teams, label: "Mine lag", as: :select, collection: current_user.teams.select{|t| !@competition.teams.include?(t)}
-    = f.actions do
-      = f.action :submit, label: "Meld på", as: :button
+  - if !current_user.nil?
+    = semantic_form_for @competition do |f|
+      = f.inputs :name do
+        = f.input :teams, label: "Mine lag", as: :select, collection: current_user.teams.select{|t| !@competition.teams.include?(t)}
+      = f.actions do
+        = f.action :submit, label: "Meld på", as: :button
 
 
 .col-md-6
+  %h3
+    Kontaktinformasjon
   %table.table
     %thead
-      %th Admin
+      %th Navn
       %th Mobilnummer
       %th Start
     %tr

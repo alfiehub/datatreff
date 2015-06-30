@@ -1,4 +1,6 @@
 class CompetitionsController < ApplicationController
+  before_filter :authorize_admin, only: [:new, :create]
+
   def index
     @competitions = Competition.all
   end
