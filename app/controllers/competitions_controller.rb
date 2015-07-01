@@ -28,7 +28,8 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new(competition_params)
     if @competition.save
-      redirect_to root_path, notice: "Du har laget en ny konkurranse."
+      flash[:success] = "Du laget en ny konkurranse"
+      redirect_to @competition
     else
       render "new"
     end
