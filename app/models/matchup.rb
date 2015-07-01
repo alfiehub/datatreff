@@ -9,7 +9,7 @@ class Matchup < ActiveRecord::Base
       (0..size/2).each do
         teams_to_use = []
 
-        (0..2).each do
+        (0..1).each do
           if teams_used < teams.length
             teams_to_use.push(teams[teams_used].id)
             teams_used += 1

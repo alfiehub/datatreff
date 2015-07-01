@@ -58,6 +58,10 @@ class CompetitionsController < ApplicationController
       size /= 2
     end
 
+    # Generate grand final
+
+    Matchup.generate_matches(round, false, [], 2, id)
+
     # Generate lower bracket
     round = 1
     size = (2 ** ((Math::log(teams.length) / Math::log(2)).to_f).ceil)/2
@@ -66,6 +70,7 @@ class CompetitionsController < ApplicationController
       round += 1
       size /= 2
     end
+
 
     @competition.update_attribute(:started, true)
     flash[:success] = "Du har startet konkurransen!"

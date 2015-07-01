@@ -1,22 +1,60 @@
-%table.table
-  %thead
-    %th Runde
-    %th Match
-    %th Lag 1
-    %th Lag 2
-    %th Winner?
-    %th Lower?
-  - @matches.each do |m|
-    %tr
-      %td
-        = m.round_number
-      %td
-        = m.match_number
-      %td
-        = m.team1_id
-      %td
-        = m.team2_id
-      %td
-        = m.result_id
-      %td
-        = m.lower_bracket
+.row
+  .col-md-2
+    - @matches.each do |m|
+      - if m.round_number == 1 && !m.lower_bracket
+        .match
+          - if !m.team1_id.nil?
+            = Team.find(m.team1_id).name
+          = "-"
+          - if !m.team2_id.nil?
+            = Team.find(m.team2_id).name
+          %br
+          = m.start_time
+  .col-md-2
+    - @matches.each do |m|
+      - if m.round_number == 2 && !m.lower_bracket
+        .match
+          - if !m.team1_id.nil?
+            = Team.find(m.team1_id).name
+          = "-"
+          - if !m.team2_id.nil?
+            = Team.find(m.team2_id).name
+          %br
+          = m.start_time
+  .col-md-2
+    - @matches.each do |m|
+      - if m.round_number == 3 && !m.lower_bracket
+        .match
+          - if !m.team1_id.nil?
+            = Team.find(m.team1_id).name
+          = "-"
+          - if !m.team2_id.nil?
+            = Team.find(m.team2_id).name
+          %br
+          = m.start_time
+  .col-md-2
+    - @matches.each do |m|
+      - if m.round_number == 4 && !m.lower_bracket
+        .match
+          - if !m.team1_id.nil?
+            = Team.find(m.team1_id).name
+          = "-"
+          - if !m.team2_id.nil?
+            = Team.find(m.team2_id).name
+          %br
+          = m.start_time
+
+
+.row
+  .col-md-2
+  .col-md-2
+    - @matches.each do |m|
+      - if m.round_number == 1 && m.lower_bracket
+        .match
+          - if !m.team1_id.nil?
+            = Team.find(m.team1_id).name
+          = "-"
+          - if !m.team2_id.nil?
+            = Team.find(m.team2_id).name
+          %br
+          = m.start_time
