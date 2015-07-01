@@ -1,0 +1,25 @@
+%h2
+  Alle artikler
+  %span{class: "label label-primary"}
+    = link_to "Ny artikkel", new_page_path, {style: "color:white;"}
+.col-md-8
+  %table.table
+    %thead
+      %th
+        Tittel
+      %th
+        Skrevet av
+      %th
+        Synlig på hovedmenyen?
+    - @pages.each do |p|
+      %tr
+        %td
+          = link_to p.title, p
+        %td
+          = User.find(p.user_id).name
+        %td
+          = p.main_menu
+        %td
+          = link_to 'Endre', edit_page_path(p)
+        %td
+          = link_to 'Slett', p, method: :delete, confirmation: "Er du sikker?"

@@ -3,7 +3,7 @@
   - if is_admin?
     %span{class: "label label-primary"}
       = link_to "Endre artikkel", edit_page_path(@page),{style: "color:white;"}
-= @page.content
+= raw(@markdown.render(@page.content))
 
 %br
 %br

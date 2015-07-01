@@ -1,10 +1,13 @@
 class PagesController < ApplicationController
+  before_filter :authorize_admin, only: [:new, :create, :index, :edit, :update]
+
   def index
     @pages = Page.all
   end
 
   def show
     @page = Page.find_by_param(params[:id])
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
   end
 
   def new
@@ -34,6 +37,16 @@ class PagesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @page = Page.find(params[:id])
+    if @page.destroy
+      flash[:success] = "Du slettet en artikkel"
+    else
+      flash[:warning] = "Noe gikk galt."
+    end
+    redirect_to pages_path
   end
 
   private
