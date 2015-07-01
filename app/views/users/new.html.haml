@@ -2,12 +2,12 @@
   - if @user.errors.any?
     .error-message
       Du gjorde noe feil.
-  = f.inputs :name => "User" do
-    = f.input :username
-    = f.input :name
-    = f.input :email
-    = f.input :mobile
-    = f.input :password
-    = f.input :password_confirmation
+  = f.inputs :name => "Registrering" do
+    = f.input :username, label: "Brukernavn"
+    = f.input :name, label: "Navn"
+    = f.input :email, label: "E-post"
+    = f.input :mobile, label: "Telefonnummer (mobil)"
+    = f.input :password, label: "Passord"
+    = f.input :password_confirmation, label: "Bekreft passord"
   = f.actions do
     = f.action :submit, as: :button
