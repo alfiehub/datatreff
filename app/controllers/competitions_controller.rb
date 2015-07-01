@@ -35,6 +35,28 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def start
+    @competition = Competition.find(params[:id])
+    id = params[:id]
+    teams = @competition.teams
+    # Some math to calculate the least amount of matches needed for the first round
+    size = 2 ** ((Math::log(teams.length) / Math::log(2)).to_f).ceil
+
+    # Create first round winners
+    # generate_matches(round, lower, teams, size, comp_id)
+    Matchup.generate_matches(1, false, teams, size, id)
+    next_round_winner_teams = size/2
+    round = 2
+    while next_round_winner_teams > 1
+      Matchup.generate_matches(round, false, [], next_round_winner_teams, id)
+      round += 1
+      next_round_winner_teams /= 2
+    end
+    @competition.update_attribute(:started, true)
+    flash[:success] = "Du har startet konkurransen!"
+    redirect_to @competition
+  end
+
   def competition_params
     params.require(:competition).permit(:name, :admin_name, :admin_mobile, :admin_email, :start_time, team_ids: [])
   end

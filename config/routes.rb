@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  resources :results
+  resources :matchups
   resources :pages
-  resources :competitions
+  resources :competitions do
+    member do
+      get :start
+    end
+  end
   resources :teams
   resources :users
   resources :sessions

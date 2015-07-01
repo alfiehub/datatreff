@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630104420) do
+ActiveRecord::Schema.define(version: 20150701084054) do
 
   create_table "competition_teams", force: :cascade do |t|
     t.integer  "competition_id"
@@ -28,9 +28,23 @@ ActiveRecord::Schema.define(version: 20150630104420) do
     t.string   "admin_name"
     t.string   "admin_mobile"
     t.string   "admin_email"
+    t.boolean  "started",      default: false
     t.datetime "start_time"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "matchups", force: :cascade do |t|
+    t.integer  "team1_id"
+    t.integer  "team2_id"
+    t.datetime "start_time"
+    t.integer  "round_number"
+    t.integer  "match_number"
+    t.boolean  "lower_bracket"
+    t.integer  "competition_id"
+    t.integer  "result_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "pages", force: :cascade do |t|
@@ -40,6 +54,14 @@ ActiveRecord::Schema.define(version: 20150630104420) do
     t.boolean  "main_menu"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer  "winner_team"
+    t.integer  "match_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "teams", force: :cascade do |t|

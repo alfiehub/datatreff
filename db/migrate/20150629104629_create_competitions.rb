@@ -5,6 +5,7 @@ class CreateCompetitions < ActiveRecord::Migration
       t.string :admin_name
       t.string :admin_mobile
       t.string :admin_email
+      t.boolean :started, default: false
       t.timestamp :start_time
 
       t.timestamps null: false
