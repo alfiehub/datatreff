@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :competitions do
     member do
       get :start
+      get :started
     end
   end
   resources :teams

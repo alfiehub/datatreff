@@ -1,0 +1,22 @@
+%table.table
+  %thead
+    %th Runde
+    %th Match
+    %th Lag 1
+    %th Lag 2
+    %th Winner?
+    %th Lower?
+  - @matches.each do |m|
+    %tr
+      %td
+        = m.round_number
+      %td
+        = m.match_number
+      %td
+        = m.team1_id
+      %td
+        = m.team2_id
+      %td
+        = m.result_id
+      %td
+        = m.lower_bracket

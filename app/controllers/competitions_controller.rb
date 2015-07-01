@@ -7,6 +7,9 @@ class CompetitionsController < ApplicationController
 
   def show
     @competition = Competition.find(params[:id])
+    if @competition.started
+      redirect_to started_competition_path(@competition)
+    end
   end
 
   def new
@@ -45,16 +48,38 @@ class CompetitionsController < ApplicationController
     # Create first round winners
     # generate_matches(round, lower, teams, size, comp_id)
     Matchup.generate_matches(1, false, teams, size, id)
-    next_round_winner_teams = size/2
+
+    # Generate the rest of winner bracket
+    size /= 2
     round = 2
-    while next_round_winner_teams > 1
-      Matchup.generate_matches(round, false, [], next_round_winner_teams, id)
+    while size >= 2
+      Matchup.generate_matches(round, false, [], size, id)
       round += 1
-      next_round_winner_teams /= 2
+      size /= 2
     end
+
+    # Generate lower bracket
+    round = 1
+    size = (2 ** ((Math::log(teams.length) / Math::log(2)).to_f).ceil)/2
+    while size >= 2
+      Matchup.generate_matches(round, true, [], size, id)
+      round += 1
+      size /= 2
+    end
+
     @competition.update_attribute(:started, true)
     flash[:success] = "Du har startet konkurransen!"
     redirect_to @competition
+  end
+
+  def started
+    @competition = Competition.find(params[:id])
+    if !@competition.started
+      redirect_to @competition
+    end
+    @matches = Competition.find(params[:id]).matchups
+    puts "LOL"
+    puts @matches
   end
 
   def competition_params
