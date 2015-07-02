@@ -87,6 +87,14 @@ class CompetitionsController < ApplicationController
     puts @matches
   end
 
+  def matches
+    @matches = Competition.find(params[:id]).matchups
+    respond_to do |f|
+      f.json { render :json => @matches }
+    end
+
+  end
+
   def competition_params
     params.require(:competition).permit(:name, :admin_name, :admin_mobile, :admin_email, :start_time, team_ids: [])
   end
