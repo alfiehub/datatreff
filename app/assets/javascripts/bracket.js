@@ -3,24 +3,27 @@ $.ajax({
   url: "matches.json",
   dataType: 'json',
   success: function(data) {
-    console.log("POP");
+    var bracketData = {
+      teams : [],
+      results : []
+    }
 
+    // Add teams
+    var t = [];
+    for (var i = 0; i < data.length; i++) {
+      t.push(data[i].name);
+      if (t.length == 2 | i == data.length-1) {
+        bracketData.teams.push(t);
+        t = [];
+      }
+    }
+
+
+    $(function() {
+      $('.bracket').bracket({
+        skipConsolationRound: true,
+        init: bracketData});
+    });
   }
 });
 
-
-var minimalData = {
-teams : [
-          ["Team 1", "Team 2"], /* first matchup */
-        ["Team 3", "Team 4"]  /* second matchup */
-          ],
-        results : [
-          [[1,2], [3,4]],       /* first round */
-        [[4,6], [2,1]]        /* second round */
-          ]
-}
-
-$(function() {
-  $('.bracket').bracket({
-    init: minimalData /* data to initialize the bracket with */ })
-});

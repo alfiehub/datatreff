@@ -88,7 +88,7 @@ class CompetitionsController < ApplicationController
   end
 
   def matches
-    @matches = Competition.find(params[:id]).matchups
+    @matches = Competition.find(params[:id]).teams
     respond_to do |f|
       f.json { render :json => @matches }
     end
