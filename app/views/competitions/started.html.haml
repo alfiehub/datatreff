@@ -4,4 +4,10 @@
 .header
   %h2
     = @competition.name
+  - if is_participating?(@competition.id, current_user.id)
+    = link_to "Meld inn resultat", new_competition_result_path(@competition)
+  = "-"
+  - if is_admin?
+    = link_to "Resultater", competition_results_path(@competition)
+
 .bracket

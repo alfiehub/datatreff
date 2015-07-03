@@ -1,0 +1,14 @@
+.row
+  .col-md-6
+    = semantic_form_for @result do |f|
+      - if @result.errors.any?
+        .error-message
+          Du gjorde noe feil.
+      = f.inputs :name => "Resultat" do
+        = f.input :team1_id, as: :select, collection: @competition.teams
+        = f.input :team2_id, as: :select, collection: @competition.teams
+        = f.input :team1_score
+        = f.input :team2_score
+        = f.input :competition_id, as: :hidden, input_html: { value: @competition.id }
+      = f.actions do
+        = f.action :submit, as: :button

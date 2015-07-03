@@ -1,0 +1,50 @@
+%h2 Resultater
+%table.table
+  %thead
+    %th
+      Lag 1
+    %th
+      Lag 2
+    %th
+      Lag 1 resultat
+    %th
+      Lag 2 resultat
+    %th
+      Konkurranse
+    %th
+      Runde
+    %th
+      Match
+    %th
+      Lower bracket?
+    %th
+      Godkjent
+    %th
+      Rapport av
+  - @results.each do |r|
+    %tr
+      %td
+        = Team.find(r.team1_id).name
+      %td
+        = Team.find(r.team2_id).name
+      %td
+        = r.team1_score
+      %td
+        = r.team2_score
+      %td
+        = r.competition.name
+      %td
+        = r.round
+      %td
+        = r.match
+      %td
+        = r.lower_bracket
+      %td
+        = r.validated
+      %td
+        = r.user.name
+      %td
+        = link_to 'Endre?', edit_competition_result_path(id: r.id)
+      %td
+        = link_to 'Slett?', competition_result_path(id: r.id), method: :delete
+

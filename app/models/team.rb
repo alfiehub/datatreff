@@ -5,6 +5,8 @@ class Team < ActiveRecord::Base
   has_many :competition_teams
   has_many :competitions, through: :competition_teams
 
+  validates :name, presence: true
+
   def self.tryfind(id)
     if id.nil?
       nil

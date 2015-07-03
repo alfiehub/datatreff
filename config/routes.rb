@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :results
-  resources :matchups
   resources :pages
   resources :competitions do
+    resources :results
     member do
       get :start
       get :started

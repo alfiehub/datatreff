@@ -34,19 +34,6 @@ ActiveRecord::Schema.define(version: 20150701084054) do
     t.datetime "updated_at",                   null: false
   end
 
-  create_table "matchups", force: :cascade do |t|
-    t.integer  "team1_id"
-    t.integer  "team2_id"
-    t.datetime "start_time"
-    t.integer  "round_number"
-    t.integer  "match_number"
-    t.boolean  "lower_bracket"
-    t.integer  "competition_id"
-    t.integer  "result_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "pages", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -57,11 +44,18 @@ ActiveRecord::Schema.define(version: 20150701084054) do
   end
 
   create_table "results", force: :cascade do |t|
-    t.integer  "winner_team"
-    t.integer  "match_id"
+    t.integer  "team1_id"
+    t.integer  "team2_id"
+    t.integer  "team1_score"
+    t.integer  "team2_score"
+    t.integer  "competition_id"
+    t.integer  "round"
+    t.integer  "match"
+    t.boolean  "lower_bracket"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "validated"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "teams", force: :cascade do |t|

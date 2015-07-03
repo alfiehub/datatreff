@@ -1,6 +1,8 @@
 class CompetitionsController < ApplicationController
   before_filter :authorize_admin, only: [:new, :create]
 
+  helper_method :is_participating?
+
   def index
     @competitions = Competition.all
   end
@@ -42,35 +44,6 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     id = params[:id]
     teams = @competition.teams
-    # Some math to calculate the least amount of matches needed for the first round
-    size = 2 ** ((Math::log(teams.length) / Math::log(2)).to_f).ceil
-
-    # Create first round winners
-    # generate_matches(round, lower, teams, size, comp_id)
-    Matchup.generate_matches(1, false, teams, size, id)
-
-    # Generate the rest of winner bracket
-    size /= 2
-    round = 2
-    while size >= 2
-      Matchup.generate_matches(round, false, [], size, id)
-      round += 1
-      size /= 2
-    end
-
-    # Generate grand final
-
-    Matchup.generate_matches(round, false, [], 2, id)
-
-    # Generate lower bracket
-    round = 1
-    size = (2 ** ((Math::log(teams.length) / Math::log(2)).to_f).ceil)/2
-    while size >= 2
-      Matchup.generate_matches(round, true, [], size, id)
-      round += 1
-      size /= 2
-    end
-
 
     @competition.update_attribute(:started, true)
     flash[:success] = "Du har startet konkurransen!"
@@ -82,9 +55,6 @@ class CompetitionsController < ApplicationController
     if !@competition.started
       redirect_to @competition
     end
-    @matches = Competition.find(params[:id]).matchups
-    puts "LOL"
-    puts @matches
   end
 
   def matches
@@ -93,6 +63,18 @@ class CompetitionsController < ApplicationController
       f.json { render :json => @matches }
     end
 
+  end
+
+  def is_participating?(c_id, user_id)
+    teams = User.find(user_id).teams.pluck(:id)
+    p_teams = Competition.find(c_id).teams.pluck(:id)
+
+    for team in p_teams
+      if teams.include?(team)
+        return true
+      end
+    end
+    return false
   end
 
   def competition_params
