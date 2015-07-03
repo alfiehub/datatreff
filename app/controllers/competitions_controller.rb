@@ -62,7 +62,13 @@ class CompetitionsController < ApplicationController
     respond_to do |f|
       f.json { render :json => @matches }
     end
+  end
 
+  def result
+    @results = Competition.find(params[:id]).results.accepted
+    respond_to do |f|
+      f.json { render :json => @results }
+    end
   end
 
   def is_participating?(c_id, user_id)
