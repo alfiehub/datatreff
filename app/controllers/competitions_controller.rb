@@ -59,15 +59,9 @@ class CompetitionsController < ApplicationController
 
   def matches
     @matches = Competition.find(params[:id]).teams
-    respond_to do |f|
-      f.json { render :json => @matches }
-    end
-  end
-
-  def result
     @results = Competition.find(params[:id]).results.accepted
     respond_to do |f|
-      f.json { render :json => @results }
+      f.json { render :json => {teams: @matches, results: @results} }
     end
   end
 

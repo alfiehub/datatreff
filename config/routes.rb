@@ -7,7 +7,6 @@ Rails.application.routes.draw do
       get :start
       get :started
       get :matches
-      get :result
     end
   end
   resources :teams
