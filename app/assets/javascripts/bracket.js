@@ -24,8 +24,12 @@ $.ajax({
     }
 
     // Fill up so we have enough empty matches, if needed
-    var minimum = Math.pow(2, Math.log(bracketData.teams.length)/Math.log(2));
-    while (bracketData.teams.length < minimum) {
+    var matches = Math.pow(2, Math.ceil((Math.log(bracketData.teams.length)/Math.log(2))));
+    var players = matches*2;
+    var l2 = Math.log(players)/Math.log(2);
+    var lower_rounds = Math.ceil(l2) + Math.ceil(Math.log(l2)/Math.log(2));
+
+    while (bracketData.teams.length < matches) {
       bracketData.teams.push(['--','--'])
     }
 
@@ -36,12 +40,18 @@ $.ajax({
       bracketData.results.push([]);
     }
     // Add winner rounds
-    for (var i = 0; i < minimum; i++) {
+    for (var i = 0; i < l2; i++) {
       bracketData.results[0].push([]);
+      for (var n = 0; n < matches/Math.pow(2,i); n++) {
+        bracketData.results[0][i].push([]);
+      }
     }
-    // Add loswers rounds
-    for (var i = 0; i < minimum; i++) {
+    // Add lower rounds
+    for (var i = 0; i < lower_rounds; i++) {
       bracketData.results[1].push([]);
+      for (var n = 0; n < matches/Math.pow(2,i); n++) {
+        bracketData.results[1][i].push([]);
+      }
     }
     // Add final rounds
     for (var i = 0; i < 2; i++) {
@@ -49,18 +59,20 @@ $.ajax({
     }
     // Add results
     for (var i = 0; i < results.length; i++) {
-      console.log(bracketData.results);
       if (!results[i].lower_bracket) {
-        if (results[i].round == 3) { // Handle finals
+        if (results[i].round == matches+1) { // Handle finals
           bracketData.results[2][results[i].match-1].push([results[i].team1_score, results[i].team2_score]);
         } else {
-          bracketData.results[0][results[i].round-1].push([results[i].team1_score, results[i].team2_score]);
+          bracketData.results[0][results[i].round-1][results[i].match-1].push(results[i].team1_score);
+          bracketData.results[0][results[i].round-1][results[i].match-1].push(results[i].team2_score);
         }
       } else {
-        bracketData.results[1][results[i].round-1].push([results[i].team1_score, results[i].team2_score]);
+        bracketData.results[1][results[i].round-1][results[i].match-1].push(results[i].team1_score);
+        bracketData.results[1][results[i].round-1][results[i].match-1].push(results[i].team2_score);
       }
     }
 
+    console.log(bracketData);
 
     $(function() {
       $('.bracket').bracket({
