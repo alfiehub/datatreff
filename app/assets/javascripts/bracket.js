@@ -8,8 +8,6 @@ $.ajax({
       results : []
     }
 
-    console.log(data);
-
     // Add teams
     var t = [];
     for (var i = 0; i < data.teams.length; i++) {
@@ -23,12 +21,12 @@ $.ajax({
       }
     }
 
-    // Fill up so we have enough empty matches, if needed
     var matches = Math.pow(2, Math.ceil((Math.log(bracketData.teams.length)/Math.log(2))));
     var players = matches*2;
     var l2 = Math.log(players)/Math.log(2);
     var lower_rounds = Math.ceil(l2) + Math.ceil(Math.log(l2)/Math.log(2));
 
+    // Fill up so we have enough empty matches, if needed
     while (bracketData.teams.length < matches) {
       bracketData.teams.push(['--','--'])
     }
