@@ -1,9 +1,9 @@
 class CreateTeamSeeds < ActiveRecord::Migration
   def change
     create_table :team_seeds do |t|
-      t.integer :team_id
+      t.string :team_name
       t.integer :competition_id
-      t.integer :index
+      t.integer :seed
 
       t.timestamps null: false
     end

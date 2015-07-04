@@ -9,16 +9,12 @@ $.ajax({
     }
 
     // Add teams
-    var t = [];
+    var teams_len = data.teams.length
+    for (var i = 0; i < data.teams.length/2; i++) {
+      bracketData.teams.push([]);
+    }
     for (var i = 0; i < data.teams.length; i++) {
-      t.push(data.teams[i].name);
-      if (t.length == 2) {
-        bracketData.teams.push(t);
-        t = [];
-      } else if (i == data.teams.length-1) {
-        t.push('--');
-        bracketData.teams.push(t);
-      }
+      bracketData.teams[Math.floor((data.teams[i].seed)/2)].push(data.teams[i].team_name);
     }
 
     var matches = Math.pow(2, Math.ceil((Math.log(bracketData.teams.length)/Math.log(2))));

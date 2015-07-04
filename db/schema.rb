@@ -53,15 +53,15 @@ ActiveRecord::Schema.define(version: 20150704174308) do
     t.integer  "match"
     t.boolean  "lower_bracket"
     t.integer  "user_id"
-    t.boolean  "validated"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "validated",      default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "team_seeds", force: :cascade do |t|
-    t.integer  "team_id"
+    t.string   "team_name"
     t.integer  "competition_id"
-    t.integer  "index"
+    t.integer  "seed"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

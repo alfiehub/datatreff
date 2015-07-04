@@ -45,6 +45,21 @@ class CompetitionsController < ApplicationController
     id = params[:id]
     teams = @competition.teams
 
+    # Shuffle and create team seeds
+    t_arr = []
+    teams.each do |t|
+      t_arr.push(t.name)
+    end
+    while t_arr.length < 2 ** (Math.log(t_arr.length)/Math.log(2)).ceil do
+      t_arr.push('__')
+    end
+
+    shuffled = t_arr.shuffle
+
+    (0..shuffled.length-1).each do |i|
+      TeamSeed.new(team_name: shuffled[i], competition_id: id, seed: i).save
+    end
+
     @competition.update_attribute(:started, true)
     flash[:success] = "Du har startet konkurransen!"
     redirect_to @competition
@@ -58,7 +73,7 @@ class CompetitionsController < ApplicationController
   end
 
   def matches
-    @matches = Competition.find(params[:id]).teams
+    @matches = Competition.find(params[:id]).team_seeds
     @results = Competition.find(params[:id]).results.accepted
     respond_to do |f|
       f.json { render :json => {teams: @matches, results: @results} }
