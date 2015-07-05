@@ -54,7 +54,7 @@ $.ajax({
     // Add results
     for (var i = 0; i < results.length; i++) {
       if (!results[i].lower_bracket) {
-        if (results[i].round == matches+1) { // Handle finals
+        if (results[i].round == l2+1) { // Handle finals
           bracketData.results[2][results[i].match-1].push([results[i].team1_score, results[i].team2_score]);
         } else {
           bracketData.results[0][results[i].round-1][results[i].match-1].push(results[i].team1_score);

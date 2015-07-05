@@ -11,6 +11,8 @@
         Skrevet av
       %th
         Synlig på hovedmenyen?
+      %th
+        Synlig på forsiden?
     - @pages.each do |p|
       %tr
         %td
@@ -19,6 +21,8 @@
           = User.find(p.user_id).name
         %td
           = p.main_menu
+        %td
+          = p.front_page
         %td
           = link_to 'Endre', edit_page_path(p)
         %td

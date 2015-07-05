@@ -1,0 +1,16 @@
+- c = 1
+- @pages.each do |p|
+  - if c % 3 == 0
+    .row
+      .col-md-4
+        %h2
+          = link_to p.title, p
+        = raw(@markdown.render(p.content))
+    - c += 1
+  - else
+    .col-md-4
+      %h2
+        = link_to p.title, p
+      = raw(@markdown.render(p.content))
+    - c+= 1
+

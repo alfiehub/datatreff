@@ -3,6 +3,8 @@ class Page < ActiveRecord::Base
 
   belongs_to :user
 
+  scope :front_page, -> { where(front_page: true) }
+
   def self.find_by_param(id)
     if id =~ NAME_FORMAT
       find_by_title(id)

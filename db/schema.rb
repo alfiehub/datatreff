@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150704174308) do
     t.text     "content"
     t.integer  "user_id"
     t.boolean  "main_menu"
+    t.boolean  "front_page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
