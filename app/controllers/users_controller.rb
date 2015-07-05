@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      if @user.id == 1
+        @user.update_attribute(:admin, true)
+      end
       session[:user_id] = @user.id
       flash[:success] = "Du er blitt registrert og logget inn!"
       redirect_to root_path
