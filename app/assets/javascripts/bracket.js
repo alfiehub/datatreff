@@ -70,7 +70,6 @@ $.ajax({
 
     $(function() {
       $('.bracket').bracket({
-        skipConsolationRound: true,
         init: bracketData});
     });
   }
