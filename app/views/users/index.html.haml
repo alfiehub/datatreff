@@ -9,7 +9,7 @@
   - @users.each do |u|
     %tr
       %td
-        = u.username
+        = link_to u.username, edit_user_path(u)
       %td
         = u.name
       %td
@@ -19,4 +19,4 @@
       %td
         = u.admin
       %td
-        = u.created_at
+        = I18n.l u.created_at
