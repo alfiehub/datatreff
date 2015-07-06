@@ -31,7 +31,8 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     if @team.save
       @team.update_attribute(:user_ids, current_user.id)
-      redirect_to @team, notice: "Laget ditt har blitt opprettet."
+      flash[:success] = "Du har opprettet et nytt lag!"
+      redirect_to @team
     else
       render "new"
     end

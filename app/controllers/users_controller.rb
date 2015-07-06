@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  before_filter :authorize_admin, only: [:index, :edit, :update, :show]
+
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end
@@ -19,6 +25,12 @@ class UsersController < ApplicationController
     else
       render "new"
     end
+  end
+
+  def edit
+  end
+
+  def update
   end
 
   private

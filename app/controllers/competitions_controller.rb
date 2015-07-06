@@ -11,6 +11,9 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     if @competition.started
       redirect_to started_competition_path(@competition)
+    elsif current_user.nil?
+      flash[:warning] = "Konkurransen har ikke started enda, du må logge inn for å melde deg på."
+      redirect_to logg_inn_path
     end
   end
 

@@ -1,0 +1,22 @@
+%table.table
+  %thead
+    %th Brukernavn
+    %th Navn
+    %th Mobilnummer
+    %th Email
+    %th Admin?
+    %th Registrert
+  - @users.each do |u|
+    %tr
+      %td
+        = u.username
+      %td
+        = u.name
+      %td
+        = u.mobile
+      %td
+        = u.email
+      %td
+        = u.admin
+      %td
+        = u.created_at

@@ -11,6 +11,8 @@
         = link_to 'Datatreff', root_path
         - if !current_user.nil?
           = current_user.username
+          - if is_admin?
+            = link_to "admin", users_path
       = render 'layouts/nav'
       = render 'layouts/notice'
       = yield

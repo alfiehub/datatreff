@@ -11,3 +11,19 @@
     = link_to "Resultater", competition_results_path(@competition)
 
 .bracket
+
+- if !current_user.nil? && is_participating?(@competition.id, current_user.id)
+  .contact-info
+    %table.table
+      %thead
+        %th Lagnavn
+        %th Brukernavn
+        %th Mobilnummer
+      - @competition.teams.each do |t|
+        %tr
+          %td
+            = t.name
+          %td
+            = t.users.first.username
+          %td
+            = t.users.first.mobile

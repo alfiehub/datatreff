@@ -5,10 +5,10 @@
         .error-message
           Du gjorde noe feil.
       = f.inputs :name => "Resultat" do
-        = f.input :team1_id, as: :select, collection: @competition.teams
-        = f.input :team2_id, as: :select, collection: @competition.teams
-        = f.input :team1_score
-        = f.input :team2_score
+        = f.input :team1_id, label: "Lag 1",  as: :select, collection: @competition.teams
+        = f.input :team2_id, lable: "Lag 2", as: :select, collection: @competition.teams
+        = f.input :team1_score, label: "Lag 1 poeng"
+        = f.input :team2_score, label: "Lag 2 poeng"
         = f.input :competition_id, as: :hidden, input_html: { value: @competition.id }
       = f.actions do
-        = f.action :submit, as: :button
+        = f.action :submit, label: "Send inn", as: :button

@@ -38,8 +38,6 @@
   - if current_user.nil?
     %li
       = link_to "Logg inn", logg_inn_path
-    %li
-      = link_to 'Registrering', registrering_path
   - else
     %li
       = link_to "Logg ut", logg_ut_path
