@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 20150704174308) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.boolean  "main_menu"
-    t.boolean  "front_page"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "main_menu",  default: false
+    t.boolean  "front_page", default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "results", force: :cascade do |t|

@@ -2,7 +2,7 @@
   - if @team.errors.any?
     .error-message
       Du gjorde noe feil.
-  = f.inputs :name => "Team" do
-    = f.input :name
+  = f.inputs :name => "Nytt lag" do
+    = f.input :name, label: "Navn"
   = f.actions do
-    = f.action :submit, as: :button
+    = f.action :submit, label: "Opprett", as: :button

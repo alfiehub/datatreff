@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :authorize_admin, only: [:new, :create, :index, :edit, :update]
+  before_filter :authorize_admin, only: [:new, :create, :index, :edit, :update, :destroy]
 
   def index
     @pages = Page.all
