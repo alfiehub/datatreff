@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704174308) do
+ActiveRecord::Schema.define(version: 20150706212959) do
 
   create_table "competition_teams", force: :cascade do |t|
     t.integer  "competition_id"
@@ -54,9 +54,13 @@ ActiveRecord::Schema.define(version: 20150704174308) do
     t.integer  "match"
     t.boolean  "lower_bracket"
     t.integer  "user_id"
-    t.boolean  "validated",      default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "validated",          default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "team_seeds", force: :cascade do |t|

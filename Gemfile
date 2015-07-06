@@ -37,3 +37,6 @@ gem 'formtastic-bootstrap'
 
 # Markdown
 gem 'redcarpet'
+
+# Paperclip
+gem 'paperclip'

@@ -45,7 +45,9 @@ vendor/ruby/
 
 .bundle/
 
-
 .loadpath
 
 webrat-*.html
+
+public/system
+

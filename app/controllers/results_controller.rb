@@ -57,6 +57,6 @@ class ResultsController < ApplicationController
 
   private
   def admin_result_params 
-    params.require(:result).permit(:team1_id, :team1_score, :team2_id, :team2_score, :competition_id, :round, :match, :lower_bracket, :validated)
+    params.require(:result).permit(:team1_id, :team1_score, :team2_id, :team2_score, :competition_id, :round, :match, :lower_bracket, :validated, :image)
   end
 end
