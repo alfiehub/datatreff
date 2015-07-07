@@ -1,7 +1,6 @@
 = semantic_form_for @competition do |f|
   - if @competition.errors.any?
-    .error-message
-      Du gjorde noe feil.
+    - flash[:daner] = "Noe gikk galt."
   = f.inputs :name => "Konkurranse" do
     = f.input :name
     = f.input :admin_name

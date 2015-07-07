@@ -1,8 +1,7 @@
 .col-md-6
   = semantic_form_for @team do |f|
     - if @team.errors.any?
-      .error-message
-        Du gjorde noe feil.
+      - flash[:danger] = "Noe gikk galt."
     = f.inputs :name => "Nytt lag" do
       = f.input :name, label: "Navn, maks 11 tegn"
     = f.actions do

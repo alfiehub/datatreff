@@ -14,6 +14,7 @@ class Page < ActiveRecord::Base
   belongs_to :user
 
   validates :title, presence: true
+  validates_uniqueness_of :title
 
   scope :front_page, -> { where(front_page: true) }
 
