@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706212959) do
+ActiveRecord::Schema.define(version: 20150708095048) do
 
   create_table "competition_teams", force: :cascade do |t|
     t.integer  "competition_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150706212959) do
     t.boolean  "front_page", default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "position"
   end
 
   create_table "results", force: :cascade do |t|

@@ -34,8 +34,6 @@ class ResultsController < ApplicationController
     if @result.update_attributes(admin_result_params)
       flash[:success] = "Du oppdaterte resultatet."
       redirect_to Competition.find(params[:result][:competition_id])
-    else
-      render 'edit'
     end
   end
 
