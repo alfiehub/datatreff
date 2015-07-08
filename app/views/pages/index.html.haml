@@ -13,6 +13,8 @@
         Synlig på hovedmenyen?
       %th
         Synlig på forsiden?
+      %th
+        Posisjon på forsiden
     - @pages.each do |p|
       %tr
         %td
@@ -23,6 +25,8 @@
           = p.main_menu
         %td
           = p.front_page
+        %td
+          = p.position
         %td
           = link_to 'Endre', edit_page_path(p)
         %td
