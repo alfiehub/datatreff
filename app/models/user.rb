@@ -8,5 +8,6 @@ class User < ActiveRecord::Base
   has_many :results
 
   validates_uniqueness_of :username, :email, :mobile
-  validates :username, :name, :mobile, :email, :password, presence: true
+  validates :username, :name, :mobile, :email, presence: true
+  validates :password, presence: true, on: :create
 end

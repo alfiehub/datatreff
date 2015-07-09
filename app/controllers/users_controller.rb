@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authorize_admin, only: [:index, :edit, :update, :show]
+  before_filter :authorize_admin, only: [:index, :show]
+  before_filter :authorize, only: [:edit, :update]
 
   def index
     @users = User.all
@@ -29,20 +30,33 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if !(is_admin? || @user.id == current_user.id)
+      flash[:danger] = "Du har ikke tillatelse til dette."
+      redirect_to root_path
+    end
   end
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if is_admin? && @user.update_attributes(admin_user_params)
       flash[:success] = "Du endret brukeren."
       redirect_to @user
+    elsif current_user.id == @user.id && @user.update_attributes(user_params)
+      flash[:success] = "Du endret brukeren din."
+      redirect_to edit_user_path(@user)
     else
-      render 'edit'
+      flash[:danger] = "Noe gikk galt."
+      redirect_to edit_user_path(@user)
     end
   end
 
   private
   def user_params
     params.require(:user).permit(:username, :name, :mobile, :email, :password, :password_confirmation)
+  end
+
+  private
+  def admin_user_params
+    params.require(:user).permit(:username, :name, :mobile, :email, :password, :password_confirmation, :admin)
   end
 end
