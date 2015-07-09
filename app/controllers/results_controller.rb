@@ -1,14 +1,18 @@
 class ResultsController < ApplicationController
-  before_filter :authorize_admin, only: [:index, :update, :edit, :destroy]
+  before_filter :authorize_admin, only: [:destroy]
+  before_filter :authorize, only: [:index, :new, :edit, :update]
 
   def index
     @competition = Competition.find(params[:competition_id])
-    @results = @competition.results
+    if is_admin?
+      @results = @competition.results
+    else
+      @results = current_user.results.where(competition_id: @competition.id)
+    end
   end
 
   def new
     @competition = Competition.find(params[:competition_id])
-    puts params
     @result = Result.new
   end
 
@@ -27,12 +31,22 @@ class ResultsController < ApplicationController
   def edit
     @result = Result.find(params[:id])
     @competition = Competition.find(params[:competition_id])
+    if !(is_admin? || @result.user.id == current_user.id)
+      flash[:warning] = "Du har ikke tillatelse til dette."
+      redirect_to @competition
+    end
   end
 
   def update
     @result = Result.find(params[:id])
-    if @result.update_attributes(admin_result_params)
+    if is_admin? && @result.update_attributes(admin_result_params)
       flash[:success] = "Du oppdaterte resultatet."
+      redirect_to Competition.find(params[:result][:competition_id])
+    elsif !@result.validated && @result.update_attributes(result_params)
+      flash[:success] = "Du oppdaterte resultatet."
+      redirect_to Competition.find(params[:result][:competition_id])
+    else
+      flash[:danger] = "Resultatet ble IKKE oppdatert, da det er allerede godkjent."
       redirect_to Competition.find(params[:result][:competition_id])
     end
   end
@@ -49,7 +63,7 @@ class ResultsController < ApplicationController
   end
 
   private
-  def result_params 
+  def result_params
     params.require(:result).permit(:team1_id, :team1_score, :team2_id, :team2_score, :competition_id, :image)
   end
 
