@@ -22,9 +22,9 @@
         %td
           = User.find(p.user_id).name
         %td
-          = p.main_menu
+          = t(p.main_menu.to_s)
         %td
-          = p.front_page
+          = t(p.front_page.to_s)
         %td
           = p.position
         %td

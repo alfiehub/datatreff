@@ -198,3 +198,8 @@ nb:
       long: "%A, %e. %B %Y, %H:%M"
       short: "%e. %B, %H:%M"
     pm: ''
+  "true": "Ja"
+  "false": "Nei"
+  formtastic:
+    :no: "Nei"
+    :yes: "Ja"
