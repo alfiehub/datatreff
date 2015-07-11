@@ -7,3 +7,4 @@ tmp
 
 database.yml
 secrets.yml
+*.swp
