@@ -1,11 +1,15 @@
 // Place all the styles related to the competitions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.header {
+.container {
+  width: 100%;
+}
+.subheader {
   text-align: center;
 }
 .jQBracket {
-  margin: auto auto;
+  float: left;
+  margin-left: 50px;
 }
 .label {
   font-size: 1em;
@@ -18,7 +22,7 @@
 }
 
 .contact-info {
-  width: 50%;
-  margin: auto auto;
-  margin-top: 50px;
+  max-width: 50%;
+  margin-right: 50px;
+  float: right;
 }

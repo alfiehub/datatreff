@@ -1,8 +1,7 @@
 %h2
   = @competition.name
 .col-md-6
-  %h3
-    Lag påmeldt
+  %h3 Lag påmeldt
   %table{class: "table table-striped"}
     %thead
       %th Lagnavn
@@ -32,19 +31,15 @@
 
 
 .col-md-6
-  %h3
-    Kontaktinformasjon
+  %h3 Kontaktinformasjon
   %table{class: "table table-striped"}
     %thead
       %th Navn
       %th Mobilnummer
       %th Start
     %tr
-      %td
-        = @competition.admin_name
-      %td
-        = @competition.admin_mobile
-      %td
-        = I18n.l @competition.start_time
+      %td= @competition.admin_name
+      %td= @competition.admin_mobile
+      %td= I18n.l @competition.start_time
   - if is_admin?
     = link_to 'Start konkurranse', start_competition_path
