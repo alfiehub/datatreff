@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
+      flash[:success] = "Du ble logget inn som #{user.username}!"
       redirect_to root_path
     else
       flash[:danger] = "Brukernavnet eller passordet er ugyldig."

@@ -14,7 +14,7 @@
 
 - if !current_user.nil? && is_participating?(@competition.id, current_user.id)
   .contact-info
-    %table.table
+    %table{class: "table table-striped"}
       %thead
         %th Lagnavn
         %th Brukernavn

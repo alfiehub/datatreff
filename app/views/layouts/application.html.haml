@@ -8,11 +8,11 @@
   %body
     .container
       %h1
+        %span{class: "glyphicon glyphicon-headphones", "aria-hidden": true}
         = link_to 'Datatreff', root_path
-        - if !current_user.nil?
-          = current_user.username
-          - if is_admin?
-            = link_to "admin", users_path
+        %small
+          - if !current_user.nil?
+            = current_user.username
       = render 'layouts/nav'
       = render 'layouts/notice'
       = yield

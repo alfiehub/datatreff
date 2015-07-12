@@ -44,6 +44,10 @@
         Personlig
         %span{class: "caret"}
       %ul{class: "dropdown-menu"}
+        - if is_admin?
+          %li{class: "dropdown-header"} Crew only
+          %li= link_to "Alle brukere", users_path
+          %li{role: "separator", class: "divider"}
         %li
           = link_to "Endre bruker", edit_user_path(current_user)
         %li
