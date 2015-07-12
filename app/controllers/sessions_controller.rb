@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
-      flash[:success] = "Du ble logget inn som #{user.username}!"
+      flash[:success] = "Velkommen tilbake, #{user.username}!"
       redirect_to root_path
     else
       flash[:danger] = "Brukernavnet eller passordet er ugyldig."
@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, flash: {success: "Du er blitt logget ut!"}
+    redirect_to root_path, flash: {success: "Du ble logget ut!"}
   end
 end

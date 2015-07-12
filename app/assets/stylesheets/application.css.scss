@@ -17,6 +17,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.header {
+  text-align: center;
+}
+.alert {
+  margin-top: 15px;
+}
 .footer {
   position: fixed;
   bottom: 10px;
