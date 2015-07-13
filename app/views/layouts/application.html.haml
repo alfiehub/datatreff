@@ -8,11 +8,12 @@
   %body
     .header
       %h1
-        %span{class: "glyphicon glyphicon-headphones", "aria-hidden": true}
+        - if !current_user.nil?
+          = current_user.username
+        - else
+          I
+        %span{class: "glyphicon glyphicon-heart", id: "heart", "aria-hidden": true}
         = link_to 'Datatreff', root_path
-        %small
-          - if !current_user.nil?
-            = current_user.username
     = render 'layouts/nav'
     .container
       = render 'layouts/notice'
