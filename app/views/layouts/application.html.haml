@@ -1,6 +1,6 @@
 %html
   %head
-    %title Datatreff
+    %title=Rails.application.config.event_name
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -13,7 +13,7 @@
         - else
           I
         %span{class: "glyphicon glyphicon-heart", id: "heart", "aria-hidden": true}
-        = link_to 'Datatreff', root_path
+        = link_to Rails.application.config.event_name, root_path
     = render 'layouts/nav'
     .container
       = render 'layouts/notice'

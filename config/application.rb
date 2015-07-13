@@ -25,5 +25,8 @@ module Datatreff
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Some variables for the website
+    config.event_name = "Datatreff"
   end
 end
