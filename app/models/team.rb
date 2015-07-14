@@ -8,6 +8,10 @@ class Team < ActiveRecord::Base
   validates :name, presence: true
   validates_uniqueness_of :name
 
+  def contact_person
+    self.users.order('user_teams.created_at ASC').first
+  end
+
   def self.tryfind(id)
     if id.nil?
       nil

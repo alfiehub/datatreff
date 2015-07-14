@@ -21,15 +21,25 @@ class CompetitionsController < ApplicationController
     @competition = Competition.new
   end
 
+  def edit
+    @competition = Competition.find(params[:id])
+  end
+
   def update
     @competition = Competition.find(params[:id])
-    teams = competition_params[:team_ids] + @competition.teams.pluck(:id)
-    team = Team.find(teams[1])
+    team_ids = (competition_params[:team_ids].nil?) ? [] : competition_params[:team_ids]
+    teams = team_ids + @competition.teams.pluck(:id)
+    team = (teams.length == @competition.teams.length) ? nil : Team.find(teams[1])
 
-    if team.users.pluck(:id).include?(current_user.id) && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
+    if !team.nil? && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
+      flash[:success] = "Laget ditt ble meldt på!"
+      redirect_to @competition
+    elsif is_admin? && @competition.update_attributes(competition_params)
+      @competition.update_attribute(:team_ids, teams)
+      flash[:success] = "Du endret konkurransen."
       redirect_to @competition
     else
-      flash[:danger] = "Noe gikk galt, enten du eller noen andre på laget ditt deltar allerede i konkurransen."
+      flash[:danger] = "Noe gikk galt, enten du eller noen andre på laget ditt deltar allerede i konkurransen. Er du sikker på at det er nok medlemmer på laget ditt?"
       redirect_to @competition
     end
   end
@@ -98,7 +108,7 @@ class CompetitionsController < ApplicationController
 
   private
   def competition_params
-    params.require(:competition).permit(:name, :admin_name, :admin_mobile, :admin_email, :start_time, team_ids: [])
+    params.require(:competition).permit(:name, :admin_name, :admin_mobile, :admin_email, :start_time, :team_size, team_ids: [])
   end
 
   private
