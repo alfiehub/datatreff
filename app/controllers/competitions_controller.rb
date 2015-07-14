@@ -26,9 +26,10 @@ class CompetitionsController < ApplicationController
     teams = competition_params[:team_ids] + @competition.teams.pluck(:id)
     team = Team.find(teams[1])
 
-    if team.users.pluck(:id).include?(current_user.id) && @competition.update_attribute(:team_ids, teams)
+    if team.users.pluck(:id).include?(current_user.id) && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
       redirect_to @competition
     else
+      flash[:danger] = "Noe gikk galt, enten du eller noen andre på laget ditt deltar allerede i konkurransen."
       redirect_to @competition
     end
   end
@@ -95,7 +96,18 @@ class CompetitionsController < ApplicationController
     return false
   end
 
+  private
   def competition_params
     params.require(:competition).permit(:name, :admin_name, :admin_mobile, :admin_email, :start_time, team_ids: [])
+  end
+
+  private
+  def check_if_anyone_in_team_is_already_participating(competition, team)
+    team.users.each do |u|
+      if competition.users.include?(u)
+        return true
+      end
+    end
+    return false
   end
 end
