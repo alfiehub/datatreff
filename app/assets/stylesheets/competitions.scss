@@ -7,10 +7,24 @@
 .subheader {
   text-align: center;
 }
-.jQBracket {
+
+.bracket#with_contact {
   float: left;
   margin-left: 50px;
 }
+
+.bracket#without_contact {
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.jQBracket {
+  margin-left: inherit;
+  margin-right: inherit;
+  float: inherit;
+}
+
 .label {
   font-size: 1em;
   font-weight: normal;
@@ -23,6 +37,6 @@
 
 .contact-info {
   max-width: 50%;
-  margin-right: 50px;
+  margin-right: 75px;
   float: right;
 }

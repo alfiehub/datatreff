@@ -1,5 +1,5 @@
 %h2 Resultater
-%table.table
+%table.table#wide
   %thead
     %th
       Lag 1
@@ -42,7 +42,7 @@
       %td
         = t(r.validated.to_s)
       %td
-        = r.user.name
+        = r.user.username
       %td
         = link_to 'Endre?', edit_competition_result_path(id: r.id)
       - if is_admin?

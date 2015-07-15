@@ -33,3 +33,12 @@
 #heart {
   color: red;
 }
+.table#wide {
+  width:95%;
+  height:20px;
+  min-width:600px;
+  position:absolute;
+  left:0;
+  right:0;
+  margin: auto auto;
+}

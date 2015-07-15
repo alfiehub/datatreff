@@ -9,9 +9,9 @@
     %br
     = link_to "Mine innsendte resultater", competition_results_path(@competition)
 
-.bracket
 
-- if !current_user.nil? && is_participating?(@competition.id, current_user.id)
+- if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
+  .bracket#with_contact
   .contact-info
     %h2 Kontaktinformasjon
     %table{class: "table table-striped"}
@@ -27,3 +27,5 @@
             = t.contact_person.username
           %td
             = t.contact_person.mobile
+- else
+  .bracket#without_contact
