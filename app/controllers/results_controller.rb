@@ -34,6 +34,9 @@ class ResultsController < ApplicationController
     if !(is_admin? || @result.user.id == current_user.id)
       flash[:warning] = "Du har ikke tillatelse til dette."
       redirect_to @competition
+    elsif @result.validated && !is_admin?
+      flash[:warning] = "Du kan ikke endre resultatet når det allerede er godkjent.."
+      redirect_to @competition
     end
   end
 

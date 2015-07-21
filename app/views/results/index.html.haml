@@ -44,7 +44,8 @@
       %td
         = r.user.username
       %td
-        = link_to 'Endre?', edit_competition_result_path(id: r.id)
+        - if !r.validated
+          = link_to 'Endre?', edit_competition_result_path(id: r.id)
       - if is_admin?
         %td
           = link_to 'Slett?', competition_result_path(id: r.id), method: :delete
