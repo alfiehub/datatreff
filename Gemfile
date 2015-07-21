@@ -40,3 +40,12 @@ gem 'redcarpet'
 
 # Paperclip
 gem 'paperclip'
+
+group :development do
+  # Speed analyzer
+  gem 'rack-mini-profiler'
+  # Alert when shit needs to be optimized, queries for example
+  gem 'bullet'
+  # Best practices?
+  gem 'rails_best_practices'
+end
