@@ -1,5 +1,7 @@
 %h2
   = @team.name
+  %span{class: "label label-primary"}
+    = link_to "Endre", edit_team_path(@team),{style: "color:white;"}
 .row
   .col-md-6
     %table.table

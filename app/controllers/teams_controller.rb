@@ -19,11 +19,20 @@ class TeamsController < ApplicationController
     end
   end
 
+  def edit
+    @team = Team.find(params[:id])
+  end
+
   def update
     @team = Team.find(params[:id])
-    users = params[:team][:user_ids] + @team.users.pluck(:id)
-    @team.update_attribute(:user_ids, users)
-    flash[:success] = "Du la til en bruker!"
+    if params[:team][:name].nil?
+      users = params[:team][:user_ids] + @team.users.pluck(:id)
+      @team.update_attribute(:user_ids, users)
+      flash[:success] = "Du la til en bruker!"
+    else
+      @team.update_attribute(:name, params[:team][:name])
+      flash[:success] = "Du endret navnet til laget!"
+    end
     redirect_to @team
   end
 
