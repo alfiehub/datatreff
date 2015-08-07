@@ -1,5 +1,5 @@
 class CompetitionsController < ApplicationController
-  before_filter :authorize_admin, only: [:new, :create]
+  before_filter :authorize_admin, only: [:new, :create, :edit]
 
   helper_method :is_participating?
 
@@ -9,6 +9,7 @@ class CompetitionsController < ApplicationController
 
   def show
     @competition = Competition.find(params[:id])
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
     if @competition.started
       redirect_to started_competition_path(@competition)
     elsif current_user.nil?
@@ -31,12 +32,12 @@ class CompetitionsController < ApplicationController
     teams = team_ids + @competition.teams.pluck(:id)
     team = (teams.length == @competition.teams.length) ? nil : Team.find(teams[1])
 
-    if !team.nil? && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
-      flash[:success] = "Laget ditt ble meldt på!"
-      redirect_to @competition
-    elsif is_admin? && @competition.update_attributes(competition_params)
+    if is_admin? && @competition.update_attributes(competition_params)
       @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Du endret konkurransen."
+      redirect_to @competition
+    elsif !team.nil? && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
+      flash[:success] = "Laget ditt ble meldt på!"
       redirect_to @competition
     else
       flash[:danger] = "Noe gikk galt, enten du eller noen andre på laget ditt deltar allerede i konkurransen. Er du sikker på at det er nok medlemmer på laget ditt?"
@@ -81,6 +82,7 @@ class CompetitionsController < ApplicationController
 
   def started
     @competition = Competition.find(params[:id])
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
     if !@competition.started
       redirect_to @competition
     end
@@ -108,7 +110,7 @@ class CompetitionsController < ApplicationController
 
   private
   def competition_params
-    params.require(:competition).permit(:name, :admin_name, :admin_mobile, :admin_email, :start_time, :team_size, team_ids: [])
+    params.require(:competition).permit(:name, :description, :admin_name, :admin_mobile, :admin_email, :start_time, :team_size, team_ids: [])
   end
 
   private

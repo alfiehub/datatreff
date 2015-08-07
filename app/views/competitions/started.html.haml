@@ -9,23 +9,26 @@
     %br
     = link_to "Mine innsendte resultater", competition_results_path(@competition)
 
+.col-md-12
+  - if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
+    .bracket#with_contact
+    .contact-info
+      %h2 Kontaktinformasjon
+      %table{class: "table table-striped"}
+        %thead
+          %th Lagnavn
+          %th Brukernavn
+          %th Mobilnummer
+        - @competition.teams.each do |t|
+          %tr
+            %td
+              = t.name
+            %td
+              = t.contact_person.username
+            %td
+              = t.contact_person.mobile
+  - else
+    .bracket#without_contact
+.description
+  = raw(@markdown.render(@competition.description))
 
-- if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
-  .bracket#with_contact
-  .contact-info
-    %h2 Kontaktinformasjon
-    %table{class: "table table-striped"}
-      %thead
-        %th Lagnavn
-        %th Brukernavn
-        %th Mobilnummer
-      - @competition.teams.each do |t|
-        %tr
-          %td
-            = t.name
-          %td
-            = t.contact_person.username
-          %td
-            = t.contact_person.mobile
-- else
-  .bracket#without_contact
