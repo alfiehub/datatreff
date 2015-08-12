@@ -6,6 +6,6 @@ class Competition < ActiveRecord::Base
   has_many :results
   has_many :team_seeds
 
-  validates :name, :admin_name, :admin_mobile, :admin_email, :start_time, :team_size, presence: true
+  validates :name, :description, :admin_name, :admin_mobile, :admin_email, :start_time, :team_size, presence: true
 
 end
