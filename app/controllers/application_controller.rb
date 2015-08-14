@@ -20,6 +20,12 @@ class ApplicationController < ActionController::Base
     !current_user.nil? && current_user.admin
   end
 
+  def render_404
+    flash[:danger] = "404 - Denne siden ble ikke funnet."
+    redirect_to root_path
+  end
+
   helper_method :is_admin?
   helper_method :current_user
+  helper_method :render_404
 end

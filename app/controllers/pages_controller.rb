@@ -7,7 +7,11 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find_by_param(params[:id])
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
+    if @page.nil?
+      render_404
+    else
+      @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
+    end
   end
 
   def new
