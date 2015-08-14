@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'logg_ut', to: 'sessions#destroy', as: 'logg_ut'
   get 'registrering', to: 'users#new', as: 'registrering'
   get 'logg_inn', to: 'sessions#new', as: 'logg_inn'
+  get 'chat', to: 'site#irc', as: 'chat'
 
   get ':id' => 'pages#show'
 

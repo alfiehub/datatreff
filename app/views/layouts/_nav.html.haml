@@ -34,6 +34,8 @@
       - Competition.all.each do |c|
         %li
           = link_to c.name, c
+  %li
+    = link_to 'Chat - IRC', chat_path
 
   - if current_user.nil?
     %li
