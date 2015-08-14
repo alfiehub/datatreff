@@ -12,6 +12,11 @@ class Team < ActiveRecord::Base
     self.users.order('user_teams.created_at ASC').first
   end
 
+  def name=(new_name)
+    TeamSeed.find_by_team_name(self[:name]).update_attribute(:team_name, new_name)
+    self[:name] = new_name
+  end
+
   def self.tryfind(id)
     if id.nil?
       nil
