@@ -13,7 +13,9 @@ class Team < ActiveRecord::Base
   end
 
   def name=(new_name)
-    TeamSeed.find_by_team_name(self[:name]).update_attribute(:team_name, new_name)
+    while !TeamSeed.find_by_team_name(self[:name]).nil?
+      TeamSeed.find_by_team_name(self[:name]).update_attribute(:team_name, new_name)
+    end
     self[:name] = new_name
   end
 
