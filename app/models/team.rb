@@ -5,8 +5,7 @@ class Team < ActiveRecord::Base
   has_many :competition_teams
   has_many :competitions, through: :competition_teams
 
-  validates :name, presence: true
-  validates_uniqueness_of :name
+  validates :name, presence: true, length: { maximum: 11 }, uniqueness: true
 
   def contact_person
     self.users.order('user_teams.created_at ASC').first

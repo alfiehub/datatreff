@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   has_many :pages
   has_many :results
 
-  validates_uniqueness_of :username, :email, :mobile
-  validates :username, :name, :mobile, :email, presence: true
+  validates :username, :name, :email, presence: true, uniqueness: true
+  validates :mobile, presence: true, uniqueness: true, length: { is: 8 }
   validates_format_of :email, with: EMAIL_REGEX
   validates :password, presence: true, on: :create
 end
