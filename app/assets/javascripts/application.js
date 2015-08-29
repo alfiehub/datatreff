@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require "jquery-bracket"
+//= require jquery.datetimepicker
 //= require bootstrap-sprockets
+$(function() {
+  $('.datetimepicker').datetimepicker();
+});
