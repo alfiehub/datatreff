@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150829135600) do
 
   create_table "file_competitions", force: :cascade do |t|
     t.string   "name"
+    t.text     "description"
     t.string   "admin_name"
     t.string   "admin_email"
     t.datetime "deadline"
