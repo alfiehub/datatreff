@@ -39,7 +39,7 @@ gem 'formtastic-bootstrap'
 gem 'redcarpet'
 
 # Paperclip
-gem 'paperclip'
+gem 'paperclip', github: 'thoughtbot/paperclip'
 
 group :development do
   # Speed analyzer

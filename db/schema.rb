@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807205453) do
+ActiveRecord::Schema.define(version: 20150829135600) do
 
   create_table "competition_teams", force: :cascade do |t|
     t.integer  "competition_id"
@@ -34,6 +34,26 @@ ActiveRecord::Schema.define(version: 20150807205453) do
     t.datetime "updated_at",                   null: false
     t.integer  "team_size"
     t.text     "description"
+  end
+
+  create_table "file_competitions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "admin_name"
+    t.string   "admin_email"
+    t.datetime "deadline"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "file_results", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "file_competition_id"
+    t.integer  "position"
+    t.string   "contribution_file_name"
+    t.string   "contribution_content_type"
+    t.integer  "contribution_file_size"
+    t.datetime "contribution_updated_at"
   end
 
   create_table "pages", force: :cascade do |t|
