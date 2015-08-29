@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin
-    redirect_to root_path, flash: {danger: "Du har ikke rettigheter til å gjøre dette."} if !current_user.admin
+    redirect_to root_path, flash: {danger: "Du har ikke rettigheter til å gjøre dette."} if current_user.nil? || !current_user.admin
   end
 
   def is_admin?

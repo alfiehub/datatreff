@@ -24,16 +24,22 @@
       Konkurranser
       %span{class: "caret"}
     %ul{class: "dropdown-menu"}
+
       - if is_admin?
-        %li
-          = link_to 'Ny konkurranse', new_competition_path
-      - if !current_user.nil?
-        %li
-          = link_to "Mine lag", teams_path
+        %li{class: "dropdown-header"} Ny konkurranse
+        %li= link_to 'Ny lagkonkurranse', new_competition_path
+        %li= link_to 'Ny fil-konkurranse', new_file_competition_path
         %li{class: "divider", "role":"separator"}
+
+      - if !current_user.nil?
+        %li= link_to "Mine lag", teams_path
+        %li{class: "divider", "role":"separator"}
+
       - Competition.all.each do |c|
-        %li
-          = link_to c.name, c
+        %li= link_to c.name, c
+
+      - FileCompetition.all.each do |c|
+        %li= link_to c.name, c
   %li
     = link_to 'Chat - IRC', chat_path
 
