@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :file_results
+  resources :file_competitions
   resources :results
   resources :pages
   resources :competitions do

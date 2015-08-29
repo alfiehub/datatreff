@@ -1,0 +1,2 @@
+class FileCompetitionsController < ApplicationController
+end
