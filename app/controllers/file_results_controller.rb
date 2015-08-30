@@ -5,7 +5,7 @@ class FileResultsController < ApplicationController
   def index
     @competition = FileCompetition.find(params[:file_competition_id])
     if is_admin?
-      @results = @competition.file_results.order(:score)
+      @results = @competition.file_results.order(score: :desc)
     else
       @results = current_user.file_results.where(file_competition_id: @competition.id)
     end
@@ -17,20 +17,20 @@ class FileResultsController < ApplicationController
   end
 
   def create
-    @comp = FileCompetition.find(params[:file_competition_id])
+    @competition = FileCompetition.find(params[:file_competition_id])
 
-    if Time.now > @comp.deadline
+    if Time.now > @competition.deadline
       flash[:danger] = "Beklager, fristen har gått ut!"
-      redirect_to @comp
+      redirect_to @competition
     else
       @result = FileResult.new(file_result_params)
-      @result.update_attribute(:user_id, current_user.id)
-      @result.update_attribute(:file_competition_id, params[:file_competition_id])
       if @result.save
+        @result.update_attribute(:user_id, current_user.id)
+        @result.update_attribute(:file_competition_id, params[:file_competition_id])
         flash[:success] = "Ditt bidrag har blitt sendt inn!"
-        redirect_to file_competition_file_results_path(@comp)
+        redirect_to file_competition_file_results_path(@competition)
       else
-        render 'new'
+        render 'new', object: @competition
       end
     end
   end
@@ -46,15 +46,16 @@ class FileResultsController < ApplicationController
 
   def update
     @result = FileResult.find(params[:id])
+    @competition = @result.file_competition
     if is_admin? && @result.update_attributes(admin_file_result_params)
       flash[:success] = "Du oppdaterte resultatet."
-      redirect_to FileCompetition.find(params[:file_competition_id])
+      redirect_to file_competition_file_results_path(@competition)
     elsif @result.update_attributes(file_result_params)
       flash[:success] = "Du oppdaterte resultatet."
-      redirect_to FileCompetition.find(params[:file_competition_id])
+      redirect_to file_competition_file_results_path(@competition)
     else
       flash[:danger] = "Resultatet ble ikke oppdatert, da noe gikk galt."
-      redirect_to FileCompetition.find(params[:file_competition_id])
+      render 'edit'
     end
   end
 

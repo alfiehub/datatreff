@@ -16,6 +16,8 @@
           = link_to r.name, edit_file_competition_file_result_path(id: r.id)
         %td
           = r.user.username
+          = '-'
+          = r.user.name
         %td
           = r.file_competition.name
         %td

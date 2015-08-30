@@ -28,7 +28,7 @@
       - if is_admin?
         %li{class: "dropdown-header"} Ny konkurranse
         %li= link_to 'Ny lagkonkurranse', new_competition_path
-        %li= link_to 'Ny fil-konkurranse', new_file_competition_path
+        %li= link_to 'Ny filkonkurranse', new_file_competition_path
         %li{class: "divider", "role":"separator"}
 
       - if !current_user.nil?
@@ -37,6 +37,8 @@
 
       - Competition.all.each do |c|
         %li= link_to c.name, c
+
+      %li{class: "divider", "role":"separator"}
 
       - FileCompetition.all.each do |c|
         %li= link_to c.name, c
