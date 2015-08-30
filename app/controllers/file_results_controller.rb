@@ -14,14 +14,21 @@ class FileResultsController < ApplicationController
   end
 
   def create
-    @result = FileResult.new(file_result_params)
-    @result.update_attribute(:user_id, current_user.id)
-    @result.update_attribute(:file_competition_id, params[:file_competition_id])
-    if @result.save
-      flash[:success] = "Ditt resultat har blitt sendt inn!"
-      redirect_to @result
+    @comp = FileCompetition.find(params[:file_competition_id])
+
+    if Time.now > @comp.deadline
+      flash[:danger] = "Beklager, fristen har gått ut!"
+      redirect_to @comp
     else
-      render 'new'
+      @result = FileResult.new(file_result_params)
+      @result.update_attribute(:user_id, current_user.id)
+      @result.update_attribute(:file_competition_id, params[:file_competition_id])
+      if @result.save
+        flash[:success] = "Ditt bidrag har blitt sendt inn!"
+        redirect_to file_competition_file_results_path(@comp)
+      else
+        render 'new'
+      end
     end
   end
 
