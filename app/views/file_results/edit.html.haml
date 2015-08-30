@@ -1,0 +1,18 @@
+.row
+  .col-md-6
+    = semantic_form_for [@competition, @result] do |f|
+      - if @result.errors.any?
+        - flash[:danger] = "Noe gikk galt."
+      = f.inputs :name => "Resultat" do
+        = f.input :name, label: 'Navn på bidraget'
+        = f.input :comment, label: 'Kommentar til dommerne'
+        = f.input :contribution, label: ".zip-fil, maks 50 megabyte"
+        - if is_admin?
+          = f.input :score
+          = f.input :admin_comment
+      = f.actions do
+        = f.action :submit, label: "Send inn", as: :button
+  .col-md-6
+    %h2
+      Bidrag
+    = link_to @result.contribution_file_name, @result.contribution.url

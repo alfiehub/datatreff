@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :competitions, through: :teams
   has_many :pages
   has_many :results
+  has_many :file_results
 
   validates :username, :name, :email, presence: true, uniqueness: true
   validates :mobile, presence: true, uniqueness: true, length: { is: 8 }

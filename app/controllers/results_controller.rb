@@ -45,13 +45,13 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     if is_admin? && @result.update_attributes(admin_result_params)
       flash[:success] = "Du oppdaterte resultatet."
-      redirect_to Competition.find(params[:result][:competition_id])
+      redirect_to Competition.find(params[:competition_id])
     elsif !@result.validated && @result.update_attributes(result_params)
       flash[:success] = "Du oppdaterte resultatet."
-      redirect_to Competition.find(params[:result][:competition_id])
+      redirect_to Competition.find(params[:competition_id])
     else
       flash[:danger] = "Resultatet ble IKKE oppdatert, da det er allerede godkjent."
-      redirect_to Competition.find(params[:result][:competition_id])
+      redirect_to Competition.find(params[:competition_id])
     end
   end
 

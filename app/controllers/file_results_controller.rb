@@ -1,6 +1,11 @@
 class FileResultsController < ApplicationController
   def index
-    @results = FileResult.all
+    @competition = FileCompetition.find(params[:file_competition_id])
+    if is_admin?
+      @results = @competition.file_results.order(:score)
+    else
+      @results = current_user.file_results.where(file_competition_id: @competition.id)
+    end
   end
 
   def new
@@ -25,13 +30,31 @@ class FileResultsController < ApplicationController
   end
 
   def edit
+    @result = FileResult.find(params[:id])
+    @competition = FileCompetition.find(params[:file_competition_id])
   end
 
   def update
+    @result = FileResult.find(params[:id])
+    if is_admin? && @result.update_attributes(admin_file_result_params)
+      flash[:success] = "Du oppdaterte resultatet."
+      redirect_to FileCompetition.find(params[:file_competition_id])
+    elsif @result.update_attributes(file_result_params)
+      flash[:success] = "Du oppdaterte resultatet."
+      redirect_to FileCompetition.find(params[:file_competition_id])
+    else
+      flash[:danger] = "Resultatet ble ikke oppdatert, da noe gikk galt."
+      redirect_to FileCompetition.find(params[:file_competition_id])
+    end
   end
 
   private
   def file_result_params
     params.require(:file_result).permit(:name, :comment, :contribution, :file_competition_id)
+  end
+
+  private
+  def admin_file_result_params
+    params.require(:file_result).permit(:name, :comment, :contribution, :file_competition_id, :score, :admin_comment)
   end
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :file_results
   resources :file_competitions do
     resources :file_results
   end

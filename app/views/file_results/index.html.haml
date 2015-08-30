@@ -1,0 +1,26 @@
+%h2 Dine bidrag
+%table.table
+  %thead
+    %th
+      Navn
+    %th
+      Innsender
+    %th
+      Konkurranse
+    %th
+      Sendt inn
+  %tbody
+    - @results.each do |r|
+      %tr
+        %td
+          = link_to r.name, edit_file_competition_file_result_path(id: r.id)
+        %td
+          = r.user.username
+        %td
+          = r.file_competition.name
+        %td
+          = r.contribution_updated_at
+        - if is_admin?
+          %td
+            = r.score
+

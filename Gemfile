@@ -40,6 +40,7 @@ gem 'redcarpet'
 
 # Paperclip
 gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'cocaine' # I need this.
 
 group :development do
   # Speed analyzer
