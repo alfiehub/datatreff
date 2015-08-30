@@ -8,6 +8,6 @@
     = f.input :admin_mobile
     = f.input :admin_email, as: :email
     = f.input :team_size
-    = f.input :start_time
+    = f.input :start_time, input_html: {class: 'datetimepicker'}, as: :string
   = f.actions do
     = f.action :submit, as: :button

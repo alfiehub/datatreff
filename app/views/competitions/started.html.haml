@@ -2,9 +2,11 @@
 = stylesheet_link_tag "competitions"
 = stylesheet_link_tag "jquery-bracket"
 .subheader
-  %h2= @competition.name
-  - if is_admin?
-    = link_to "Endre konkurranse", edit_competition_path(@competition)
+  %h2
+    = @competition.name
+    - if is_admin?
+      %span{class: "label label-primary"}
+        = link_to "Endre", edit_competition_path(@competition),{style: "color:white;"}
   - if !current_user.nil? && is_participating?(@competition.id, current_user.id)
     = link_to "Meld inn resultat", new_competition_result_path(@competition)
   - if is_admin? || (!current_user.nil? && current_user.results.where(competition_id: @competition.id).any?)

@@ -1,5 +1,5 @@
 class CompetitionsController < ApplicationController
-  before_filter :authorize_admin, only: [:new, :create, :edit]
+  before_filter :authorize_admin, only: [:new, :create, :edit, :update]
 
   helper_method :is_participating?
 

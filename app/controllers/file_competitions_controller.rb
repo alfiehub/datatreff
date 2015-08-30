@@ -1,4 +1,6 @@
 class FileCompetitionsController < ApplicationController
+  before_filter :authorize_admin, only: [:new, :create, :edit, :update]
+
   def new
     @competition = FileCompetition.new
   end

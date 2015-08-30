@@ -7,7 +7,6 @@ class CreateFileResults < ActiveRecord::Migration
       t.integer :score
       t.text :admin_comment
       t.integer :file_competition_id
-      t.integer :position, default: nil
     end
   end
 end

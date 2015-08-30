@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20150829135600) do
     t.integer  "score"
     t.text     "admin_comment"
     t.integer  "file_competition_id"
-    t.integer  "position"
     t.string   "contribution_file_name"
     t.string   "contribution_content_type"
     t.integer  "contribution_file_size"
