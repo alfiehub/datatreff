@@ -18,6 +18,7 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(result_params)
+    @result.update_attribute(:competition_id, params[:competition_id])
     if @result.save
       @result.update_attribute(:user_id, current_user.id)
       puts params

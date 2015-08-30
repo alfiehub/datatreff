@@ -1,6 +1,6 @@
 .row
   .col-md-6
-    = semantic_form_for @result do |f|
+    = semantic_form_for [@competition, @result] do |f|
       - if @result.errors.any?
         - flash[:danger] = "Noe gikk galt."
       = f.inputs :name => "Resultat" do
@@ -8,7 +8,6 @@
         = f.input :team2_id, lable: "Lag 2", as: :select, collection: @competition.teams
         = f.input :team1_score, label: "Lag 1 poeng"
         = f.input :team2_score, label: "Lag 2 poeng"
-        = f.input :competition_id, as: :hidden, input_html: { value: @competition.id }
         = f.input :image, label: "Screenshot"
       = f.actions do
         = f.action :submit, label: "Send inn", as: :button

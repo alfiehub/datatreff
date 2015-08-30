@@ -1,0 +1,10 @@
+.row
+  = semantic_form_for [@competition, @result] do |f|
+    - if @result.errors.any?
+      - flash[:danger] = "Noe gikk galt."
+    = f.inputs :name => "Resultat" do
+      = f.input :name, label: 'Navn på bidraget'
+      = f.input :comment, label: 'Kommentar til dommerne'
+      = f.input :contribution, label: ".zip-fil, maks 50 megabyte"
+    = f.actions do
+      = f.action :submit, label: "Send inn", as: :button

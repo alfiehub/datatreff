@@ -49,6 +49,9 @@ ActiveRecord::Schema.define(version: 20150829135600) do
   create_table "file_results", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
+    t.text     "comment"
+    t.integer  "score"
+    t.text     "admin_comment"
     t.integer  "file_competition_id"
     t.integer  "position"
     t.string   "contribution_file_name"

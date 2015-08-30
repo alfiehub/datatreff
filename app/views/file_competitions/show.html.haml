@@ -4,6 +4,7 @@
     - if is_admin?
       %span{class: "label label-primary"}
         = link_to "Endre", edit_file_competition_path(@competition),{style: "color:white;"}
+  = link_to 'Send inn ditt bidrag!', new_file_competition_file_result_path(@competition)
 
 .col-md-6
   %h3 Beskrivelse
