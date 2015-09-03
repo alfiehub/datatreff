@@ -5,7 +5,7 @@
 .row
   .col-md-6
     %table.table
-      - @team.users.each do |u|
+      - @team.ordered_users.each do |u|
         %tr
           %td
             = u.username
