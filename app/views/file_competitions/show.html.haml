@@ -11,7 +11,6 @@
     = link_to 'Mine bidrag', file_competition_file_results_path(@competition)
 
 .col-md-6
-  %h3 Beskrivelse
   = raw(@markdown.render(@competition.description))
 .col-md-6
   %h3 Informasjon
