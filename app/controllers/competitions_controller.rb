@@ -36,7 +36,7 @@ class CompetitionsController < ApplicationController
       @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Du endret konkurransen."
       redirect_to @competition
-    elsif !team.nil? && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
+    elsif !team.nil? && teams.length-2 == @competition.teams.length && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Laget ditt ble meldt på!"
       redirect_to @competition
     else
