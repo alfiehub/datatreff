@@ -47,4 +47,5 @@
       %td= @competition.admin_mobile
       %td= I18n.l @competition.start_time
   - if is_admin?
-    = link_to 'Start konkurranse', start_competition_path
+    = link_to 'Start konkurranse', start_competition_path, data: {confirm: "Er du sikker på at du vil starte denne konkurransen nå? DU KAN IKKE GÅ TILBAKE"}
+
