@@ -7,6 +7,8 @@ class Team < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 11 }, uniqueness: true
 
+  attr_accessor :username
+
   def contact_person
     self.users.order('user_teams.created_at ASC').first
   end

@@ -16,6 +16,6 @@
 
     = semantic_form_for @team do |f|
       = f.inputs :name do
-        = f.input :users, label: "Alle brukere", collection: User.all.select{|u| !@team.users.include?(u)}.map{|u| [u.username, u.id]}
+        = f.input :username, as: :string, placeholder: 'Brukernavnet som skal legges til', label: 'Brukernavn'
       = f.actions do
-        = f.action :submit, label: "Legg til brukere", as: :button
+        = f.action :submit, label: "Legg til bruker", as: :button

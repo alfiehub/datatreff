@@ -26,9 +26,17 @@ class TeamsController < ApplicationController
   def update
     @team = Team.find(params[:id])
     if params[:team][:name].nil?
-      users = params[:team][:user_ids] + @team.users.pluck(:id)
-      @team.update_attribute(:user_ids, users)
-      flash[:success] = "Du la til en bruker!"
+      user = User.find_by_username(params[:team][:username])
+
+      if user.nil?
+        flash[:danger] = params[:team][:username] + ' finnes ikke i databasen :('
+      else
+        if !@team.users.pluck(:id).include?(user.id) && UserTeam.new(user_id: user.id, team_id: @team.id).save()
+          flash[:success] = "Du la til " + params[:team][:username] + '!'
+        else
+          flash[:danger] = 'Noe gikk galt, er brukeren allerede lagt til?'
+        end
+      end
     else
       @team.update_attribute(:name, params[:team][:name])
       flash[:success] = "Du endret navnet til laget!"
