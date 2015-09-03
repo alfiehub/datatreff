@@ -22,6 +22,12 @@
         %h3 Kontaktinformasjon
         %table{class: "table table-striped"}
           %thead
+            %th Admin
+            %th Mobilnummer
+          %tr
+            %td= @competition.admin_name
+            %td= @competition.admin_mobile
+          %thead
             %th Lagnavn
             %th Brukernavn
             %th Mobilnummer
