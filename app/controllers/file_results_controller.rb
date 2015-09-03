@@ -1,6 +1,7 @@
 class FileResultsController < ApplicationController
   before_filter :authorize_admin, only: [:destroy]
   before_filter :authorize, only: [:index, :new, :create, :edit, :update]
+  before_filter :event_started
 
   def index
     @competition = FileCompetition.find(params[:file_competition_id])

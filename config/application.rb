@@ -28,5 +28,6 @@ module Datatreff
 
     # Some variables for the website
     config.event_name = "Datatreff"
+    config.event_start = DateTime.new(2015, 9, 18, 16, 00, 0)
   end
 end

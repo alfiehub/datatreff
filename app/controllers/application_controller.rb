@@ -25,7 +25,17 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
+  def event_started
+    redirect_to root_path if !is_admin? && Time.now < Rails.application.config.event_start
+  end
+
+  def event_started?
+    !is_admin? || Time.now < Rails.application.config.event_start
+  end
+
   helper_method :is_admin?
   helper_method :current_user
   helper_method :render_404
+  helper_method :event_started
+  helper_method :event_started?
 end

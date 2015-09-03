@@ -4,7 +4,8 @@
     - if is_admin?
       %span{class: "label label-primary"}
         = link_to "Endre", edit_file_competition_path(@competition),{style: "color:white;"}
-  = link_to 'Send inn ditt bidrag!', new_file_competition_file_result_path(@competition)
+  - if event_started?
+    = link_to 'Send inn ditt bidrag!', new_file_competition_file_result_path(@competition)
   - if is_admin? || (!current_user.nil? && current_user.file_results.where(file_competition_id: @competition.id).any?)
     %br
     = link_to 'Mine bidrag', file_competition_file_results_path(@competition)

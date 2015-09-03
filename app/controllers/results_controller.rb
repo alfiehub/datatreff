@@ -1,6 +1,7 @@
 class ResultsController < ApplicationController
   before_filter :authorize_admin, only: [:destroy]
   before_filter :authorize, only: [:index, :new, :edit, :create, :update]
+  before_filter :event_started
 
   def index
     @competition = Competition.find(params[:competition_id])
