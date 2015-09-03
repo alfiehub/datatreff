@@ -35,12 +35,12 @@
         %li= link_to "Mine lag", teams_path
         %li{class: "divider", "role":"separator"}
 
-      - Competition.all.each do |c|
+      - Competition.all.order(:name).each do |c|
         %li= link_to c.name, c
 
       %li{class: "divider", "role":"separator"}
 
-      - FileCompetition.all.each do |c|
+      - FileCompetition.all.order(:name).each do |c|
         %li= link_to c.name, c
   %li
     = link_to 'Chat - IRC', chat_path
