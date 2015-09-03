@@ -21,9 +21,9 @@
           = t.contact_person.name
         %td
           = t.contact_person.mobile
-        - if t.users.include?(current_user)
+        - if t.users.include?(current_user) || is_admin?
           %td
-            = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete
+            = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
 
   - if !current_user.nil?
     = semantic_form_for @competition do |f|
