@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150829135600) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "competition_teams", force: :cascade do |t|
     t.integer  "competition_id"
     t.integer  "team_id"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20150829135600) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "competition_teams", ["competition_id"], name: "index_competition_teams_on_competition_id"
-  add_index "competition_teams", ["team_id"], name: "index_competition_teams_on_team_id"
+  add_index "competition_teams", ["competition_id"], name: "index_competition_teams_on_competition_id", using: :btree
+  add_index "competition_teams", ["team_id"], name: "index_competition_teams_on_team_id", using: :btree
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name"
@@ -109,8 +112,8 @@ ActiveRecord::Schema.define(version: 20150829135600) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id"
-  add_index "user_teams", ["user_id"], name: "index_user_teams_on_user_id"
+  add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id", using: :btree
+  add_index "user_teams", ["user_id"], name: "index_user_teams_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
