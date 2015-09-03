@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def event_started
-    flash[:success] = "Du kan ikke gjør dette enda, LANet har ikke startet :'("
+    flash[:danger] = "Du kan ikke gjør dette enda, LANet har ikke startet :'("
     redirect_to root_path if !is_admin? && Time.now < Rails.application.config.event_start
   end
 
