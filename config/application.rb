@@ -27,7 +27,7 @@ module Datatreff
     config.active_record.raise_in_transactional_callbacks = true
 
     # Some variables for the website
-    config.event_name = "Datatreff"
+    config.event_name = "GalaxeLAN"
     config.event_start = DateTime.new(2015, 9, 18, 16, 00, 0)
   end
 end
