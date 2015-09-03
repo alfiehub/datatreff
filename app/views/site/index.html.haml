@@ -1,6 +1,6 @@
 - c = 0
 - @pages.each do |p|
   .col-md-6
-    %h2
-      = link_to p.title, "/"+p.title
+    %h2#subheader
+      = p.title
     = raw(@markdown.render(p.content))

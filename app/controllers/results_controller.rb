@@ -18,12 +18,13 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(result_params)
-    @result.update_attribute(:competition_id, params[:competition_id])
+    @competition = Competition.find(params[:competition_id])
     if @result.save
+      @result.update_attribute(:competition_id, @competition.id)
       @result.update_attribute(:user_id, current_user.id)
       puts params
       flash[:success] = "Du har meldt inn et resultat, administrator vil godkjenne det så fort som mulig"
-      redirect_to Competition.find(params[:result][:competition_id])
+      redirect_to competition_results_path(@competition)
     else
       render "new"
     end
@@ -43,15 +44,17 @@ class ResultsController < ApplicationController
 
   def update
     @result = Result.find(params[:id])
+    @competition = Competition.find(params[:result][:competition_id])
     if is_admin? && @result.update_attributes(admin_result_params)
       flash[:success] = "Du oppdaterte resultatet."
-      redirect_to Competition.find(params[:competition_id])
+      redirect_to @competition
     elsif !@result.validated && @result.update_attributes(result_params)
+      @result.update_attribute(:competition_id, @competition.id)
       flash[:success] = "Du oppdaterte resultatet."
-      redirect_to Competition.find(params[:competition_id])
+      redirect_to @competition
     else
       flash[:danger] = "Resultatet ble IKKE oppdatert, da det er allerede godkjent."
-      redirect_to Competition.find(params[:competition_id])
+      render :edit
     end
   end
 

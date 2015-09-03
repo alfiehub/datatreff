@@ -8,7 +8,7 @@ class CreateResults < ActiveRecord::Migration
       t.integer :competition_id
       t.integer :round
       t.integer :match
-      t.boolean :lower_bracket
+      t.boolean :lower_bracket, default: false
       t.integer :user_id
       t.boolean :validated, default: false
 

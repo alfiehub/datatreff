@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20150829135600) do
     t.string   "name"
     t.string   "admin_name"
     t.string   "admin_mobile"
-    t.string   "admin_email"
     t.boolean  "started",      default: false
     t.datetime "start_time"
     t.datetime "created_at",                   null: false
@@ -40,7 +39,6 @@ ActiveRecord::Schema.define(version: 20150829135600) do
     t.string   "name"
     t.text     "description"
     t.string   "admin_name"
-    t.string   "admin_email"
     t.datetime "deadline"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -78,7 +76,7 @@ ActiveRecord::Schema.define(version: 20150829135600) do
     t.integer  "competition_id"
     t.integer  "round"
     t.integer  "match"
-    t.boolean  "lower_bracket"
+    t.boolean  "lower_bracket",      default: false
     t.integer  "user_id"
     t.boolean  "validated",          default: false
     t.datetime "created_at",                         null: false

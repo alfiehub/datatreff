@@ -14,13 +14,12 @@
     = link_to "Mine innsendte resultater", competition_results_path(@competition)
 
 .col-md-12
-  .bracket#with_contact
-  .right
-    %h2 Beskrivelse
+  .description
+    %h3 Beskrivelse
     = raw(@markdown.render(@competition.description))
     - if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
       .contact-info
-        %h2 Kontaktinformasjon
+        %h3 Kontaktinformasjon
         %table{class: "table table-striped"}
           %thead
             %th Lagnavn
@@ -34,3 +33,5 @@
                 = t.contact_person.username
               %td
                 = t.contact_person.mobile
+.col-md-12
+  .bracket

@@ -4,7 +4,6 @@ class CreateFileCompetitions < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :admin_name
-      t.string :admin_email
       t.datetime :deadline
       t.timestamps null: false
     end

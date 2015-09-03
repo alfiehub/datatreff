@@ -1,11 +1,10 @@
-%h2
+%h2#subheader
   = @page.title
   - if is_admin?
     %span{class: "label label-primary"}
       = link_to "Endre artikkel", edit_page_path(@page),{style: "color:white;"}
 = raw(@markdown.render(@page.content))
 
-%br
 %br
 Skrevet av
 %b= @page.user.name
