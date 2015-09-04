@@ -13,7 +13,7 @@
         %li
           = link_to 'Ny artikkel', new_page_path
         %li{class: "divider", "role":"separator"}
-      - Page.all{|p| p.main_menu}.each do |p|
+      - Page.all{|p| p.main_menu}.order(:title).each do |p|
         - if p.main_menu
           %li
             = link_to p.title, "/"+p.title
