@@ -32,7 +32,7 @@
         %li{class: "divider", "role":"separator"}
 
       - if !current_user.nil?
-        %li= link_to "Mine lag", teams_path
+        %li= link_to "Mine lag", teams_path, id: 'bold'
         %li{class: "divider", "role":"separator"}
 
       - Competition.all.order(:name).each do |c|
