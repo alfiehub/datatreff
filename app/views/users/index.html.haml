@@ -11,6 +11,7 @@ Antall admins:
     %th Email
     %th Admin?
     %th Registrert
+    %th Sist endret
   - @users.each do |u|
     %tr
       %td
@@ -24,4 +25,6 @@ Antall admins:
       %td
         = t u.admin.to_s
       %td
-        = I18n.l u.created_at
+        = u.created_at.to_formatted_s(:short)
+      %td
+        = u.updated_at.to_formatted_s(:short)
