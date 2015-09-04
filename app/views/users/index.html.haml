@@ -1,3 +1,8 @@
+Antall registrerte brukere:
+= @users.length
+%br
+Antall admins:
+= @users.where(admin: true).length
 %table{class: "table table-striped"}
   %thead
     %th Brukernavn
