@@ -8,18 +8,20 @@
     %thead
       %th Lagnavn
       %th Brukernavn
-      %th Navn
-      %th Mobilnummer
+      - if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
+        %th Navn
+        %th Mobilnummer
     - @competition.teams.each do |t|
       %tr
         %td
           = t.name
         %td
           = t.contact_person.username
-        %td
-          = t.contact_person.name
-        %td
-          = t.contact_person.mobile
+        - if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
+          %td
+            = t.contact_person.name
+          %td
+            = t.contact_person.mobile
         - if t.users.include?(current_user) || is_admin?
           %td
             = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
