@@ -18,6 +18,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+ul#nav {
+  width: 50%;
+  margin: auto auto;
+}
 .header {
   text-align: center;
 }
