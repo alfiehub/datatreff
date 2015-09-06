@@ -1,8 +1,8 @@
 %ul{class: "nav nav-pills nav-justified", id: 'nav'}
-  %li
+  %li{class: ('active' if (controller_name == 'site' && action_name != 'irc'))}
     = link_to "Hjem", root_path
 
-  %li{class: "dropdown"}
+  %li{class: ('dropdown active' if controller_name == 'pages')}
     %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
       Informasjon
       %span{class: "caret"}
@@ -19,7 +19,7 @@
             = link_to p.title, "/"+p.title
 
 
-  %li{class: "dropdown"}
+  %li{class: ((controller_name == 'competitions' || controller_name == 'file_competitions' || controller_name == 'teams') ? "dropdown active" : "dropdown")}
     %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
       Konkurranser
       %span{class: "caret"}
@@ -42,14 +42,14 @@
 
       - FileCompetition.all.order(:name).each do |c|
         %li= link_to c.name, c
-  %li
+  %li{class: ('active' if action_name == 'irc')}
     = link_to 'Chat - IRC', chat_path
 
   - if current_user.nil?
-    %li
+    %li{class: ('active' if controller_name == 'sessions')}
       = link_to "Logg inn", logg_inn_path
   - else
-    %li{class: "dropdown"}
+    %li{class: controller_name == 'users' ? 'dropdown active' : 'dropdown'}
       %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
         Personlig
         %span{class: "caret"}
