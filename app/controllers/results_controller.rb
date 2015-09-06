@@ -27,6 +27,7 @@ class ResultsController < ApplicationController
       flash[:success] = "Du har meldt inn et resultat, administrator vil godkjenne det så fort som mulig"
       redirect_to competition_results_path(@competition)
     else
+      flash.now[:danger] = 'Noe gikk galt.'
       render "new"
     end
   end
@@ -54,7 +55,7 @@ class ResultsController < ApplicationController
       flash[:success] = "Du oppdaterte resultatet."
       redirect_to @competition
     else
-      flash[:danger] = "Resultatet ble IKKE oppdatert, da det er allerede godkjent."
+      flash.now[:danger] = "Resultatet ble IKKE oppdatert, da det er allerede godkjent."
       render :edit
     end
   end

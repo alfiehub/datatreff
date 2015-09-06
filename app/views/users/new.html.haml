@@ -1,6 +1,4 @@
 = semantic_form_for @user do |f|
-  - if @user.errors.any?
-    - flash[:danger] = "Noe gikk galt."
   = f.inputs :name => "Registrering" do
     = f.input :username, label: "Brukernavn", placeholder: "360 no scope killah Ola-boi"
     = f.input :name, label: "Navn", placeholder: "Ola Nordmann"

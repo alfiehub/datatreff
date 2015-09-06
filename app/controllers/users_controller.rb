@@ -24,7 +24,8 @@ class UsersController < ApplicationController
       flash[:success] = "Du er blitt registrert og logget inn!"
       redirect_to root_path
     else
-      render "new"
+      flash.now[:danger] = "Noe gikk galt."
+      render :new
     end
   end
 
@@ -45,8 +46,8 @@ class UsersController < ApplicationController
       flash[:success] = "Du endret brukeren din."
       redirect_to edit_user_path(@user)
     else
-      flash[:danger] = "Noe gikk galt."
-      redirect_to edit_user_path(@user)
+      flash.now[:danger] = "Noe gikk galt."
+      render :edit
     end
   end
 

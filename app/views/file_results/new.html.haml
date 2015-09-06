@@ -1,7 +1,5 @@
 .row
   = semantic_form_for [@competition, @result] do |f|
-    - if @result.errors.any?
-      - flash[:danger] = "Noe gikk galt."
     = f.inputs :name => "Resultat" do
       = f.input :name, label: 'Navn på bidraget'
       = f.input :comment, label: 'Kommentar til dommerne'

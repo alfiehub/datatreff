@@ -1,8 +1,6 @@
 .row
   .col-md-6
     = semantic_form_for [@competition, @result] do |f|
-      - if @result.errors.any?
-        - flash[:danger] = "Noe gikk galt."
       = f.inputs :name => "Resultat" do
         = f.input :team1_id, label: "Lag 1",  as: :select, collection: @competition.teams
         = f.input :team2_id, label: "Lag 2", as: :select, collection: @competition.teams

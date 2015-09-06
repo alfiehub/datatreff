@@ -31,6 +31,7 @@ class FileResultsController < ApplicationController
         flash[:success] = "Ditt bidrag har blitt sendt inn!"
         redirect_to file_competition_file_results_path(@competition)
       else
+        flash.now[:danger] = 'Noe gikk galt.'
         render 'new', object: @competition
       end
     end
@@ -55,7 +56,7 @@ class FileResultsController < ApplicationController
       flash[:success] = "Du oppdaterte resultatet."
       redirect_to file_competition_file_results_path(@competition)
     else
-      flash[:danger] = "Resultatet ble ikke oppdatert, da noe gikk galt."
+      flash.now[:danger] = "Resultatet ble ikke oppdatert, da noe gikk galt."
       render 'edit'
     end
   end

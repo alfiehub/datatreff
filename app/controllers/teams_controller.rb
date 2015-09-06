@@ -44,6 +44,7 @@ class TeamsController < ApplicationController
       flash[:success] = "Du endret navnet til laget!"
       redirect_to @team
     else
+      flash.now[:danger] = "Noe gikk galt."
       render :edit
     end
   end
