@@ -1,18 +1,27 @@
-.row
-  .col-md-6
-    %table{class: "table table-striped"}
-      %h2
-        Mine lag
-        %span{class: "label label-primary"}
-          = link_to "Nytt lag", new_team_path, {style: "color:white;"}
-      - @teams.each do |t|
-        %tr
+.center-box
+  %h2
+    Mine lag
+    %span{class: "label label-primary"}
+      = link_to "Nytt lag", new_team_path, {style: "color:white;"}
+  %table{class: "table table-striped"}
+    %thead
+      %th
+        Lagnavn
+      - if is_admin?
+        %th
+          Navn
+        %th
+          Brukernavn
+        %th
+          Mobilnummer
+    - @teams.each do |t|
+      %tr
+        %td
+          = link_to t.name, t
+        - if is_admin? && !t.users.first.nil?
           %td
-            = link_to t.name, t
-          - if is_admin? && !t.users.first.nil?
-            %td
-              = t.contact_person.name
-            %td
-              = t.contact_person.username
-            %td
-              = t.contact_person.mobile
+            = t.contact_person.name
+          %td
+            = t.contact_person.username
+          %td
+            = t.contact_person.mobile

@@ -1,6 +1,6 @@
-.col-md-6
+.form.center-block.well.bs-component
   = semantic_form_for @team do |f|
     = f.inputs :name => "Nytt lag" do
       = f.input :name, label: "Navn, maks 11 tegn"
     = f.actions do
-      = f.action :submit, label: "Opprett", as: :button
+      = f.action :submit, label: "Opprett"

@@ -1,12 +1,11 @@
-%h2
-  Logg inn
-= semantic_form_for 'user', url: sessions_path do |f|
-  = f.inputs do
-    = f.input :username, label: false, placeholder: "Brukernavn"
-    = f.input :password, label: false, placeholder: "Passord"
-  = f.actions do
-    = f.action :submit, label: "Logg inn"
+.form.well.center-block.ws-component
+  = semantic_form_for 'user', url: sessions_path do |f|
+    = f.inputs name: 'Logg inn' do
+      = f.input :username, label: false, placeholder: "Brukernavn"
+      = f.input :password, label: false, placeholder: "Passord"
+    = f.actions do
+      = f.action :submit, label: "Logg inn"
+  Ingen bruker?
+  = link_to "Registrer", registrering_path
+  deg nå!
 
-Ingen bruker?
-= link_to "Registrer", registrering_path
-deg nå!

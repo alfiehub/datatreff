@@ -1,21 +1,20 @@
-%h2
-  = @team.name
-  %span{class: "label label-primary"}
-    = link_to "Endre", edit_team_path(@team),{style: "color:white;"}
-.row
-  .col-md-6
-    %table.table
-      - @team.ordered_users.each do |u|
-        %tr
-          %td
-            = u.username
-          %td
-            = u.name
-          %td
-            = link_to 'x', user_team_path(UserTeam.find_by_team_id_and_user_id(@team.id, u.id)), method: :delete
+.center-box
+  %h2
+    = @team.name
+    %span{class: "label label-primary"}
+      = link_to "Endre", edit_team_path(@team),{style: "color:white;"}
+  %table.table
+    - @team.ordered_users.each do |u|
+      %tr
+        %td
+          = u.username
+        %td
+          = u.name
+        %td
+          = link_to 'x', user_team_path(UserTeam.find_by_team_id_and_user_id(@team.id, u.id)), method: :delete
 
-    = semantic_form_for @team do |f|
-      = f.inputs :name do
-        = f.input :username, as: :string, placeholder: 'Brukernavnet som skal legges til', label: 'Brukernavn'
-      = f.actions do
-        = f.action :submit, label: "Legg til bruker", as: :button
+  = semantic_form_for @team do |f|
+    = f.inputs :name do
+      = f.input :username, as: :string, placeholder: 'Brukernavnet som skal legges til', label: 'Brukernavn'
+    = f.actions do
+      = f.action :submit, label: "Legg til bruker"

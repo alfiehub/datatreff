@@ -1,12 +1,11 @@
-.form.center-block
-  .well.bs-component
-    = semantic_form_for @user do |f|
-      = f.inputs :name => "Registrering" do
-        = f.input :username, label: "Brukernavn", placeholder: "360 no scope killah Ola-boi"
-        = f.input :name, label: "Navn", placeholder: "Ola Nordmann"
-        = f.input :email, label: "E-post", placeholder: "Ola@nordmann.no"
-        = f.input :mobile, label: "Telefonnummer (mobil)", placeholder: '13371337'
-        = f.input :password, label: "Passord"
-        = f.input :password_confirmation, label: "Bekreft passord"
-      = f.actions do
-        = f.action :submit, label: "Opprett bruker"
+.form.center-block.well.bs-component
+  = semantic_form_for @user do |f|
+    = f.inputs :name => "Registrering" do
+      = f.input :username, label: "Brukernavn", placeholder: "360 no scope killah Ola-boi"
+      = f.input :name, label: "Navn", placeholder: "Ola Nordmann"
+      = f.input :email, label: "E-post", placeholder: "Ola@nordmann.no"
+      = f.input :mobile, label: "Telefonnummer (mobil)", placeholder: '13371337'
+      = f.input :password, label: "Passord"
+      = f.input :password_confirmation, label: "Bekreft passord"
+    = f.actions do
+      = f.action :submit, label: "Opprett bruker"
