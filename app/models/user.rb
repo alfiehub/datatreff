@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :results
   has_many :file_results
 
-  validates :username, :name, :email, presence: true, uniqueness: true
+  validates :username, :name, :email, presence: true, uniqueness: true, length: { in: 1..26 }
   validates :mobile, presence: true, uniqueness: true, length: { is: 8 }
   validates_format_of :email, with: EMAIL_REGEX
   validates :password, presence: true, on: :create
