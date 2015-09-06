@@ -16,7 +16,14 @@
  */
 
 @import "bootstrap-sprockets";
+@import "./_variables.scss";
 @import "bootstrap";
+@import "./_bootswatch.scss";
+
+.form {
+  width: 500px;
+  margin-top: 15px;
+}
 
 .notice {
   width: 50%;

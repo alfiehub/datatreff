@@ -1,13 +1,15 @@
-.col-md-6
-  = semantic_form_for @user do |f|
-    = f.inputs do
-      = f.input :username, label: "Brukernavn"
-      = f.input :name, label: "Navn"
-      = f.input :mobile, label: "Mobiltelefon"
-      = f.input :email, label: "Epost"
-      = f.input :password, label: "Nytt passord"
-      = f.input :password_confirmation, label: "Bekreft nytt passord"
-      - if is_admin?
-        = f.input :admin, as: :radio
-    = f.actions do
-      = f.action :submit, label: "Lagre"
+.form.center-block
+  %h3 Rediger bruker
+  .well.bs-component
+    = semantic_form_for @user do |f|
+      = f.inputs do
+        = f.input :username, label: "Brukernavn"
+        = f.input :name, label: "Navn"
+        = f.input :mobile, label: "Mobiltelefon"
+        = f.input :email, label: "Epost"
+        = f.input :password, label: "Nytt passord"
+        = f.input :password_confirmation, label: "Bekreft nytt passord"
+        - if is_admin?
+          = f.input :admin, as: :radio
+      = f.actions do
+        = f.action :submit, label: "Lagre"
