@@ -63,6 +63,15 @@ ul#nav {
   margin: auto auto;
 }
 
+.table#smalltext {
+  th {
+    font-size: 14px;
+  }
+  td {
+    font-size: 13px;
+  }
+}
+
 h2#subheader {
   text-align: center;
 }
