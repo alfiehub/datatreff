@@ -30,18 +30,22 @@ class TeamsController < ApplicationController
 
       if user.nil?
         flash[:danger] = params[:team][:username] + ' finnes ikke i databasen :('
+        redirect_to @team
       else
         if !@team.users.pluck(:id).include?(user.id) && UserTeam.new(user_id: user.id, team_id: @team.id).save()
           flash[:success] = "Du la til " + params[:team][:username] + '!'
+          redirect_to @team
         else
           flash[:danger] = 'Noe gikk galt, er brukeren allerede lagt til?'
+          redirect_to @team
         end
       end
-    else
-      @team.update_attribute(:name, params[:team][:name])
+    elsif @team.update_attributes(team_params)
       flash[:success] = "Du endret navnet til laget!"
+      redirect_to @team
+    else
+      render :edit
     end
-    redirect_to @team
   end
 
   def create
@@ -57,6 +61,6 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name, user_ids: [])
+    params.require(:team).permit(:name)
   end
 end
