@@ -43,6 +43,9 @@ gem 'redcarpet'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'cocaine' # I need this.
 
+# Mina - automate deployment!
+gem 'mina'
+
 group :development do
   # Speed analyzer
   gem 'rack-mini-profiler'
