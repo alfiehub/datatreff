@@ -1,11 +1,10 @@
-.row
-  .col-md-6
-    = semantic_form_for [@competition, @result] do |f|
-      = f.inputs :name => "Resultat" do
-        = f.input :team1_id, label: "Lag 1",  as: :select, collection: @competition.teams
-        = f.input :team2_id, label: "Lag 2", as: :select, collection: @competition.teams
-        = f.input :team1_score, label: "Lag 1 poeng"
-        = f.input :team2_score, label: "Lag 2 poeng"
-        = f.input :image, label: "Screenshot"
-      = f.actions do
-        = f.action :submit, label: "Send inn", as: :button
+.form.center-block.well.bs-component
+  = semantic_form_for [@competition, @result] do |f|
+    = f.inputs :name => "Resultat" do
+      = f.input :team1_id, label: "Lag 1",  as: :select, collection: @competition.teams
+      = f.input :team2_id, label: "Lag 2", as: :select, collection: @competition.teams
+      = f.input :team1_score, label: "Lag 1 poeng"
+      = f.input :team2_score, label: "Lag 2 poeng"
+      = f.input :image, label: "Screenshot", input_html: {style: 'color: white;'}
+    = f.actions do
+      = f.action :submit, label: "Send inn"

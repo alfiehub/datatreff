@@ -1,12 +1,11 @@
-= semantic_form_for @competition do |f|
-  - if @competition.errors.any?
-    - flash[:danger] = "Noe gikk galt."
-  = f.inputs :name => "Konkurranse" do
-    = f.input :name
-    = f.input :description
-    = f.input :admin_name
-    = f.input :admin_mobile
-    = f.input :team_size
-    = f.input :start_time, input_html: {class: 'datetimepicker'}, as: :string
-  = f.actions do
-    = f.action :submit, as: :button
+.center-block.well.bs-component
+  = semantic_form_for @competition do |f|
+    = f.inputs :name => "Konkurranse" do
+      = f.input :name
+      = f.input :description
+      = f.input :admin_name
+      = f.input :admin_mobile
+      = f.input :team_size
+      = f.input :start_time, input_html: {class: 'datetimepicker'}, as: :string
+    = f.actions do
+      = f.action :submit

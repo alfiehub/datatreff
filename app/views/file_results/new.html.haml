@@ -1,8 +1,8 @@
-.row
+.form.center-block.well.bs-component
   = semantic_form_for [@competition, @result] do |f|
     = f.inputs :name => "Resultat" do
       = f.input :name, label: 'Navn på bidraget'
       = f.input :comment, label: 'Kommentar til dommerne'
-      = f.input :contribution, label: ".zip-fil, maks 50 megabyte"
+      = f.input :contribution, label: ".zip-fil, maks 50 megabyte", input_html: {style: 'color: white;'}
     = f.actions do
-      = f.action :submit, label: "Send inn", as: :button
+      = f.action :submit, label: "Send inn"

@@ -6,7 +6,8 @@
         = f.input :team2_id, as: :select, collection: @competition.teams
         = f.input :team1_score
         = f.input :team2_score
-        = f.input :competition_id, as: :hidden, input_html: { value: @competition.id }
+        = f.input :competition_id, as: :hidden, input_html: { value: @competition.id, style: 'color: white;'}
+
         - if is_admin?
           = f.input :round
           = f.input :match
