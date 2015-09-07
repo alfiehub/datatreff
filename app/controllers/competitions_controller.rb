@@ -111,7 +111,7 @@ class CompetitionsController < ApplicationController
 
   private
   def competition_params
-    params.require(:competition).permit(:name, :description, :admin_name, :admin_mobile, :start_time, :team_size, team_ids: [])
+    params.require(:competition).permit(:name, :description, :admin_name, :admin_email, :admin_mobile, :start_time, :team_size, team_ids: [])
   end
 
   private

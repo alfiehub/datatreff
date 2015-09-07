@@ -53,6 +53,7 @@ task :deploy => :environment do
     queue 'git fetch'
     queue 'git reset --hard origin/' + branch
     queue 'bundle install'
+    queue 'rake db:migrate'
     queue 'touch tmp/restart.txt'
   end
 end

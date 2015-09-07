@@ -38,6 +38,6 @@ class FileCompetitionsController < ApplicationController
 
   private
   def file_competition_params
-    params.require(:file_competition).permit(:name, :description, :admin_name, :deadline)
+    params.require(:file_competition).permit(:name, :description, :admin_name, :admin_email, :deadline)
   end
 end
