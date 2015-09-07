@@ -49,6 +49,9 @@ gem 'mina'
 # Translate routes, because norwegian is better
 gem 'route_translator'
 
+# Internationalization
+gem 'rails-i18n'
+
 group :development do
   # Speed analyzer
   gem 'rack-mini-profiler'
