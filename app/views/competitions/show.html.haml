@@ -10,7 +10,7 @@
       %th Brukernavn
       - if is_admin?
         %th Navn
-        %th Mobilnummer
+        %th Mobil
       %th
     - @competition.teams.each do |t|
       %tr{class: ('active' if t.users.include?(current_user))}
