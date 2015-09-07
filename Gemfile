@@ -46,6 +46,9 @@ gem 'cocaine' # I need this.
 # Mina - automate deployment!
 gem 'mina'
 
+# Translate routes, because norwegian is better
+gem 'route_translator'
+
 group :development do
   # Speed analyzer
   gem 'rack-mini-profiler'

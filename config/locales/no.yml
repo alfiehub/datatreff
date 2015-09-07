@@ -203,3 +203,11 @@ nb:
   formtastic:
     :no: "Nei"
     :yes: "Ja"
+  routes:
+    file_competitions: fkonkurranser
+    competitions: konkurranser
+    users: brukere
+    results: resultater
+    pages: sider
+    teams: lag
+
