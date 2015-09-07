@@ -30,4 +30,4 @@
         %td
           = link_to 'Endre', edit_page_path(p)
         %td
-          = link_to 'Slett', p, method: :delete, confirmation: "Er du sikker?"
+          = link_to 'Slett', p, method: :delete, data: {confirm: "Er du sikker?"}

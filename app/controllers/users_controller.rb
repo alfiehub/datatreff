@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authorize_admin, only: [:index, :show]
+  before_filter :authorize_admin, only: [:index, :show, :destroy]
   before_filter :authorize, only: [:edit, :update]
 
   def index
@@ -49,6 +49,16 @@ class UsersController < ApplicationController
       flash.now[:danger] = "Noe gikk galt."
       render :edit
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "Du slettet brukeren."
+    else
+      flash[:warning] = "Noe gikk galt."
+    end
+    redirect_to users_path
   end
 
   private
