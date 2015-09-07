@@ -8,7 +8,7 @@
     %thead
       %th Lagnavn
       %th Brukernavn
-      - if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
+      - if is_admin?
         %th Navn
         %th Mobilnummer
     - @competition.teams.each do |t|
@@ -17,7 +17,7 @@
           = t.name
         %td
           = t.contact_person.username
-        - if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
+        - if is_admin?
           %td
             = t.contact_person.name
           %td
