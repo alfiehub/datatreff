@@ -19,14 +19,14 @@
   .col-md-4
     .description
       %h3 Kontaktinformasjon
-      %table{class: "table table-striped"}
+      %table{class: "table table-striped table-hover"}
         %thead
           %th Admin
           %th Mobilnummer
         %tr
           %td= @competition.admin_name
           %td= @competition.admin_mobile
-      %table{class: "table table-striped"}
+      %table{class: "table table-striped table-hover"}
         %thead
           %th Lag
           %th Kaptein
@@ -44,7 +44,7 @@
   .col-md-12
     .bracket
     .contact-info
-      %table{class: "table table-striped"}
+      %table{class: "table table-striped table-hover"}
         %thead
           %th Admin
           %th Mobilnummer

@@ -3,7 +3,7 @@
     = @team.name
     %span{class: "label label-primary"}
       = link_to "Endre", edit_team_path(@team),{style: "color:white;"}
-  %table.table
+  %table{class: 'table table-striped table-hover'}
     - @team.ordered_users.each do |u|
       %tr
         %td
