@@ -32,8 +32,3 @@ module Datatreff
     config.event_start = DateTime.new(2015, 9, 18, 16, 00, 0)
   end
 end
-
-RouteTranslator.config do |config|
-  config.force_locale = false
-  config.hide_locale = true
-end
