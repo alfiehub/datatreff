@@ -20,9 +20,14 @@ class Page < ActiveRecord::Base
 
   def self.find_by_param(id)
     if id =~ NAME_FORMAT
+      id.gsub!('-', ' ')
       find_by_title(id)
     else
       find(id)
     end
+  end
+
+  def titledash
+    self[:title].tr(' ', '-')
   end
 end
