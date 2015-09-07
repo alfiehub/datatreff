@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Velkommen tilbake, #{user.username}!"
       redirect_to root_path
     else
-      flash[:danger] = "Brukernavnet eller passordet er ugyldig."
+      flash.now[:danger] = "Brukernavnet eller passordet er ugyldig."
       render :new
     end
 
