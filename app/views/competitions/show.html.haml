@@ -25,18 +25,23 @@
         - if t.users.include?(current_user) || is_admin?
           %td
             = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
+    %tr
+      %td{style: 'text-align: right;'}
+        %b
+          Sum:
+      %td
+        %b= @competition.teams.length
+        stk.
 
   - if !current_user.nil?
     = semantic_form_for @competition do |f|
       = f.inputs :name do
         = f.input :teams, label: "Mine lag", as: :select, collection: current_user.teams.select{|t| !@competition.teams.include?(t)}
       = f.actions do
-        = f.action :submit, label: "Meld på", as: :button
+        = f.action :submit, label: "Meld på"
 
 
 .col-md-6
-  = raw(@markdown.render(@competition.description))
-  %h3 Kontaktinformasjon
   %table{class: "table table-striped"}
     %thead
       %th Admin
@@ -46,6 +51,7 @@
       %td= @competition.admin_name
       %td= @competition.admin_mobile
       %td= I18n.l @competition.start_time
+  = raw(@markdown.render(@competition.description))
   - if is_admin?
     = link_to 'Start konkurranse', start_competition_path, data: {confirm: "Er du sikker på at du vil starte denne konkurransen nå? DU KAN IKKE GÅ TILBAKE"}
 

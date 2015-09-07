@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if is_admin? && @user.update_attributes(admin_user_params)
       flash[:success] = "Du endret brukeren."
-      redirect_to @user
+      redirect_to edit_user_path(@user)
     elsif current_user.id == @user.id && @user.update_attributes(user_params)
       flash[:success] = "Du endret brukeren din."
       redirect_to edit_user_path(@user)
