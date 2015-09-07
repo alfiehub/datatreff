@@ -13,31 +13,41 @@
     %br
     = link_to "Mine innsendte resultater", competition_results_path(@competition)
 
-.col-md-12
-  .description
-    %h3 Beskrivelse
-    = raw(@markdown.render(@competition.description))
-    - if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
-      .contact-info
-        %h3 Kontaktinformasjon
-        %table{class: "table table-striped"}
-          %thead
-            %th Admin
-            %th Mobilnummer
+- if is_admin? || (!current_user.nil? && is_participating?(@competition.id, current_user.id))
+  .col-md-8
+    .bracket
+  .col-md-4
+    .description
+      %h3 Kontaktinformasjon
+      %table{class: "table table-striped"}
+        %thead
+          %th Admin
+          %th Mobilnummer
+        %tr
+          %td= @competition.admin_name
+          %td= @competition.admin_mobile
+      %table{class: "table table-striped"}
+        %thead
+          %th Lag
+          %th Kaptein
+          %th Mobilnummer
+        - @competition.teams.each do |t|
           %tr
-            %td= @competition.admin_name
-            %td= @competition.admin_mobile
-          %thead
-            %th Lagnavn
-            %th Brukernavn
-            %th Mobilnummer
-          - @competition.teams.each do |t|
-            %tr
-              %td
-                = t.name
-              %td
-                = t.contact_person.username
-              %td
-                = t.contact_person.mobile
-.col-md-12
-  .bracket
+            %td
+              = t.name
+            %td
+              = t.contact_person.username
+            %td
+              = t.contact_person.mobile
+      = raw(@markdown.render(@competition.description))
+- else
+  .col-md-12
+    .bracket
+    .contact-info
+      %table{class: "table table-striped"}
+        %thead
+          %th Admin
+          %th Mobilnummer
+        %tr
+          %td= @competition.admin_name
+          %td= @competition.admin_mobile
