@@ -31,4 +31,5 @@ Antall admins:
       %td
         = u.updated_at.to_formatted_s(:short)
       %td
-        = link_to 'Slett', u, method: :delete, data: {confirm: "Er du sikker?"}
+        - if current_user.id == 1
+          = link_to 'x', u, method: :delete, data: {confirm: "Er du sikker?"}
