@@ -15,7 +15,11 @@
     - @competition.teams.each do |t|
       %tr{class: ('active' if t.users.include?(current_user))}
         %td
-          = t.name
+          - if is_admin?
+            = "(#{t.users.length})"
+            = link_to t.name, t
+          - else
+            = t.name
         %td
           = t.contact_person.username
         - if is_admin?
