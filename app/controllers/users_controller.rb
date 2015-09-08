@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = params[:id].nil? ? User.find(current_user.id) : User.find(params[:id])
     if !(is_admin? || @user.id == current_user.id)
       flash[:danger] = "Du har ikke tillatelse til dette."
       redirect_to root_path
