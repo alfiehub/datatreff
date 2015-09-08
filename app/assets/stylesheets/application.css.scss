@@ -20,11 +20,13 @@
 @import "bootstrap";
 @import "./_bootswatch.scss";
 
+b, strong {
+  color: white;
+}
 .form {
   width: 500px;
   margin-top: 15px;
 }
-
 .notice {
   width: 50%;
   margin: auto auto;
@@ -52,7 +54,6 @@ ul#nav {
 #heart {
   color: red;
 }
-
 .table#wide {
   width:95%;
   height:20px;
@@ -62,7 +63,6 @@ ul#nav {
   right:0;
   margin: auto auto;
 }
-
 .table#smalltext {
   th {
     font-size: 15px;
@@ -71,16 +71,13 @@ ul#nav {
     font-size: 14px;
   }
 }
-
 h2#subheader {
   text-align: center;
 }
-
 .center-box {
   width: 500px;
   margin: auto auto;
 }
-
 .table {
   white-space: nowrap;
 }
