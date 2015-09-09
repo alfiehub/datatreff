@@ -29,7 +29,7 @@ class CompetitionsController < ApplicationController
 
   def update
     @competition = Competition.find(params[:id])
-    team_ids = (competition_params[:team_ids].nil?) ? [] : competition_params[:team_ids]
+    team_ids = (competition_params[:team_ids].length == 1) ? [] : competition_params[:team_ids]
     teams = team_ids + @competition.teams.pluck(:id)
     team = (teams.length == @competition.teams.length) ? nil : Team.find(teams[1])
 
@@ -39,6 +39,9 @@ class CompetitionsController < ApplicationController
       redirect_to @competition
     elsif !team.nil? && teams.length-2 == @competition.teams.length && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Laget ditt ble meldt på!"
+      redirect_to @competition
+    elsif team.nil? && !@competition.users.pluck(:id).include?(current_user.id)
+      flash[:danger] = "Du har ikke valgt noe lag, har du husket å opprette ett? Gå til Konkurranser > Mine lag for en oversikt."
       redirect_to @competition
     else
       flash[:danger] = "Noe gikk galt, enten du eller noen andre på laget ditt deltar allerede i konkurransen. Er du sikker på at det er nok medlemmer på laget ditt?"
