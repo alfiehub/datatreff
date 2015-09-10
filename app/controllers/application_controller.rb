@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   private
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
+    if !@current_user.nil?
+      @current_user.update_column(:last_login, Time.now)
+    end
+    return @current_user
   end
 
   def authorize

@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     user = User.find_by_username(params[:user][:username])
 
     if user && user.authenticate(params[:user][:password])
-      user.update_column(:last_login, Time.now)
       session[:user_id] = user.id
       flash[:success] = "Velkommen tilbake, #{user.username}!"
       redirect_to root_path
