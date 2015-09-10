@@ -30,7 +30,7 @@ ready = function() {
       if (event.elapsed) {
       $(this).text(event.strftime('GalaxeLAN har startet!'));
       } else {
-      $(this).html(event.strftime('<b>%-D</b> døgn, <b>%-H</b> %!H:time,timer;, <b>%-M</b> %!M:minutt,minutter; og <b>%-S</b> %!S:sekund,sekunder; igjen!'));
+      $(this).html(event.strftime('Bare <b>%-D</b> døgn, <b>%-H</b> %!H:time,timer;, <b>%-M</b> %!M:minutt,minutter; og <b>%-S</b> %!S:sekund,sekunder; igjen!'));
       };
     });
   });
