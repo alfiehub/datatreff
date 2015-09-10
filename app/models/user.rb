@@ -14,4 +14,12 @@ class User < ActiveRecord::Base
   validates :mobile, presence: true, uniqueness: true, length: { is: 8 }
   validates_format_of :email, with: EMAIL_REGEX
   validates :password, presence: true, on: :create
+
+  def last_login
+    if self[:last_login].nil?
+      self[:created_at]
+    else
+      self[:last_login]
+    end
+  end
 end
