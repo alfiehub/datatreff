@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require "jquery.countdown.js"
@@ -18,16 +19,22 @@
 //= require jquery.datetimepicker
 //= require bootstrap-sprockets
 
-$(function() {
-  $('.datetimepicker').datetimepicker();
-});
-
-$(function() {
-  $("#clock").countdown("2015/09/18 16:00:00", {elapse: true}).on('update.countdown', function(event) {
-    if (event.elapsed) {
-    $(this).text(event.strftime('GalaxeLAN har startet!'));
-    } else {
-    $(this).html(event.strftime('<b>%-D</b> %!D:dag,dager;, <b>%-H</b> %!H:time,timer;, <b>%-M</b> %!M:minutt,minutter; og <b>%-S</b> %!S:sekund,sekunder; igjen!'));
-    };
+var ready;
+ready = function() {
+  $(function() {
+    $('.datetimepicker').datetimepicker();
   });
-});
+
+  $(function() {
+    $("#clock").countdown("2015/09/18 16:00:00", {elapse: true}).on('update.countdown', function(event) {
+      if (event.elapsed) {
+      $(this).text(event.strftime('GalaxeLAN har startet!'));
+      } else {
+      $(this).html(event.strftime('<b>%-D</b> døgn, <b>%-H</b> %!H:time,timer;, <b>%-M</b> %!M:minutt,minutter; og <b>%-S</b> %!S:sekund,sekunder; igjen!'));
+      };
+    });
+  });
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
