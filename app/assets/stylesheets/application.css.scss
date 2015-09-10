@@ -20,6 +20,13 @@
 @import "bootstrap";
 @import "./_bootswatch.scss";
 
+#clock {
+  display: inline-block;
+  position: relative;
+  margin-top: -38px;
+  left: 350px;
+}
+
 b, strong {
   color: white;
 }
