@@ -15,11 +15,13 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: EMAIL_REGEX
   validates :password, presence: true, on: :create
 
-  def last_login
-    if self[:last_login].nil?
+  scope :online, -> { where("last_seen > ?", 5.minutes.ago) }
+
+  def last_seen
+    if self[:last_seen].nil?
       self[:created_at]
     else
-      self[:last_login]
+      self[:last_seen]
     end
   end
 end

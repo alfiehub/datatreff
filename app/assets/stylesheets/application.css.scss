@@ -20,11 +20,12 @@
 @import "bootstrap";
 @import "./_bootswatch.scss";
 
-#clock {
+.right-box {
+  text-align: center;
   display: inline-block;
-  position: relative;
-  margin-top: -38px;
-  left: 335px;
+  float: right;
+  margin-top: -46px;
+  margin-right: 5px;
 }
 
 b, strong {
