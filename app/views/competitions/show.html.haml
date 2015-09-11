@@ -40,7 +40,7 @@
         stk.
       %td
 
-  - if !current_user.nil?
+  - if !current_user.nil? && !@competition.users.pluck(:id).include?(current_user.id)
     = semantic_form_for @competition do |f|
       = f.inputs :name do
         = f.input :teams, label: "Mine lag", collection: current_user.teams.select{|t| !@competition.teams.include?(t)}, input_html: {multiple: false}
