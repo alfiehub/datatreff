@@ -29,15 +29,15 @@ class CompetitionsController < ApplicationController
 
   def update
     @competition = Competition.find(params[:id])
-    team_ids = (competition_params[:team_ids].nil? || competition_params[:team_ids].length == 1) ? [] : competition_params[:team_ids]
+    team_ids = (competition_params[:team_ids].nil? || competition_params[:team_ids].length == 0) ? [] : competition_params[:team_ids]
     teams = team_ids + @competition.teams.pluck(:id)
-    team = (teams.length == @competition.teams.length) ? nil : Team.find(teams[1])
+    team = (teams.length == @competition.teams.length) ? nil : Team.find(teams[0])
 
     if is_admin? && @competition.update_attributes(competition_params)
       @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Du endret konkurransen."
       redirect_to @competition
-    elsif !team.nil? && teams.length-2 == @competition.teams.length && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
+    elsif !team.nil? && teams.length-1 == @competition.teams.length && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Laget ditt ble meldt på!"
       redirect_to @competition
     elsif team.nil? && !@competition.users.pluck(:id).include?(current_user.id)
