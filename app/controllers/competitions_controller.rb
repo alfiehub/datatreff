@@ -29,7 +29,7 @@ class CompetitionsController < ApplicationController
 
   def update
     @competition = Competition.find(params[:id])
-    team_ids = (competition_params[:team_ids].length == 1) ? [] : competition_params[:team_ids]
+    team_ids = (competition_params[:team_ids].nil? || competition_params[:team_ids].length == 1) ? [] : competition_params[:team_ids]
     teams = team_ids + @competition.teams.pluck(:id)
     team = (teams.length == @competition.teams.length) ? nil : Team.find(teams[1])
 
