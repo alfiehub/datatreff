@@ -26,7 +26,9 @@
     .sidebar-nav.navbar-collapse
       %ul.nav#side-menu
         %li
-          = link_to 'Informasjon', '#'
+          %a{href:'#'}
+            Informasjon
+            %span.fa.arrow
           %ul.nav.nav-second-level.collapse
             - if is_admin?
               %li
@@ -37,7 +39,9 @@
                 %li
                   = link_to p.title, "/"+p.titledash
         %li{class: 'active'}
-          = link_to 'Konkurranser', '#'
+          %a{href:'#'}
+            Konkurranser
+            %span.fa.arrow
           %ul.nav.nav-second-level.collapse
             - Competition.all.each do |c|
               %li
