@@ -38,7 +38,7 @@
               - if p.main_menu
                 %li
                   = link_to p.title, "/"+p.titledash
-        %li{class: 'active'}
+        %li{class: ('active' if controller_name != 'pages')}
           %a{href:'#'}
             Konkurranser
             %span.fa.arrow
