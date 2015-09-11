@@ -1,64 +1,46 @@
-%ul{class: "nav nav-tabs nav-justified", id: 'nav'}
-  %li{class: ('active' if (controller_name == 'site' && action_name != 'irc'))}
-    = link_to "Hjem", root_path
-
-  %li{class: ('dropdown active' if controller_name == 'pages')}
-    %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
-      Informasjon
-      %span{class: "caret"}
-    %ul{class: "dropdown-menu"}
-      - if is_admin?
-        %li
-          = link_to 'Alle artikler', pages_path
-        %li
-          = link_to 'Ny artikkel', new_page_path
-        %li{class: "divider", "role":"separator"}
-      - Page.all{|p| p.main_menu}.order(:title).each do |p|
-        - if p.main_menu
-          %li
-            = link_to p.title, "/"+p.titledash
-
-
-  %li{class: ((controller_name == 'competitions' || controller_name == 'file_competitions' || controller_name == 'teams') ? "dropdown active" : "dropdown")}
-    %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
-      Konkurranser
-      %span{class: "caret"}
-    %ul{class: "dropdown-menu"}
-
-      - if is_admin?
-        %li{class: "dropdown-header"} Ny konkurranse
-        %li= link_to 'Ny lagkonkurranse', new_competition_path
-        %li= link_to 'Ny filkonkurranse', new_file_competition_path
-        %li{class: "divider", "role":"separator"}
-
+%nav{class: 'navbar navbar-default navbar-static-top', style: 'margin-bottom: 0px;', role: 'navigation'}
+  .navbar-header
+    = link_to Rails.application.config.event_name, root_path, class: 'navbar-brand'
+  %p.navbar-text.navbar-left#clock{style: 'margin-right: 5px;'}
+  %ul.nav.navbar-top-links.navbar-right
+    %li.dropdown
       - if !current_user.nil?
-        %li= link_to "Mine lag", teams_path, id: 'bold'
-        %li{class: "divider", "role":"separator"}
+        %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
+          = current_user.username
+          %i.fa.fa-caret-down
+        %ul.dropdown-menu.dropdown-user
+          %li
+            = link_to 'Mine lag', teams_path
+          %li.divider
+          %li
+            = link_to 'Rediger bruker', edit_user_path(current_user)
+          %li
+            = link_to 'Logg ut', logg_ut_path
+      - else
+        = link_to 'Logg inn', logg_inn_path
 
-      - Competition.all.order(:name).each do |c|
-        %li= link_to c.name, c
-
-      %li{class: "divider", "role":"separator"}
-
-      - FileCompetition.all.order(:name).each do |c|
-        %li= link_to c.name, c
-  %li{class: ('active' if action_name == 'irc')}
-    = link_to 'Chat - IRC', chat_path
-
-  - if current_user.nil?
-    %li{class: ('active' if controller_name == 'sessions')}
-      = link_to "Logg inn", logg_inn_path
-  - else
-    %li{class: controller_name == 'users' ? 'dropdown active' : 'dropdown'}
-      %a{class: "dropdown-toggle", "data-toggle":"dropdown", "href":"#", role: "button", "aria-haspopup":"true"}
-        Personlig
-        %span{class: "caret"}
-      %ul{class: "dropdown-menu"}
-        - if is_admin?
-          %li{class: "dropdown-header"} Crew only
-          %li= link_to "Alle brukere", users_path
-          %li{role: "separator", class: "divider"}
-        %li
-          = link_to "Rediger bruker", rediger_bruker_path
-        %li
-          = link_to "Logg ut", logg_ut_path
+  .navbar-default.sidebar{role: 'navigation'}
+    .sidebar-nav.navbar-collapse
+      %ul.nav#side-menu
+        %li{class: 'active'}
+          = link_to 'Informasjon', '#'
+          %ul.nav.nav-second-level.collapse
+            - if is_admin?
+              %li
+                = link_to 'Alle artikler', pages_path
+              %li{class: 'divider'}
+            - Page.all{|p| p.main_menu}.order(:title).each do |p|
+              - if p.main_menu
+                %li
+                  = link_to p.title, "/"+p.titledash
+        %li{class: 'active'}
+          = link_to 'Konkurranser', '#'
+          %ul.nav.nav-second-level.collapse
+            - Competition.all.each do |c|
+              %li
+                = link_to c.name, c
+            - FileCompetition.all.each do |f|
+              %li
+                = link_to f.name, f
+          %li{class: ('active' if action_name == 'irc')}
+            = link_to 'Chat - IRC', chat_path

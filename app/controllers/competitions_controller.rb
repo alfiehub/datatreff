@@ -41,7 +41,7 @@ class CompetitionsController < ApplicationController
       flash[:success] = "Laget ditt ble meldt på!"
       redirect_to @competition
     elsif team.nil? && !@competition.users.pluck(:id).include?(current_user.id)
-      flash[:danger] = "Du har ikke valgt noe lag, har du husket å opprette ett? Gå til Konkurranser > Mine lag for en oversikt."
+      flash[:danger] = "Du har ikke valgt noe lag, har du husket å opprette ett? Gå til ditt navn (øverst i høyre hjørnet) også til Mine lag for en oversikt."
       redirect_to @competition
     else
       flash[:danger] = "Noe gikk galt, enten du eller noen andre på laget ditt deltar allerede i konkurransen. Er du sikker på at det er nok medlemmer på laget ditt?"

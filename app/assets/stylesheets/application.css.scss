@@ -13,12 +13,17 @@
  *= require_self
  *= require jquery.datetimepicker
  *= require formtastic-bootstrap
+ *= require bootstrap/dist/css/bootstrap
+ *= require metisMenu/dist/metisMenu
+ *= require sb-admin-2
+ *= require timeline
+ *= require mocha/mocha
+ *= require font-awesome/css/font-awesome
  */
 
-@import "bootstrap-sprockets";
-@import "./_variables.scss";
-@import "bootstrap";
-@import "./_bootswatch.scss";
+div#page-wrapper {
+  min-height: 100%;
+}
 
 .right-box {
   text-align: center;
@@ -28,9 +33,6 @@
   margin-right: 5px;
 }
 
-b, strong {
-  color: white;
-}
 .form {
   width: 500px;
   margin-top: 15px;
@@ -61,6 +63,7 @@ ul#nav {
 }
 #heart {
   color: red;
+  font-size: 20px;
 }
 .table#wide {
   width:95%;
@@ -79,13 +82,13 @@ ul#nav {
     font-size: 14px;
   }
 }
-h2#subheader {
-  text-align: center;
-}
 .center-box {
   width: 500px;
   margin: auto auto;
 }
 .table {
   white-space: nowrap;
+}
+.center {
+  margin: auto auto;
 }

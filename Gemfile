@@ -32,9 +32,7 @@ gem 'haml'
 gem 'haml-rails'
 
 # Bootstrap
-gem 'bootstrap-sass'
 gem 'formtastic-bootstrap'
-gem 'bootswatch-rails'
 
 # Markdown
 gem 'redcarpet'

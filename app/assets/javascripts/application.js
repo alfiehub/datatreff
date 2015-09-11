@@ -12,12 +12,17 @@
 //
 //= require jquery
 //= jquery.turbolinks
-//= require jquery_ujs
 //= require turbolinks
+//= require jquery_ujs
 //= require "jquery.countdown.js"
 //= require "jquery-bracket"
 //= require jquery.datetimepicker
-//= require bootstrap-sprockets
+//= require bootstrap/dist/js/bootstrap
+//= require metisMenu/dist/metisMenu
+//= require sb-admin-2
+//= require holderjs/holder
+//= require raphael/raphael
+//= require mocha/mocha
 
 var ready;
 ready = function() {

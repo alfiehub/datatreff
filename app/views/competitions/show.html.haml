@@ -1,8 +1,9 @@
-%h2#subheader
-  = @competition.name
-  - if is_admin?
-    %span{class: "label label-primary"}
-      = link_to "Endre", edit_competition_path(@competition),{style: "color:white;"}
+.col-md-12
+  %h2
+    = @competition.name
+    - if is_admin?
+      %span{class: "label label-primary"}
+        = link_to "Endre", edit_competition_path(@competition),{style: "color:white;"}
 .col-md-6
   %table{class: "table table-striped table-hover", id: 'smalltext'}
     %thead

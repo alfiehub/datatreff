@@ -54,6 +54,7 @@ task :deploy => :environment do
     queue 'git reset --hard origin/' + branch
     queue 'bundle install'
     queue 'rake db:migrate RAILS_ENV=production'
+    queue 'rake assets:precompile RAILS_ENV=production'
     queue 'touch tmp/restart.txt'
   end
 end

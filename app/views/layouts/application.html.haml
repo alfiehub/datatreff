@@ -7,20 +7,8 @@
     = csrf_meta_tags
 
   %body
-    .header
-      %h1
-        - if !current_user.nil?
-          = current_user.username
-        - else
-          I
-        %span{class: "glyphicon glyphicon-heart", id: "heart", "aria-hidden": true}
-        = link_to Rails.application.config.event_name, root_path
-    .right-box
-      #clock
-      #online
-        = "Pålogget nå: #{User.online.length}"
-
-    = render 'layouts/nav'
-    .container
-      = render 'layouts/notice'
-      = yield
+    #wrapper
+      = render 'layouts/nav'
+      #page-wrapper
+        = render 'layouts/notice'
+        = yield

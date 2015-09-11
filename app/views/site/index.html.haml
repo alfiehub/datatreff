@@ -1,6 +1,6 @@
 - c = 0
 - @pages.each do |p|
   .col-md-6
-    %h2#subheader
+    %h2.page-header
       = p.title
     = raw(@markdown.render(p.content))
