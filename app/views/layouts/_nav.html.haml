@@ -12,6 +12,9 @@
           %li
             = link_to 'Mine lag', teams_path
           %li.divider
+          - if is_admin?
+            %li
+              = link_to 'Alle brukere', users_path
           %li
             = link_to 'Rediger bruker', edit_user_path(current_user)
           %li
@@ -22,7 +25,7 @@
   .navbar-default.sidebar{role: 'navigation'}
     .sidebar-nav.navbar-collapse
       %ul.nav#side-menu
-        %li{class: 'active'}
+        %li
           = link_to 'Informasjon', '#'
           %ul.nav.nav-second-level.collapse
             - if is_admin?
