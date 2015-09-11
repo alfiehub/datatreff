@@ -3,14 +3,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_username(params[:user][:username])
+    user = User.find_by_id(params[:user][:username]) || User.find_by_email(params[:user][:username])
 
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
       flash[:success] = "Velkommen tilbake, #{user.username}!"
       redirect_to root_path
     else
-      flash.now[:danger] = "Brukernavnet eller passordet er ugyldig."
+      flash.now[:danger] = "Brukernavnet/e-posten eller passordet er ugyldig."
       render :new
     end
 

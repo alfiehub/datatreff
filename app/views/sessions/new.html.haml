@@ -1,7 +1,7 @@
 .form.well.center-block.ws-component
   = semantic_form_for 'user', url: sessions_path do |f|
     = f.inputs 'Logg inn' do
-      = f.input :username, label: false, placeholder: "Brukernavn"
+      = f.input :username, label: false, placeholder: "Brukernavn eller e-post"
       = f.input :password, label: false, placeholder: "Passord"
     = f.actions do
       = f.action :submit, label: "Logg inn"

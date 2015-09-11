@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   validates :username, :name, :email, presence: true, uniqueness: true
   validates :username, length: { maximum: 26 }
+  validates_uniqueness_of :username, :email, case_sensitive: false
   validates :mobile, presence: true, uniqueness: true, length: { is: 8 }
   validates_format_of :email, with: EMAIL_REGEX
   validates :password, presence: true, on: :create
@@ -22,6 +23,14 @@ class User < ActiveRecord::Base
       self[:created_at]
     else
       self[:last_seen]
+    end
+  end
+
+  def email
+    if !self[:email].nil?
+      self[:email].downcase
+    else
+      ""
     end
   end
 end
