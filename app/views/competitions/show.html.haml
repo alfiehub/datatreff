@@ -43,7 +43,7 @@
   - if !current_user.nil?
     = semantic_form_for @competition do |f|
       = f.inputs :name do
-        = f.input :teams, label: "Mine lag", as: :select, collection: current_user.teams.select{|t| !@competition.teams.include?(t)}
+        = f.input :teams, label: "Mine lag", collection: current_user.teams.select{|t| !@competition.teams.include?(t)}, input_html: {multiple: false}
       = f.actions do
         = f.action :submit, label: "Meld på"
 
