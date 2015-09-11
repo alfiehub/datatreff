@@ -25,6 +25,9 @@
   .navbar-default.sidebar{role: 'navigation'}
     .sidebar-nav.navbar-collapse
       %ul.nav#side-menu
+        %li
+          %a
+            = "Pålogget nå: #{User.online.length}"
         %li{class: ('active' if controller_name == 'pages')}
           %a{href:'#'}
             Informasjon
