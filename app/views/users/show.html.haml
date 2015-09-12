@@ -1,9 +1,18 @@
-%h2
-  = @user.username
-= @user.name
-%br
-= @user.mobile
-- if params[:id] == current_user.id || is_admin?
-  %br
-  = @user.email
-
+.row
+  .col-md-3
+    %h2
+      = @user.username
+      %span{class: "label label-primary"}
+        = link_to "Endre", edit_user_path(@user),{style: "color:white;"}
+    = @user.name
+    %br
+    = @user.mobile
+    - if params[:id] == current_user.id || is_admin?
+      %br
+      = @user.email
+  .col-md-3
+    %h2
+      = "#{@user.username} sine lag"
+    - @user.teams.each do |t|
+      %p
+        = link_to t.name, t

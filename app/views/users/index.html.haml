@@ -18,7 +18,7 @@ Antall admins:
   - @users.each do |u|
     %tr
       %td
-        = link_to u.username, edit_user_path(u)
+        = link_to u.username, user_path(u)
       %td
         = u.name
       %td
