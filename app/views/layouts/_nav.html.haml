@@ -28,7 +28,7 @@
         %li
           %a
             = "Pålogget nå: #{User.online.length}"
-        %li{class: ('active' if controller_name == 'pages')}
+        %li{class: ('active' if controller_name == 'pages' || controller_name == 'site')}
           %a{href:'#'}
             Informasjon
             %span.fa.arrow
@@ -41,7 +41,7 @@
               - if p.main_menu
                 %li
                   = link_to p.title, "/"+p.titledash
-        %li{class: ('active' if controller_name != 'pages')}
+        %li{class: ('active' if controller_name == 'competitions')}
           %a{href:'#'}
             Konkurranser
             %span.fa.arrow
