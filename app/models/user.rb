@@ -18,7 +18,9 @@ class User < ActiveRecord::Base
 
   scope :online, -> { where("last_seen > ?", 5.minutes.ago) }
 
-  def last_seen
+  scope :last_seen, -> { order("last_seen DESC NULLS LAST") }
+
+  def last_seen_fake
     if self[:last_seen].nil?
       self[:created_at]
     else

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :authorize, only: [:edit, :update]
 
   def index
-    @users = User.all.order(:created_at)
+    @users = User.last_seen
   end
 
   def new
