@@ -20,9 +20,6 @@
 //= require bootstrap/dist/js/bootstrap
 //= require metisMenu/dist/metisMenu
 //= require sb-admin-2
-//= require holderjs/holder
-//= require raphael/raphael
-//= require mocha/mocha
 
 var ready;
 ready = function() {
