@@ -24,11 +24,6 @@ class ApplicationController < ActionController::Base
     !current_user.nil? && current_user.admin
   end
 
-  def render_404
-    flash[:danger] = "404 - Denne siden ble ikke funnet."
-    redirect_to root_path
-  end
-
   def event_started
     if !is_admin? && Time.now < Rails.application.config.event_start
       flash[:danger] = "Du kan ikke gjør dette enda, LANet har ikke startet :'("
@@ -40,9 +35,14 @@ class ApplicationController < ActionController::Base
     !is_admin? || Time.now < Rails.application.config.event_start
   end
 
+  def render_404
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+    end
+  end
+
   helper_method :is_admin?
   helper_method :current_user
-  helper_method :render_404
   helper_method :event_started
   helper_method :event_started?
 end
