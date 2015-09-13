@@ -23,9 +23,10 @@
           = "Mine konkurranser"
           %i.fa.fa-caret-down
         %ul.dropdown-menu.dropdown-user
-          - current_user.competitions.each do |c|
-            %li
-              = link_to c.name, c
+          - current_user.teams.each do |t|
+            - t.competitions.each do |c|
+              %li
+                = link_to "#{c.name}: #{t.name}", c
 
     - if !current_user.nil?
       %li.dropdown
