@@ -75,7 +75,7 @@
             Konkurranser
             %span.fa.arrow
           %ul.nav.nav-second-level.collapse
-            - Competition.all.each do |c|
+            - Competition.order(:name).each do |c|
               %li
                 = link_to c.name, c
             - FileCompetition.all.each do |f|
