@@ -35,7 +35,7 @@ gem 'haml-rails'
 gem 'formtastic-bootstrap'
 
 # Markdown
-gem 'redcarpet'
+gem 'kramdown'
 
 # Paperclip
 gem 'paperclip', github: 'thoughtbot/paperclip'

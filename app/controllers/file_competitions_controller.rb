@@ -9,7 +9,6 @@ class FileCompetitionsController < ApplicationController
 
   def show
     @competition = FileCompetition.find(params[:id])
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
   end
 
   def create

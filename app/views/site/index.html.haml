@@ -3,4 +3,4 @@
   .col-md-6
     %h2.page-header
       = p.title
-    = raw(@markdown.render(p.content))
+    = raw(kramdown(p.content))

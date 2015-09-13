@@ -59,7 +59,7 @@
       %td= @competition.admin_name
       %td= @competition.admin_email
       %td= I18n.l @competition.start_time
-  = raw(@markdown.render(@competition.description))
+  = raw(kramdown(@competition.description))
   - if is_admin?
     = link_to 'Start konkurranse', start_competition_path, data: {confirm: "Er du sikker på at du vil starte denne konkurransen nå? DU KAN IKKE GÅ TILBAKE"}
 

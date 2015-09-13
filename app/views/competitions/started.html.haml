@@ -41,7 +41,7 @@
               = t.contact_person.username
             %td
               = t.contact_person.mobile
-      = raw(@markdown.render(@competition.description))
+      = raw(kramdown(@competition.description))
 - else
   .col-md-12
     .bracket

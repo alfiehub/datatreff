@@ -9,8 +9,6 @@ class PagesController < ApplicationController
     @page = Page.find_by_param(params[:id])
     if @page.nil?
       render_404
-    else
-      @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
     end
   end
 

@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  helper_method :is_admin?, :current_user, :event_started, :event_started?, :kramdown
+
   private
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
@@ -41,8 +43,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :is_admin?
-  helper_method :current_user
-  helper_method :event_started
-  helper_method :event_started?
+  def kramdown(text)
+    Kramdown::Document.new(text, :auto_ids => false, parse_block_html: true).to_html
+  end
+
 end

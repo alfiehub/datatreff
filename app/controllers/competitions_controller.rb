@@ -10,7 +10,6 @@ class CompetitionsController < ApplicationController
 
   def show
     @competition = Competition.find(params[:id])
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
     if @competition.started
       redirect_to started_competition_path(@competition)
     elsif current_user.nil?
@@ -86,7 +85,6 @@ class CompetitionsController < ApplicationController
 
   def started
     @competition = Competition.find(params[:id])
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, tables: true)
     if !@competition.started
       redirect_to @competition
     end
