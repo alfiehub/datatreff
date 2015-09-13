@@ -21,3 +21,18 @@
           - t.users.each do |u|
             %tr
               %td= link_to u.username, u
+  .col-md-3
+    %h2
+      = "#{@user.username} sine konkurranser"
+    %table.table.table-striped.table-hover.table-condensed
+      %thead
+        %th Lag
+        %th Konkurranse
+      %tbody
+        - @user.teams.each do |t|
+          - t.competitions.each do |c|
+            %tr
+              %td
+                = t.name
+              %td
+                = c.name
