@@ -14,9 +14,6 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    if !is_admin? && (current_user.nil? || !current_user.teams.include?(@team))
-      redirect_to teams_path
-    end
   end
 
   def edit
@@ -32,7 +29,7 @@ class TeamsController < ApplicationController
         flash[:danger] = params[:team][:username] + ' finnes ikke i databasen :('
         redirect_to @team
       else
-        if !@team.users.pluck(:id).include?(user.id) && UserTeam.new(user_id: user.id, team_id: @team.id).save()
+        if @team.users.pluck(:id).include?(current_user.id) && !@team.users.pluck(:id).include?(user.id) && UserTeam.new(user_id: user.id, team_id: @team.id).save()
           flash[:success] = "Du la til " + params[:team][:username] + '!'
           redirect_to @team
         else

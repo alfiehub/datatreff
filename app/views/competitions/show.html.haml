@@ -19,9 +19,7 @@
         %td
           - if is_admin?
             = "(#{t.users.length})"
-            = link_to t.name, t
-          - else
-            = t.name
+          = link_to t.name, t
         %td
           = t.contact_person.username
         - if is_admin?
