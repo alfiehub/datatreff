@@ -3,18 +3,50 @@
     = link_to Rails.application.config.event_name, root_path, class: 'navbar-brand'
   %p.navbar-text.navbar-left#clock{style: 'margin-right: 5px;'}
   %ul.nav.navbar-top-links.navbar-right
-    %li.dropdown
-      - if !current_user.nil?
+    - if is_admin?
+      %li.dropdown
         %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
-          = current_user.username
+          %i.fa.fa-lock
+          Admin
           %i.fa.fa-caret-down
         %ul.dropdown-menu.dropdown-user
           %li
-            = link_to 'Mine lag', teams_path
-          %li.divider
-          - if is_admin?
+            = link_to 'Alle artikler', pages_path
+          %li
+            = link_to 'Alle lag', teams_path
+          %li
+            = link_to 'Alle brukere', users_path
+    - if current_user && current_user.competitions.any?
+      %li.dropdown
+        %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
+          %i.fa.fa-keyboard-o
+          = "Mine konkurranser"
+          %i.fa.fa-caret-down
+        %ul.dropdown-menu.dropdown-user
+          - current_user.competitions.each do |c|
             %li
-              = link_to 'Alle brukere', users_path
+              = link_to c.name, c
+
+    - if !current_user.nil?
+      %li.dropdown
+        %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
+          %i.fa.fa-group
+          = "Mine lag"
+          %i.fa.fa-caret-down
+        %ul.dropdown-menu.dropdown-user
+          %li
+            = link_to 'Nytt lag', new_team_path
+          %li.divider
+          - current_user.teams.each do |t|
+            %li
+              = link_to t.name, t
+    %li.dropdown
+      - if !current_user.nil?
+        %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
+          %i.fa.fa-user
+          = current_user.username
+          %i.fa.fa-caret-down
+        %ul.dropdown-menu.dropdown-user
           %li
             = link_to 'Rediger bruker', edit_user_path(current_user)
           %li
@@ -33,10 +65,6 @@
             Informasjon
             %span.fa.arrow
           %ul.nav.nav-second-level.collapse
-            - if is_admin?
-              %li
-                = link_to 'Alle artikler', pages_path
-              %li{class: 'divider'}
             - Page.all{|p| p.main_menu}.order(:title).each do |p|
               - if p.main_menu
                 %li
