@@ -11,7 +11,8 @@
 
   %body
     #wrapper
-      = render 'layouts/nav'
+      = cache_if(current_user.nil?, User.last_seen.count) do
+        = render 'layouts/nav'
       #page-wrapper
         = render 'layouts/notice'
         = yield
