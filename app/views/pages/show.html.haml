@@ -1,5 +1,5 @@
+= content_for :title, @page.title
 = cache(@page.updated_at) do
-  = content_for :title, @page.title
   .col-md-12
     %h2.page-header
       = @page.title
