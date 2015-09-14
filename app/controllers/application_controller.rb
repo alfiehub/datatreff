@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
-    if !@current_user.nil? && @current_user.last_seen < 5.minutes.ago
+    if !@current_user.nil? && (@current_user.last_seen.nil? || @current_user.last_seen < 5.minutes.ago)
       @current_user.update_column(:last_seen, Time.now)
     end
     return @current_user
