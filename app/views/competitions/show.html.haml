@@ -6,41 +6,40 @@
       %span{class: "label label-primary"}
         = link_to "Endre", edit_competition_path(@competition),{style: "color:white;"}
 .col-md-6
-  = cache(@competition.teams.count) do
-    %table{class: "table table-striped table-hover", id: 'smalltext'}
-      %thead
-        %th Lagnavn
-        %th Lagkaptein
-        - if is_admin?
-          %th Navn
-          %th Mobil
-        %th
-      - @competition.teams.each do |t|
-        %tr{class: ('active' if t.users.include?(current_user))}
-          %td
-            - if is_admin?
-              = "(#{t.users.length})"
-              = link_to t.name, t
-            - else
-              = t.name
-          %td
-            = t.contact_person.username
+  %table{class: "table table-striped table-hover", id: 'smalltext'}
+    %thead
+      %th Lagnavn
+      %th Lagkaptein
+      - if is_admin?
+        %th Navn
+        %th Mobil
+      %th
+    - @competition.teams.each do |t|
+      %tr{class: ('active' if t.users.include?(current_user))}
+        %td
           - if is_admin?
-            %td
-              = t.contact_person.name
-            %td
-              = t.contact_person.mobile
+            = "(#{t.users.length})"
+            = link_to t.name, t
+          - else
+            = t.name
+        %td
+          = t.contact_person.username
+        - if is_admin?
           %td
-            - if t.users.include?(current_user) || is_admin?
-              = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
-      %tr
-        %td{style: 'text-align: right;'}
-          %b
-            Sum:
+            = t.contact_person.name
+          %td
+            = t.contact_person.mobile
         %td
-          %b= @competition.teams.length
-          stk.
-        %td
+          - if t.users.include?(current_user) || is_admin?
+            = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
+    %tr
+      %td{style: 'text-align: right;'}
+        %b
+          Sum:
+      %td
+        %b= @competition.teams.length
+        stk.
+      %td
 
   - if !current_user.nil? && !@competition.users.pluck(:id).include?(current_user.id)
     = semantic_form_for @competition do |f|
