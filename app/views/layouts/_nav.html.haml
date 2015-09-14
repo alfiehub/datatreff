@@ -70,7 +70,7 @@
               - if p.main_menu
                 %li
                   = link_to p.title, "/"+p.titledash
-        %li{class: ('active' if controller_name == 'competitions')}
+        %li{class: ('active' if (controller_name == 'competitions' || controller_name == 'file_competitions'))}
           %a{href:'#'}
             Konkurranser
             %span.fa.arrow
