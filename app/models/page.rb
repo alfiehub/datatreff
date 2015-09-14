@@ -17,6 +17,7 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :title
 
   scope :front_page, -> { where(front_page: true) }
+  scope :main_menu, -> { where(main_menu: true) }
 
   def self.find_by_param(id)
     if id =~ NAME_FORMAT
