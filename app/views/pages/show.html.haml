@@ -1,12 +1,13 @@
-= content_for :title, @page.title
-.col-md-12
-  %h2.page-header
-    = @page.title
-    - if is_admin?
-      %span{class: "label label-primary"}
-        = link_to "Endre artikkel", edit_page_path(@page),{style: "color:white;"}
-  = raw(kramdown(@page.content))
+= cache(@page.updated_at) do
+  = content_for :title, @page.title
+  .col-md-12
+    %h2.page-header
+      = @page.title
+      - if is_admin?
+        %span{class: "label label-primary"}
+          = link_to "Endre artikkel", edit_page_path(@page),{style: "color:white;"}
+    = raw(kramdown(@page.content))
 
-  %br
-  Skrevet av
-  %b= @page.user.name
+    %br
+    Skrevet av
+    %b= @page.user.name
