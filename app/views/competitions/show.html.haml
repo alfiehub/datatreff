@@ -52,7 +52,7 @@
     Du er ikke med i noe lag, du må opprette eller bli med i ett før du kan melde deg på.
 
 .col-md-6
-  = cache(@competition.description) do
+  = cache(@competition.description.size) do
     %table{class: "table table-striped table-hover"}
       %thead
         %th Admin
