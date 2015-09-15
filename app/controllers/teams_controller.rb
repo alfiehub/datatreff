@@ -15,12 +15,17 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     if !is_admin? && (current_user.nil? || !current_user.teams.include?(@team))
+      flash[:danger] = "Du får ikke lov til å gjøre dette"
       redirect_to teams_path
     end
   end
 
   def edit
     @team = Team.find(params[:id])
+    if !@team.users.pluck(:id).include?(current_user.id)
+      flash[:danger] = "Du har ikke tillatelse til å gjøre dette, hvorfor prøver du? :'("
+      redirect_to root_path
+    end
   end
 
   def update
@@ -43,6 +48,9 @@ class TeamsController < ApplicationController
     elsif (@team.users.pluck(:id).include?(current_user.id) || is_admin? )&& @team.update_attributes(team_params)
       flash[:success] = "Du endret navnet til laget!"
       redirect_to @team
+    elsif !@team.users.pluck(:id).include?(current_user.id)
+      flash[:danger] = "Ayyyy lmao, du kan ikke gjøre dette lenger ditt troll!"
+      redirect_to root_path
     else
       flash.now[:danger] = "Noe gikk galt."
       render :edit
