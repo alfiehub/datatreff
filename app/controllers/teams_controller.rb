@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.find(params[:id])
-    if !@team.users.pluck(:id).include?(current_user.id)
+    if !@team.users.pluck(:id).include?(current_user.id) && !is_admin?
       flash[:danger] = "Du har ikke tillatelse til å gjøre dette, hvorfor prøver du? :'("
       redirect_to root_path
     end
