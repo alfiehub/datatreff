@@ -49,7 +49,7 @@ class ResultsController < ApplicationController
     if is_admin? && @result.update_attributes(admin_result_params)
       flash[:success] = "Du oppdaterte resultatet."
       redirect_to @competition
-    elsif !@result.validated && @result.update_attributes(result_params)
+    elsif !@result.validated && @result.user.id == current_user.id && @result.update_attributes(result_params) 
       @result.update_attribute(:competition_id, @competition.id)
       flash[:success] = "Du oppdaterte resultatet."
       redirect_to @competition
@@ -61,7 +61,7 @@ class ResultsController < ApplicationController
 
   def destroy
     @result = Result.find(params[:id])
-    if !@result.validated && @result.destroy
+    if (@result.user.id == current_user.id || is_admin?) && !@result.validated && @result.destroy
       flash[:success] = "Du slettet et resultat"
     else
       flash[:warning] = "Noe gikk galt, resultatet er kanskje godkjent?"
