@@ -48,8 +48,10 @@
         = f.input :teams, label: "Mine lag", collection: current_user.teams.select{|t| !@competition.teams.include?(t)}, input_html: {multiple: false}
       = f.actions do
         = f.action :submit, label: "Meld på"
-  - else
+  - elsif !current_user.teams.any?
     Du er ikke med i noe lag, du må opprette eller bli med i ett før du kan melde deg på.
+  - else
+    Du deltar allerede i denne konkurransen!
 
 .col-md-6
   = cache(@competition.description.size) do

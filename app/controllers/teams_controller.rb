@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.find(params[:id])
-    if !@team.users.pluck(:id).include?(current_user.id) && !is_admin?
+    if !(@team.users.pluck(:id).include?(current_user.id) || is_admin?)
       flash[:danger] = "Du har ikke tillatelse til å gjøre dette, hvorfor prøver du? :'("
       redirect_to root_path
     end
@@ -45,7 +45,7 @@ class TeamsController < ApplicationController
           redirect_to @team
         end
       end
-    elsif (@team.users.pluck(:id).include?(current_user.id) || is_admin? )&& @team.update_attributes(team_params)
+    elsif (@team.users.pluck(:id).include?(current_user.id) || is_admin?) && @team.update_attributes(team_params)
       flash[:success] = "Du endret navnet til laget!"
       redirect_to @team
     elsif !@team.users.pluck(:id).include?(current_user.id)
