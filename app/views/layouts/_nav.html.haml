@@ -1,5 +1,5 @@
-= cache_if(current_user.nil?, User.online.size) do
-  %nav{class: 'navbar navbar-default navbar-static-top', style: 'margin-bottom: 0px;', role: 'navigation'}
+%nav{class: 'navbar navbar-default navbar-static-top', style: 'margin-bottom: 0px;', role: 'navigation'}
+  = cache (current_user.nil? ? 'nil' : [current_user, current_user.teams.size, current_user.competitions.size]) do
     .navbar-header
       = link_to Rails.application.config.event_name, root_path, class: 'navbar-brand'
     %p.navbar-text.navbar-left#clock{style: 'margin-right: 5px;'}
@@ -55,31 +55,31 @@
       - else
         %li.dropdown
           = link_to 'Logg inn', logg_inn_path
-    .navbar-default.sidebar{role: 'navigation'}
-      .sidebar-nav.navbar-collapse
-        %ul.nav#side-menu
-          %li
-            %a
-              = "Pålogget nå: #{User.online.size}"
-          = cache(Page.front_page.size) do
-            %li{class: 'active'}
-              %a{href:'#'}
-                Informasjon
-                %span.fa.arrow
-              %ul.nav.nav-second-level.collapse
-                - Page.main_menu.order(:title).each do |p|
-                  %li
-                    = link_to p.title, "/"+p.titledash
-            %li{class: 'active'}
-              %a{href:'#'}
-                Konkurranser
-                %span.fa.arrow
-              %ul.nav.nav-second-level.collapse
-                - Competition.order(:name).each do |c|
-                  %li
-                    = link_to c.name, c
-                - FileCompetition.all.each do |f|
-                  %li
-                    = link_to f.name, f
-              %li{class: ('active' if action_name == 'irc')}
-                = link_to 'Chat - IRC', chat_path
+  .navbar-default.sidebar{role: 'navigation'}
+    .sidebar-nav.navbar-collapse
+      %ul.nav#side-menu
+        %li
+          %a
+            = "Pålogget nå: #{User.online.size}"
+        = cache(Page.front_page.size) do
+          %li{class: 'active'}
+            %a{href:'#'}
+              Informasjon
+              %span.fa.arrow
+            %ul.nav.nav-second-level.collapse
+              - Page.main_menu.order(:title).each do |p|
+                %li
+                  = link_to p.title, "/"+p.titledash
+          %li{class: 'active'}
+            %a{href:'#'}
+              Konkurranser
+              %span.fa.arrow
+            %ul.nav.nav-second-level.collapse
+              - Competition.order(:name).each do |c|
+                %li
+                  = link_to c.name, c
+              - FileCompetition.all.each do |f|
+                %li
+                  = link_to f.name, f
+            %li{class: ('active' if action_name == 'irc')}
+              = link_to 'Chat - IRC', chat_path
