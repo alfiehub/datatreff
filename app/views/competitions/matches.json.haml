@@ -1,5 +1,6 @@
-= @matches.each do |m|
-  = m.to_json
+= cache(@results.size)
+  = @matches.each do |m|
+    = m.to_json
 
-= @results.each do |m|
-  = m.to_json
+  = @results.each do |m|
+    = m.to_json

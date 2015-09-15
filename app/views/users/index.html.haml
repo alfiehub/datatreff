@@ -1,9 +1,9 @@
 = stylesheet_link_tag 'users'
 Antall registrerte brukere:
-= @users.length
+= @users.size
 %br
 Antall admins:
-= @users.where(admin: true).length
+= @users.where(admin: true).size
 %table{class: "table table-striped table-hover table-condensed"}
   %thead
     %th Brukernavn

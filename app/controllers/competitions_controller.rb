@@ -28,15 +28,15 @@ class CompetitionsController < ApplicationController
 
   def update
     @competition = Competition.find(params[:id])
-    team_ids = (competition_params[:team_ids].nil? || competition_params[:team_ids].length == 0) ? [] : competition_params[:team_ids]
+    team_ids = (competition_params[:team_ids].nil? || competition_params[:team_ids].size == 0) ? [] : competition_params[:team_ids]
     teams = team_ids + @competition.teams.pluck(:id)
-    team = (teams.length == @competition.teams.length) ? nil : Team.find(teams[0])
+    team = (teams.size == @competition.teams.size) ? nil : Team.find(teams[0])
 
     if is_admin? && @competition.update_attributes(competition_params)
       @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Du endret konkurransen."
       redirect_to @competition
-    elsif !team.nil? && teams.length-1 == @competition.teams.length && team.users.pluck(:id).include?(current_user.id) && team.users.length >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
+    elsif !team.nil? && teams.size-1 == @competition.teams.size && team.users.pluck(:id).include?(current_user.id) && team.users.size >= @competition.team_size && !check_if_anyone_in_team_is_already_participating(@competition, team) && @competition.update_attribute(:team_ids, teams)
       flash[:success] = "Laget ditt ble meldt på!"
       redirect_to @competition
     elsif team.nil? && !@competition.users.pluck(:id).include?(current_user.id)
@@ -68,13 +68,13 @@ class CompetitionsController < ApplicationController
     teams.each do |t|
       t_arr.push(t.name)
     end
-    while t_arr.length < 2 ** (Math.log(t_arr.length)/Math.log(2)).ceil do
+    while t_arr.size < 2 ** (Math.log(t_arr.size)/Math.log(2)).ceil do
       t_arr.push('__')
     end
 
     shuffled = t_arr.shuffle
 
-    (0..shuffled.length-1).each do |i|
+    (0..shuffled.size-1).each do |i|
       TeamSeed.new(team_name: shuffled[i], competition_id: id, seed: i).save
     end
 

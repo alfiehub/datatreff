@@ -18,7 +18,7 @@
       %tr{class: ('active' if t.users.include?(current_user))}
         %td
           - if is_admin?
-            = "(#{t.users.length})"
+            = "(#{t.users.size})"
             = link_to t.name, t
           - else
             = t.name
@@ -37,7 +37,7 @@
         %b
           Sum:
       %td
-        %b= @competition.teams.length
+        %b= @competition.teams.size
         stk.
       %td
 
@@ -48,18 +48,18 @@
       = f.actions do
         = f.action :submit, label: "Meld på"
 
-
-.col-md-6
-  %table{class: "table table-striped table-hover"}
-    %thead
-      %th Admin
-      %th E-post
-      %th Start
-    %tr
-      %td= @competition.admin_name
-      %td= @competition.admin_email
-      %td= I18n.l @competition.start_time
-  = raw(kramdown(@competition.description))
-  - if is_admin?
-    = link_to 'Start konkurranse', start_competition_path, data: {confirm: "Er du sikker på at du vil starte denne konkurransen nå? DU KAN IKKE GÅ TILBAKE"}
+= cache(@competition.description) do
+  .col-md-6
+    %table{class: "table table-striped table-hover"}
+      %thead
+        %th Admin
+        %th E-post
+        %th Start
+      %tr
+        %td= @competition.admin_name
+        %td= @competition.admin_email
+        %td= I18n.l @competition.start_time
+    = raw(kramdown(@competition.description))
+    - if is_admin?
+      = link_to 'Start konkurranse', start_competition_path, data: {confirm: "Er du sikker på at du vil starte denne konkurransen nå? DU KAN IKKE GÅ TILBAKE"}
 

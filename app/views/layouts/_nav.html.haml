@@ -1,4 +1,4 @@
-= cache_if(current_user.nil?, User.online.count) do
+= cache_if(current_user.nil?, User.online.size) do
   %nav{class: 'navbar navbar-default navbar-static-top', style: 'margin-bottom: 0px;', role: 'navigation'}
     .navbar-header
       = link_to Rails.application.config.event_name, root_path, class: 'navbar-brand'
@@ -60,8 +60,8 @@
         %ul.nav#side-menu
           %li
             %a
-              = "Pålogget nå: #{User.online.length}"
-          = cache(Page.front_page.count) do
+              = "Pålogget nå: #{User.online.size}"
+          = cache(Page.front_page.size) do
             %li{class: 'active'}
               %a{href:'#'}
                 Informasjon
