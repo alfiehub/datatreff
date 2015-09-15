@@ -6,9 +6,9 @@ class ResultsController < ApplicationController
   def index
     @competition = Competition.find(params[:competition_id])
     if is_admin?
-      @results = @competition.results
+      @results = @competition.results.order(:round, :match)
     else
-      @results = current_user.results.where(competition_id: @competition.id)
+      @results = current_user.results.where(competition_id: @competition.id).order(:round, :match)
     end
   end
 
@@ -23,7 +23,6 @@ class ResultsController < ApplicationController
     if @result.save
       @result.update_attribute(:competition_id, @competition.id)
       @result.update_attribute(:user_id, current_user.id)
-      puts params
       flash[:success] = "Du har meldt inn et resultat, administrator vil godkjenne det så fort som mulig"
       redirect_to competition_results_path(@competition)
     else
@@ -62,10 +61,10 @@ class ResultsController < ApplicationController
 
   def destroy
     @result = Result.find(params[:id])
-    if @result.destroy
+    if !@result.validated && @result.destroy
       flash[:success] = "Du slettet et resultat"
     else
-      flash[:warning] = "Noe gikk galt."
+      flash[:warning] = "Noe gikk galt, resultatet er kanskje godkjent?"
     end
     puts params
     redirect_to competition_results_path(Competition.find(params[:competition_id]))
