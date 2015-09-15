@@ -14,7 +14,7 @@
         %th Navn
         %th Mobil
       %th
-    - @competition.teams.each do |t|
+    - @competition.teams.order(:name).each do |t|
       %tr{class: ('active' if t.users.include?(current_user))}
         %td
           - if is_admin?
