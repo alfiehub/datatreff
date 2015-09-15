@@ -5,53 +5,54 @@
     - if is_admin?
       %span{class: "label label-primary"}
         = link_to "Endre", edit_competition_path(@competition),{style: "color:white;"}
-.col-md-6
-  %table{class: "table table-striped table-hover", id: 'smalltext'}
-    %thead
-      %th Lagnavn
-      %th Lagkaptein
-      - if is_admin?
-        %th Navn
-        %th Mobil
-      %th
-    - @competition.teams.order(:name).each do |t|
-      %tr{class: ('active' if t.users.include?(current_user))}
-        %td
-          - if is_admin?
-            = "(#{t.users.size})"
-            = link_to t.name, t
-          - else
-            = t.name
-        %td
-          = t.contact_person.username
+= cache [current_user.id, @competition.teams.size] do
+  .col-md-6
+    %table{class: "table table-striped table-hover", id: 'smalltext'}
+      %thead
+        %th Lagnavn
+        %th Lagkaptein
         - if is_admin?
+          %th Navn
+          %th Mobil
+        %th
+      - @competition.teams.order(:name).each do |t|
+        %tr{class: ('active' if t.users.include?(current_user))}
           %td
-            = t.contact_person.name
+            - if is_admin?
+              = "(#{t.users.size})"
+              = link_to t.name, t
+            - else
+              = t.name
           %td
-            = t.contact_person.mobile
+            = t.contact_person.username
+          - if is_admin?
+            %td
+              = t.contact_person.name
+            %td
+              = t.contact_person.mobile
+          %td
+            - if t.users.include?(current_user) || is_admin?
+              = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
+      %tr
+        %td{style: 'text-align: right;'}
+          %b
+            Sum:
         %td
-          - if t.users.include?(current_user) || is_admin?
-            = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
-    %tr
-      %td{style: 'text-align: right;'}
-        %b
-          Sum:
-      %td
-        %b= @competition.teams.size
-        stk.
-      %td
+          %b= @competition.teams.size
+          stk.
+        %td
 
-  %h4 Påmelding
-  - if !current_user.nil? && !@competition.users.pluck(:id).include?(current_user.id) && current_user.teams.any?
-    = semantic_form_for @competition do |f|
-      = f.inputs :name do
-        = f.input :teams, label: "Mine lag", collection: current_user.teams.select{|t| !@competition.teams.include?(t)}, input_html: {multiple: false}
-      = f.actions do
-        = f.action :submit, label: "Meld på"
-  - elsif !current_user.teams.any?
-    Du er ikke med i noe lag, du må opprette eller bli med i ett før du kan melde deg på.
-  - else
-    Du deltar allerede i denne konkurransen!
+    %h4 Påmelding
+    - if !current_user.nil? && !@competition.users.pluck(:id).include?(current_user.id) && current_user.teams.any?
+      = semantic_form_for @competition do |f|
+        = f.inputs :name do
+          = f.input :teams, label: "Mine lag", collection: current_user.teams.select{|t| !@competition.teams.include?(t)}, input_html: {multiple: false}
+        = f.actions do
+          = f.action :submit, label: "Meld på"
+    - elsif !current_user.teams.any?
+      Du er ikke med i noe lag, du må opprette eller bli med i ett før du kan melde deg på.
+    - else
+      Du deltar allerede i denne konkurransen!
 
 .col-md-6
   = cache(@competition.description.size) do
