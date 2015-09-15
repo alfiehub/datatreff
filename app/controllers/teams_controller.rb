@@ -40,7 +40,7 @@ class TeamsController < ApplicationController
           redirect_to @team
         end
       end
-    elsif @team.update_attributes(team_params)
+    elsif (@team.users.pluck(:id).include?(current_user.id) || is_admin? )&& @team.update_attributes(team_params)
       flash[:success] = "Du endret navnet til laget!"
       redirect_to @team
     else

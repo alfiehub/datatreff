@@ -48,8 +48,8 @@
       = f.actions do
         = f.action :submit, label: "Meld på"
 
-= cache(@competition.description) do
-  .col-md-6
+.col-md-6
+  = cache(@competition.description) do
     %table{class: "table table-striped table-hover"}
       %thead
         %th Admin
@@ -60,6 +60,6 @@
         %td= @competition.admin_email
         %td= I18n.l @competition.start_time
     = raw(kramdown(@competition.description))
-    - if is_admin?
-      = link_to 'Start konkurranse', start_competition_path, data: {confirm: "Er du sikker på at du vil starte denne konkurransen nå? DU KAN IKKE GÅ TILBAKE"}
+  - if is_admin?
+    = link_to 'Start konkurranse', start_competition_path, data: {confirm: "Er du sikker på at du vil starte denne konkurransen nå? DU KAN IKKE GÅ TILBAKE"}
 
