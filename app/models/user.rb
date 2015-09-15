@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   validates :password, presence: true, on: :create
 
   scope :online, -> { where("last_seen > ?", 5.minutes.ago) }
-
   scope :last_seen, -> { order("last_seen DESC NULLS LAST") }
 
   def last_seen_fake
@@ -34,5 +33,9 @@ class User < ActiveRecord::Base
     else
       ""
     end
+  end
+
+  def self.find_by_lower_username username
+    self.where("lower(username) = ?", username).first
   end
 end
