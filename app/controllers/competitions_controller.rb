@@ -62,6 +62,8 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     id = params[:id]
     teams = @competition.teams
+    pre_seeded_teams = @competition.team_seeds.pluck(:team_name)
+    used_positions = @competition.team_seeds.pluck(:seed)
 
     # Shuffle and create team seeds
     t_arr = []
@@ -74,8 +76,19 @@ class CompetitionsController < ApplicationController
 
     shuffled = t_arr.shuffle
 
-    (0..shuffled.size-1).each do |i|
-      TeamSeed.new(team_name: shuffled[i], competition_id: id, seed: i).save
+    # Remove the teams already seeded from the shuffled array
+    pre_seeded_teams.each do |p|
+      shuffled.delete(p)
+    end
+
+    # Create team seeds, increment position if its already used, else: create a new TeamSeed
+    position = 0
+    while shuffled.length > 0 do
+      if !used_positions.include?(position)
+        team = shuffled.pop()
+        TeamSeed.new(team_name: team, competition_id: id, seed: position).save
+      end
+      position += 1
     end
 
     @competition.update_attribute(:started, true)
@@ -91,7 +104,7 @@ class CompetitionsController < ApplicationController
   end
 
   def matches
-    @matches = Competition.find(params[:id]).team_seeds
+    @matches = Competition.find(params[:id]).team_seeds.order(:seed)
     @results = Competition.find(params[:id]).results.accepted
     respond_to do |f|
       f.json { render :json => {teams: @matches, results: @results} }

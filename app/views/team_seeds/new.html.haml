@@ -1,0 +1,10 @@
+.row
+  %h2.page-header Ny TeamSeed
+  HUSK AT DET ER 0-INDEKSERT FRA TOPPEN
+  .center-block.well.bs-component
+    = semantic_form_for [@competition, @team_seed] do |f|
+      = f.inputs do
+        = f.input :team_name, collection: @competition.teams.pluck(:name), input_html: {multiple: false}
+        = f.input :seed
+      = f.actions do
+        = f.action :submit

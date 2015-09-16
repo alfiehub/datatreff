@@ -1,0 +1,2 @@
+module TeamSeedsHelper
+end

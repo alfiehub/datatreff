@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :pages
     resources :competitions do
       resources :results
+      resources :team_seeds
       member do
         get :start
         get :started
