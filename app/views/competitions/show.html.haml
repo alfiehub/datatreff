@@ -5,7 +5,7 @@
     - if is_admin?
       %span{class: "label label-primary"}
         = link_to "Endre", edit_competition_path(@competition),{style: "color:white;"}
-= cache [current_user.id, @competition.teams.size] do
+= cache [current_user.id, current_user.teams.size, @competition.teams.size] do
   .col-md-6
     %table{class: "table table-striped table-hover", id: 'smalltext'}
       %thead

@@ -1,51 +1,52 @@
-.row
-  %h2
-    Mine resultater:
-    = @competition.name
-  %table{class: 'table table-striped table-hover'}
-    %thead
-      %th
-        Lag 1
-      %th
-        Lag 2
-      %th
-        Lag 1 poeng
-      %th
-        Lag 2 poeng
-      %th
-        Runde
-      %th
-        Match
-      %th
-        Lower?
-      %th
-        Godkjent
-      %th
-        Rapport av
-    - @results.each do |r|
-      %tr
-        %td
-          = Team.find(r.team1_id).name
-        %td
-          = Team.find(r.team2_id).name
-        %td
-          = r.team1_score
-        %td
-          = r.team2_score
-        %td
-          = r.round
-        %td
-          = r.match
-        %td
-          = t(r.lower_bracket.to_s)
-        %td
-          = t(r.validated.to_s)
-        %td
-          = r.user.username
-        %td
-          - if !r.validated || is_admin?
-            = link_to 'Endre?', edit_competition_result_path(id: r.id)
-        - if is_admin?
+= cache [current_user.id, @results.size, @results.accepted.size] do
+  .row
+    %h2
+      Mine resultater:
+      = @competition.name
+    %table{class: 'table table-striped table-hover'}
+      %thead
+        %th
+          Lag 1
+        %th
+          Lag 2
+        %th
+          Lag 1 poeng
+        %th
+          Lag 2 poeng
+        %th
+          Runde
+        %th
+          Match
+        %th
+          Lower?
+        %th
+          Godkjent
+        %th
+          Rapport av
+      - @results.each do |r|
+        %tr
           %td
-            = link_to 'Slett?', competition_result_path(id: r.id), method: :delete, data: {confirm: "Er du sikker på at du vil slette dette resultatet?"}
+            = Team.find(r.team1_id).name
+          %td
+            = Team.find(r.team2_id).name
+          %td
+            = r.team1_score
+          %td
+            = r.team2_score
+          %td
+            = r.round
+          %td
+            = r.match
+          %td
+            = t(r.lower_bracket.to_s)
+          %td
+            = t(r.validated.to_s)
+          %td
+            = r.user.username
+          %td
+            - if !r.validated || is_admin?
+              = link_to 'Endre?', edit_competition_result_path(id: r.id)
+          - if is_admin?
+            %td
+              = link_to 'Slett?', competition_result_path(id: r.id), method: :delete, data: {confirm: "Er du sikker på at du vil slette dette resultatet?"}
 

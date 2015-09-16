@@ -66,8 +66,6 @@ $.ajax({
       }
     }
 
-    console.log(bracketData);
-
     $(function() {
       $('.bracket').bracket({
         init: bracketData});
