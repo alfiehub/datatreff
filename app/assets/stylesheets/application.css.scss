@@ -92,3 +92,16 @@ ul#nav {
 .center {
   margin: auto auto;
 }
+.instagram{
+  overflow: auto;
+  height: 600px;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+  }
+  .img-title {
+    text-align: center;
+  }
+}

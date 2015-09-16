@@ -50,6 +50,9 @@ gem 'route_translator'
 # Internationalization
 gem 'rails-i18n'
 
+# Instagram
+gem 'instagram'
+
 group :development do
   # Speed analyzer
   gem 'rack-mini-profiler'
