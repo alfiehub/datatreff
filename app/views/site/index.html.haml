@@ -1,5 +1,5 @@
 = content_for :title, 'Forside'
-= cache [front_page_cache_key, @instagram.first.images.low_resolution.url] do
+= cache(front_page_cache_key, expires_in: 5.minutes) do
   .col-md-6
     %h2.page-header
       = @pages.first.title
