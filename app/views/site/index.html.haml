@@ -9,7 +9,7 @@
     .instagram
       - Instagram.tag_recent_media("galaxelan", {:count => 5}).each do |i|
         = i.user.username
-        = link_to image_tag(serve_or_download_image(i.images.low_resolution.url)), "https://instagram.com/#{i.user.username}/"
+        = link_to image_tag(i.images.low_resolution.url), "https://instagram.com/#{i.user.username}/"
         .text
           = i.caption.text
   - @pages[1..-1].each do |p|
