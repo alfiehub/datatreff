@@ -1,9 +1,12 @@
+require 'uri'
+require 'open-uri'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :is_admin?, :current_user, :event_started, :event_started?, :kramdown
+  helper_method :is_admin?, :current_user, :event_started, :event_started?, :kramdown, :serve_or_download_image
 
   private
   def current_user
@@ -47,4 +50,16 @@ class ApplicationController < ActionController::Base
     Kramdown::Document.new(text, :auto_ids => false, parse_block_html: true).to_html
   end
 
+  def serve_or_download_image (url)
+    uri = URI.parse(url)
+    filename = File.basename(uri.path)
+    if !File.exists?(Rails.public_path + '/instagram/' + filename)
+      open("#{Rails.root}/public"+ '/instagram/' + filename, 'wb') do |file|
+        file << open(url).read
+      end
+      return Rails.public_path + '/instagram/' + filename
+    else
+      Rails.public_path + '/instagram/' + filename
+    end
+  end
 end
