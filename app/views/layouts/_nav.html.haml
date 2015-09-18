@@ -1,5 +1,5 @@
 %nav{class: 'navbar navbar-default navbar-static-top', style: 'margin-bottom: 0px;', role: 'navigation'}
-  = cache (current_user.nil? ? 'nav_nil' : ['nav', current_user, current_user.teams.size, current_user.competitions.size, (Result.not_accepted.size if is_admin?)]) do
+  = cache (current_user.nil? ? 'nav_nil' : ['nav', current_user, current_user.teams.size, current_user.competitions.size, (not_accepted_cache_key if is_admin?)]) do
     .navbar-header
       = link_to Rails.application.config.event_name, root_path, class: 'navbar-brand'
     %p.navbar-text.navbar-left#clock{style: 'margin-right: 5px;'}
