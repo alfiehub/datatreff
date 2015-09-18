@@ -5,6 +5,8 @@
     %p.navbar-text.navbar-left#clock{style: 'margin-right: 5px;'}
     %ul.nav.navbar-top-links.navbar-right
       - if is_admin?
+        - if Result.not_accepted.any?
+          DET FINNES RESULTATER SOM IKKE ER GODKJENT
         %li.dropdown
           %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
             %i.fa.fa-lock
