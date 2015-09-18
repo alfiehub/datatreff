@@ -34,7 +34,7 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     team_ids = (competition_params[:team_ids].nil? || competition_params[:team_ids].size == 0) ? [] : competition_params[:team_ids]
     teams = team_ids + @competition.teams.pluck(:id)
-    team = (teams.size == @competition.teams.size) ? nil : Team.find(teams[0])
+    team = (teams.size == @competition.teams.size) ? nil : Team.find_by_id(teams[0])
 
     if is_admin? && @competition.update_attributes(competition_params)
       @competition.update_attribute(:team_ids, teams)
