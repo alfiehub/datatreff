@@ -3,10 +3,10 @@
     .form.center-block.well.bs-component
       = semantic_form_for [@competition, @result] do |f|
         = f.inputs :name => "Resultat" do
-          = f.input :team1_id, as: :select, collection: @competition.teams.order(:name)
-          = f.input :team2_id, as: :select, collection: @competition.teams.order(:name)
-          = f.input :team1_score
-          = f.input :team2_score
+          = f.input :team1_id, as: :select, collection: @competition.teams.order(:name), label: "Lag 1"
+          = f.input :team2_id, as: :select, collection: @competition.teams.order(:name), label: "Lag 2"
+          = f.input :team1_score, label: "Lag 1 poeng"
+          = f.input :team2_score, label: "Lag 2 poeng"
           = f.input :competition_id, as: :hidden, input_html: { value: @competition.id, style: 'color: white;'}
 
           - if is_admin?
