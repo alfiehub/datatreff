@@ -1,0 +1,5 @@
+%h2.page-header
+  = @competition.name
+- @competition.teams.order(:name).each do |t|
+  %br
+  = t.name

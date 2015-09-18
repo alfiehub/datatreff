@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :results
       resources :team_seeds
       member do
+        get :all
         get :start
         get :started
         get :matches

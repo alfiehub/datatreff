@@ -1,5 +1,5 @@
 class CompetitionsController < ApplicationController
-  before_filter :authorize_admin, only: [:new, :create, :edit, :start]
+  before_filter :authorize_admin, only: [:new, :create, :edit, :start, :all]
   before_filter :authorize
 
   helper_method :is_participating?
@@ -16,6 +16,10 @@ class CompetitionsController < ApplicationController
       flash[:warning] = "Konkurransen har ikke started enda, du må logge inn for å melde deg på."
       redirect_to logg_inn_path
     end
+  end
+
+  def all
+    @competition = Competition.find(params[:id])
   end
 
   def new
