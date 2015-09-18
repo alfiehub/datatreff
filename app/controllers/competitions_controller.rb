@@ -112,15 +112,9 @@ class CompetitionsController < ApplicationController
   end
 
   def is_participating?(c_id, user_id)
-    teams = User.find(user_id).teams.pluck(:id)
-    p_teams = Competition.find(c_id).teams.pluck(:id)
+    users = Competition.find(c_id).users.pluck(:id)
 
-    for team in p_teams
-      if teams.include?(team)
-        return true
-      end
-    end
-    return false
+    return users.include?(user_id)
   end
 
   private

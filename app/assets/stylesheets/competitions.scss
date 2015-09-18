@@ -17,14 +17,14 @@
   float: right;
 }
 
-.bracket {
-  margin-left: -95px;
-}
-
 .jQBracket {
   margin-left: inherit;
   margin-right: inherit;
   float: inherit;
+  .finals {
+    right: -15px !important;
+    bottom: 1px;
+  }
 }
 
 .label {
