@@ -8,5 +8,6 @@
       = f.input :admin_mobile
       = f.input :team_size
       = f.input :start_time, input_html: {class: 'datetimepicker'}, as: :string
+      = f.input :teams, collection: Team.all, input_html: {multiple: false}, include_blank: true, selected: 0, label: "Legg til lag. IKKE VELG NOE HER MED MINDRE DU VIL LEGGE TIL ET LAG I KONKURRANSEN. WARNING"
     = f.actions do
       = f.action :submit
