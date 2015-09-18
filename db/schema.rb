@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911095715) do
+ActiveRecord::Schema.define(version: 20150917233850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,15 +81,21 @@ ActiveRecord::Schema.define(version: 20150911095715) do
     t.integer  "competition_id"
     t.integer  "round"
     t.integer  "match"
-    t.boolean  "lower_bracket",      default: false
+    t.boolean  "lower_bracket",  default: false
     t.integer  "user_id"
-    t.boolean  "validated",          default: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.boolean  "validated",      default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "screenshots", force: :cascade do |t|
+    t.integer  "result_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "team_seeds", force: :cascade do |t|

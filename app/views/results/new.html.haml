@@ -5,6 +5,6 @@
       = f.input :team2_id, label: "Lag 2", as: :select, collection: @competition.teams.order(:name)
       = f.input :team1_score, label: "Lag 1 poeng"
       = f.input :team2_score, label: "Lag 2 poeng"
-      = f.input :image, label: "Screenshot", input_html: {style: 'color: white;'}
+      = f.input :screenshots, label: "Screenshot(s). Ett eller fler.", as: :file, input_html: {style: 'color: white;', multiple: true}
     = f.actions do
       = f.action :submit, label: "Send inn"
