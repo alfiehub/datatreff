@@ -20,7 +20,7 @@ class FileResultsController < ApplicationController
   def create
     @competition = FileCompetition.find(params[:file_competition_id])
 
-    if Time.now > @competition.deadline
+    if Time.now < @competition.deadline
       flash[:danger] = "Beklager, fristen har gått ut!"
       redirect_to @competition
     else
