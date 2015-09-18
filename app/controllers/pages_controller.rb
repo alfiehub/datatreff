@@ -35,7 +35,7 @@ class PagesController < ApplicationController
     @page = Page.find_by_param(params[:id])
     if @page.update_attributes(page_params)
       flash[:success] = "Du endret artikkelen."
-      redirect_to @page
+      redirect_to pages_path
     else
       render 'new'
     end
