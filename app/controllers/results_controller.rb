@@ -6,9 +6,9 @@ class ResultsController < ApplicationController
   def index
     @competition = Competition.find(params[:competition_id])
     if is_admin?
-      @results = @competition.results.order(:round, :match)
+      @results = @competition.results.order(:validated, :lower_bracket, :round, :match)
     else
-      @results = current_user.results.where(competition_id: @competition.id).order(:round, :match)
+      @results = current_user.results.where(competition_id: @competition.id).order(:validated, :lower_bracket, :round, :match)
     end
   end
 
