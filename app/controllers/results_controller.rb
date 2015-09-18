@@ -22,9 +22,14 @@ class ResultsController < ApplicationController
   end
 
   def create
-    @result = Result.new(result_params)
+    @result = is_admin? ? Result.new(admin_result_params) : Result.new(result_params)
     @competition = Competition.find(params[:competition_id])
-    if !params[:result][:screenshots].nil? && params[:result][:screenshots].length > 0 && @result.save
+    if is_admin? && @result.save
+      @result.update_attribute(:competition_id, @competition.id)
+      @result.update_attribute(:user_id, current_user.id)
+      flash[:success] = "Du har meldt inn et resultat, administrator vil godkjenne det så fort som mulig"
+      redirect_to competition_results_path(@competition)
+    elsif !params[:result][:screenshots].nil? && params[:result][:screenshots].length > 0 && @result.save
       @result.update_attribute(:competition_id, @competition.id)
       @result.update_attribute(:user_id, current_user.id)
       params[:result][:screenshots].each do |s|

@@ -1,10 +1,23 @@
-.form.center-block.well.bs-component
-  = semantic_form_for [@competition, @result] do |f|
-    = f.inputs :name => "Resultat" do
-      = f.input :team1_id, label: "Lag 1",  as: :select, collection: @competition.teams.order(:name)
-      = f.input :team2_id, label: "Lag 2", as: :select, collection: @competition.teams.order(:name)
-      = f.input :team1_score, label: "Lag 1 poeng"
-      = f.input :team2_score, label: "Lag 2 poeng"
-      = f.input :screenshots, label: "Screenshot(s). Ett eller fler.", as: :file, input_html: {style: 'color: white;', multiple: true}
-    = f.actions do
-      = f.action :submit, label: "Send inn"
+.row
+  .col-md-6
+    .form.center-block.well.bs-component
+      = semantic_form_for [@competition, @result] do |f|
+        = f.inputs :name => "Resultat" do
+          = f.input :team1_id, as: :select, collection: @competition.teams.order(:name)
+          = f.input :team2_id, as: :select, collection: @competition.teams.order(:name)
+          = f.input :team1_score
+          = f.input :team2_score
+          = f.input :competition_id, as: :hidden, input_html: { value: @competition.id, style: 'color: white;'}
+
+          - if is_admin?
+            = f.input :round
+            = f.input :match
+            = f.input :lower_bracket, as: :select
+            = f.input :validated, as: :select
+          = f.input :screenshots, label: "Screenshot(s). Ett eller fler.", as: :file, input_html: {style: 'color: white;', multiple: true}
+        = f.actions do
+          = f.action :submit, label: "Oppdater resultat"
+  .col-md-6
+    %h3 Screenshots
+    - @result.screenshots.each do |s|
+      = link_to image_tag(s.image.url(:medium)), s.image.url
