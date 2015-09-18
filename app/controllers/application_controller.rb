@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def event_started?
-    !is_admin? || Time.now < Rails.application.config.event_start
+    is_admin? || Time.now > Rails.application.config.event_start
   end
 
   def render_404
