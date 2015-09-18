@@ -21,6 +21,8 @@
 
 div#page-wrapper {
   min-height: 100%;
+  overflow: auto;
+  padding-top: 40px;
 }
 
 .right-box {
@@ -105,4 +107,9 @@ ul#nav {
   .text {
     margin-bottom: 20px;
   }
+}
+
+.navbar {
+  width: 100%;
+  position: fixed !important;
 }
