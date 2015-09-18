@@ -1,4 +1,4 @@
-= cache [current_user.id, @competition.name, @results.size, @results.accepted.size] do
+= cache [current_user.id, @competition.name, results_cache_key(@competition.id)] do
   .row
     %h2
       Mine resultater:
