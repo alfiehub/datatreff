@@ -18,11 +18,10 @@
     %table{class: "table table-striped table-hover"}
       %thead
         %th Admin
-        %th E-post
         %th Mobilnummer
       %tr
         %td= @competition.admin_name
-        %td= @competition.admin_email
+        %td= @competition.admin_mobile
     = raw(kramdown(@competition.description))
   .row
     .bracket{style: @competition.teams.length > 16 ? 'margin-left: -75px;' : 'margin: auto auto;'}
