@@ -43,7 +43,7 @@ $.ajax({
     // Add lower rounds
     for (var i = 0; i < lower_rounds; i++) {
       bracketData.results[1].push([]);
-      for (var n = 0; n < matches/Math.pow(2,i); n++) {
+      for (var n = 0; n < matches; n++) {
         bracketData.results[1][i].push([]);
       }
     }
@@ -65,6 +65,8 @@ $.ajax({
         bracketData.results[1][results[i].round-1][results[i].match-1].push(results[i].team2_score);
       }
     }
+
+    console.log(bracketData);
 
     $(function() {
       $('.bracket').bracket({
