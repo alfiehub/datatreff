@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :images
   localized do
     resources :file_competitions do
       resources :file_results

@@ -1,0 +1,8 @@
+.row
+  .col-md-6
+    .form.center-block.well.bs-component
+      = semantic_form_for @image do |f|
+        = f.inputs do
+          = f.input :image, as: :file, input_html: {style: 'color: white;'}
+        = f.actions do
+          = f.submit
