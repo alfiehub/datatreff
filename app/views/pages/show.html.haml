@@ -7,7 +7,3 @@
         %span{class: "label label-primary"}
           = link_to "Endre artikkel", edit_page_path(@page),{style: "color:white;"}
     = raw(kramdown(@page.content))
-
-    %br
-    Skrevet av
-    %b= @page.user.name
