@@ -86,7 +86,7 @@
             %ul.nav.nav-second-level.collapse
               - Competition.order(:name).each do |c|
                 %li
-                  = link_to c.name, c
+                  = link_to c.name, started_competition_path(c)
               - FileCompetition.all.each do |f|
                 %li
                   = link_to f.name, f

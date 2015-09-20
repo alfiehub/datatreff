@@ -44,12 +44,13 @@
     .col-md-4
 - else
   .col-md-12
-    .center-box
-      %table{class: "table table-striped table-hover"}
-        %thead
-          %th Admin
-          %th Mobilnummer
-        %tr
-          %td= @competition.admin_name
-          %td= @competition.admin_mobile
+    - if !current_user.nil?
+      .center-box
+        %table{class: "table table-striped table-hover"}
+          %thead
+            %th Admin
+            %th Mobilnummer
+          %tr
+            %td= @competition.admin_name
+            %td= @competition.admin_mobile
     .bracket{style: @competition.teams.length > 16 ? 'margin-left: -95px;' : 'margin: auto auto;'}
