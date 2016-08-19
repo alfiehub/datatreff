@@ -10,14 +10,17 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'galaxelan.net'
-set :deploy_to, '/datatreff'
+print "Username @ compo.galaxelan.no (defaults to current user's username): "
+username = STDIN.gets.chomp
+set :user, username unless username == ''
+
+set :domain, 'compo.galaxelan.no'
+set :deploy_to, '/var/www/party.galaxelan.no'
 set :repository, 'git@github.com:alfiehub/datatreff.git'
 set :branch, 'master'
-set :user, 'root'
 
 # For system-wide RVM install.
-set :rvm_path, '/usr/local/rvm/scripts/rvm'
+set_default :rvm_path, "$HOME/.rvm/scripts/rvm"
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
@@ -36,7 +39,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use[ruby-2.2.2]'
+  invoke :'rvm:use[ruby-2.3.1]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -52,9 +55,9 @@ task :deploy => :environment do
     queue 'git checkout master'
     queue 'git fetch'
     queue 'git reset --hard origin/' + branch
-    queue 'bundle install'
-    queue 'rake db:migrate RAILS_ENV=production'
-    queue 'rake assets:precompile RAILS_ENV=production'
+    queue 'bundle install --deployment'
+    queue 'bundle exec rake db:migrate RAILS_ENV=production'
+    queue 'bundle exec rake assets:precompile RAILS_ENV=production'
     queue 'touch tmp/restart.txt'
   end
 end
