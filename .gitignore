@@ -8,3 +8,4 @@ tmp
 database.yml
 secrets.yml
 *.swp
+local_env.yml
