@@ -58,6 +58,7 @@ task :deploy => :environment do
     queue 'bundle install'
     queue 'rake db:migrate RAILS_ENV=production'
     queue 'rake assets:precompile RAILS_ENV=production'
+    queue 'rake tmp:cache:clear RAILS_ENV=production'
     queue 'touch tmp/restart.txt'
   end
 end
