@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   get 'registrering', to: 'users#new', as: 'registrering'
   get 'logg_inn', to: 'sessions#new', as: 'logg_inn'
   get 'rediger_bruker', to: 'users#edit', as: 'rediger_bruker'
-  get 'chat', to: 'site#irc', as: 'chat'
 
   get ':id' => 'pages#show'
 
