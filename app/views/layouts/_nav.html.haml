@@ -18,7 +18,7 @@
                   - Result.not_accepted.each do |r|
                     %li
                       = link_to r.competition.name, competition_results_path(r.competition)
-            %li
+            %li.top-level
               %a{href: '#'}
                 Admin
                 %span.fa.arrow
@@ -31,7 +31,7 @@
                   = link_to 'Alle brukere', users_path
   
           - if !current_user.nil?
-            %li
+            %li.top-level
               %a{href: '#'}
                 = current_user.username
                 %span.fa.arrow
@@ -42,7 +42,7 @@
                   = link_to 'Rediger bruker', rediger_bruker_path
                 %li
                   = link_to 'Logg ut', logg_ut_path
-            %li.active
+            %li.active.top-level
               %a{href: '#'}
                 Mine lag
                 %span.fa.arrow
@@ -55,7 +55,7 @@
                     %li
                       = link_to t.name, t
             - if current_user.competitions.any?
-              %li.active
+              %li.active.top-level
                 %a{href: '#'}
                   = "Mine konkurranser"
                   %span.fa.arrow
@@ -68,7 +68,7 @@
             %li
               = link_to 'Logg inn', logg_inn_path
           = cache [Page.main_menu.size] do
-            %li{class: 'active'}
+            %li.active.top-level
               %a{href:'#'}
                 Informasjon
                 %span.fa.arrow
@@ -76,7 +76,7 @@
                 - Page.main_menu.order(:title).each do |p|
                   %li
                     = link_to p.title, "/"+p.titledash
-          %li{class: 'active'}
+          %li.active.top-level
             %a{href:'#'}
               Konkurranser
               %span.fa.arrow
