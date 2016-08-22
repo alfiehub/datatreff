@@ -15,7 +15,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     if !is_admin? && (current_user.nil? || !current_user.teams.include?(@team))
-      flash[:danger] = "Du får ikke lov til å gjøre dette"
+      flash[:danger] = "Du får ikke lov til å gjøre dette."
       redirect_to teams_path
     end
   end

@@ -1,4 +1,4 @@
-.center-box
+.col-md-3
   %h2
     = @team.name
     %span{class: "label label-primary"}
@@ -13,9 +13,8 @@
         %td
           = link_to 'x', user_team_path(UserTeam.find_by_team_id_and_user_id(@team.id, u.id)), method: :delete, data: {confirm: 'Er du sikker på at du vil fjerne denne brukeren fra laget?'}
 
-  - if is_admin?
-    = semantic_form_for @team do |f|
-      = f.inputs :name do
-        = f.input :username, as: :string, placeholder: 'Brukernavnet som skal legges til', label: 'Brukernavn'
-      = f.actions do
-        = f.action :submit, label: "Legg til bruker"
+  = semantic_form_for @team do |f|
+    = f.inputs :name do
+      = f.input :username, as: :string, placeholder: 'Brukeren som skal legges til', label: 'Brukernavn'
+    = f.actions do
+      = f.action :submit, label: "Legg til bruker"

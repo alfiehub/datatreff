@@ -1,5 +1,5 @@
 = content_for :title, 'Logg inn'
-.form.well.center-block.ws-component
+.form.well.ws-component
   = semantic_form_for 'user', url: sessions_path do |f|
     = f.inputs 'Logg inn' do
       = f.input :username, label: false, placeholder: "Brukernavn eller e-post"
@@ -13,6 +13,6 @@
   %br
   Har du glemt brukernavnet eller passordet ditt?
   %br
-  Spør oss på
+  Ta kontakt med admin på
   = link_to 'Discord', 'https://discord.gg/mDD2zQW'
 

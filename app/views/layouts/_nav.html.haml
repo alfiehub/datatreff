@@ -1,84 +1,90 @@
 %nav{class: 'navbar navbar-default navbar-static-top', style: 'margin-bottom: 0px;', role: 'navigation'}
-  = cache (current_user.nil? ? 'nav_nil' : ['nav', current_user, current_user.teams.size, current_user.competitions.size, (not_accepted_cache_key if is_admin?)]) do
-    .navbar-header
-      = link_to Rails.application.config.event_name, root_path, class: 'navbar-brand'
-    %p.navbar-text.navbar-left#clock{style: 'margin-right: 5px;'}
-    %ul.nav.navbar-top-links.navbar-right
-      - if is_admin?
-        - if Result.not_accepted.any?
-          %li.dropdown
-            %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
-              %i.fa.fa-lock
-              IKKE GODKJENTE RESULTATER
-              %i.fa.fa-caret-down
-            %ul.dropdown-menu.dropdown-user
-              - Result.not_accepted.each do |r|
-                %li
-                  = link_to r.competition.name, competition_results_path(r.competition)
-        %li.dropdown
-          %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
-            %i.fa.fa-lock
-            Admin
-            %i.fa.fa-caret-down
-          %ul.dropdown-menu.dropdown-user
-            %li
-              = link_to 'Alle artikler', pages_path
-            %li
-              = link_to 'Alle lag', teams_path
-            %li
-              = link_to 'Alle brukere', users_path
-
-      - if !current_user.nil?
-        - if current_user.competitions.any?
-          %li.dropdown
-            %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
-              %i.fa.fa-trophy
-              = "Mine konkurranser"
-              %i.fa.fa-caret-down
-            %ul.dropdown-menu.dropdown-user
-              - current_user.teams.each do |t|
-                - t.competitions.each do |c|
-                  %li
-                    = link_to "#{c.name}: #{t.name}", c
-        %li.dropdown
-          %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
-            %i.fa.fa-group
-            = "Mine lag"
-            %i.fa.fa-caret-down
-          %ul.dropdown-menu.dropdown-user
-            %li
-              = link_to 'Nytt lag', new_team_path
-            %li.divider
-            - current_user.teams.each do |t|
-              %li
-                = link_to t.name, t
-        %li.dropdown
-          %a{href: '#', class: 'dropdown-toggle', 'data-toggle':'dropdown'}
-            %i.fa.fa-user
-            = current_user.username
-            %i.fa.fa-caret-down
-          %ul.dropdown-menu.dropdown-user
-            %li
-              = link_to 'Rediger bruker', edit_user_path(current_user)
-            %li
-              = link_to 'Logg ut', logg_ut_path
-      - else
-        %li.dropdown
-          = link_to 'Logg inn', logg_inn_path
+  .navbar-header
+    = link_to image_tag("small_no_date.png", style: "height: 50px; margin: -20px 0px 0px 0px;"), root_path, class: 'navbar-brand'
+  %p.navbar-text.navbar-left#clock{style: 'margin: 23px 5px 0px 22px;'} 
   .navbar-default.sidebar{role: 'navigation'}
     .sidebar-nav.navbar-collapse
       %ul.nav#side-menu
-        %li
-          %a= "Pålogget nå: #{User.online.size}"
-        = cache [Page.main_menu.size] do
-          %li{class: 'active'}
-            %a{href:'#'}
-              Informasjon
-              %span.fa.arrow
-            %ul.nav.nav-second-level.collapse
-              - Page.main_menu.order(:title).each do |p|
+        = cache (current_user.nil? ? 'nav_nil' : ['nav', current_user, current_user.teams.size, current_user.competitions.size, (not_accepted_cache_key if is_admin?)]) do
+          %li
+            %a= "Pålogget nå: #{User.online.size}"
+          - if is_admin?
+            - if Result.not_accepted.any?
+              %li
+                %a{href: '#'}
+                  %i.fa.fa-lock
+                  IKKE GODKJENTE RESULTATER
+                  %i.fa.fa-caret-down
+                %ul.nav.nav-second-level.collapse
+                  - Result.not_accepted.each do |r|
+                    %li
+                      = link_to r.competition.name, competition_results_path(r.competition)
+            %li
+              %a{href: '#'}
+                %i.fa.fa-lock
+                &nbsp;
+                Admin
+                %span.fa.arrow
+              %ul.nav.nav-second-level.collapse
                 %li
-                  = link_to p.title, "/"+p.titledash
+                  = link_to 'Alle artikler', pages_path
+                %li
+                  = link_to 'Alle lag', teams_path
+                %li
+                  = link_to 'Alle brukere', users_path
+  
+          - if !current_user.nil?
+            %li
+              %a{href: '#'}
+                %i.fa.fa-user
+                &nbsp;
+                = current_user.username
+                %span.fa.arrow
+              %ul.nav.nav-second-level.collapse
+                %li
+                  = link_to 'Nytt lag', new_team_path
+                %li
+                  = link_to 'Rediger bruker', rediger_bruker_path
+                %li
+                  = link_to 'Logg ut', logg_ut_path
+            %li.active
+              %a{href: '#'}
+                %i.fa.fa-group
+                &nbsp;
+                Mine lag
+                %span.fa.arrow
+              %ul.nav.nav-second-level.collapse
+                - if current_user.teams.empty?
+                  %li
+                    = link_to 'Ingen lag her, lag ditt eget!', new_team_path
+                - else
+                  - current_user.teams.each do |t, index|
+                    %li
+                      = link_to t.name, t
+            - if current_user.competitions.any?
+              %li.active
+                %a{href: '#'}
+                  %i.fa.fa-trophy
+                  &nbsp;
+                  = "Mine konkurranser"
+                  %span.fa.arrow
+                %ul.nav.nav-second-level.collapse
+                  - current_user.teams.each do |t|
+                    - t.competitions.each do |c|
+                      %li
+                        = link_to "#{c.name}: #{t.name}", c
+          - else
+            %li
+              = link_to 'Logg inn', logg_inn_path
+          = cache [Page.main_menu.size] do
+            %li{class: 'active'}
+              %a{href:'#'}
+                Informasjon
+                %span.fa.arrow
+              %ul.nav.nav-second-level.collapse
+                - Page.main_menu.order(:title).each do |p|
+                  %li
+                    = link_to p.title, "/"+p.titledash
           %li{class: 'active'}
             %a{href:'#'}
               Konkurranser
