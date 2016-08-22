@@ -3,4 +3,7 @@
   .col-md-12
     %h2.page-header
       = @page.title
+      - if is_admin?
+        %span{class: "label label-primary"}
+          = link_to "Endre", edit_page_path(@page),{style: "color:white;"}
     = raw(kramdown(@page.content))

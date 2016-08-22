@@ -1,6 +1,6 @@
-.row
-  .notice
-    - if flash.any?
+- if flash.any?
+  .row
+    .notice
       - flash.each do |type, message|
         .alert{role: "alert", class: 'alert-dismissible alert-'+type.to_s}
           %button{type: 'button', class: 'close', 'data-dismiss':'alert', 'aria-label':'Close'}
