@@ -1,6 +1,6 @@
 = content_for :title, @competition.name
 .col-md-12
-  %h2
+  %h2.page-header
     = @competition.name
     - if is_admin?
       %span{class: "label label-primary"}
