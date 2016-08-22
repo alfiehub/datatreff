@@ -14,15 +14,12 @@
                 %a{href: '#'}
                   %i.fa.fa-lock
                   IKKE GODKJENTE RESULTATER
-                  %i.fa.fa-caret-down
                 %ul.nav.nav-second-level.collapse
                   - Result.not_accepted.each do |r|
                     %li
                       = link_to r.competition.name, competition_results_path(r.competition)
             %li
               %a{href: '#'}
-                %i.fa.fa-lock
-                &nbsp;
                 Admin
                 %span.fa.arrow
               %ul.nav.nav-second-level.collapse
@@ -36,8 +33,6 @@
           - if !current_user.nil?
             %li
               %a{href: '#'}
-                %i.fa.fa-user
-                &nbsp;
                 = current_user.username
                 %span.fa.arrow
               %ul.nav.nav-second-level.collapse
@@ -49,8 +44,6 @@
                   = link_to 'Logg ut', logg_ut_path
             %li.active
               %a{href: '#'}
-                %i.fa.fa-group
-                &nbsp;
                 Mine lag
                 %span.fa.arrow
               %ul.nav.nav-second-level.collapse
@@ -64,8 +57,6 @@
             - if current_user.competitions.any?
               %li.active
                 %a{href: '#'}
-                  %i.fa.fa-trophy
-                  &nbsp;
                   = "Mine konkurranser"
                   %span.fa.arrow
                 %ul.nav.nav-second-level.collapse
