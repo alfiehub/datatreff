@@ -1,5 +1,5 @@
 = content_for :title, @page.title
-= cache(@page.updated_at) do
+= cache_if(!is_admin?, @page.updated_at) do
   .col-md-12
     %h2.page-header
       = @page.title
