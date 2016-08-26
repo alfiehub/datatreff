@@ -5,9 +5,9 @@
   .navbar-default.sidebar{role: 'navigation'}
     .sidebar-nav.navbar-collapse
       %ul.nav#side-menu
+        %li
+          %a= "Pålogget nå: #{User.online.size}"
         = cache (current_user.nil? ? 'nav_nil' : ['nav', current_user, current_user.teams.size, current_user.competitions.size, (not_accepted_cache_key if is_admin?)]) do
-          %li
-            %a= "Pålogget nå: #{User.online.size}"
           - if is_admin?
             - if Result.not_accepted.any?
               %li
