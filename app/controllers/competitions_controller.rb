@@ -1,6 +1,6 @@
 class CompetitionsController < ApplicationController
   before_filter :authorize_admin, only: [:new, :create, :edit, :start, :all]
-  before_filter :authorize, except: [:started, :matches]
+  before_filter :authorize, except: [:started, :matches, :show]
 
   helper_method :is_participating?
 
@@ -13,8 +13,7 @@ class CompetitionsController < ApplicationController
     if @competition.started
       redirect_to started_competition_path(@competition)
     elsif current_user.nil?
-      flash[:warning] = "Konkurransen har ikke started enda, du må logge inn for å melde deg på."
-      redirect_to logg_inn_path
+      render :public
     end
   end
 
