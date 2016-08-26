@@ -67,15 +67,15 @@
           - else
             %li
               = link_to 'Logg inn', logg_inn_path
-          = cache [Page.main_menu.size] do
-            %li.active.top-level
-              %a{href:'#'}
-                Informasjon
-                %span.fa.arrow
-              %ul.nav.nav-second-level.collapse
-                - Page.main_menu.order(:title).each do |p|
-                  %li
-                    = link_to p.title, "/"+p.titledash
+        = cache [Page.main_menu.size, Competition.all.size, FileCompetition.all.size] do
+          %li.active.top-level
+            %a{href:'#'}
+              Informasjon
+              %span.fa.arrow
+            %ul.nav.nav-second-level.collapse
+              - Page.main_menu.order(:title).each do |p|
+                %li
+                  = link_to p.title, "/"+p.titledash
           %li.active.top-level
             %a{href:'#'}
               Konkurranser
