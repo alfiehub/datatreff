@@ -111,3 +111,18 @@ li.top-level {
 .nav>li>a:hover, .nav>li>a:focus {
   background-color: inherit !important;
 }
+
+.instagram{
+  overflow: auto;
+  height: 450px;
+  text-align: center;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+  }
+  .text {
+    margin-bottom: 20px;
+  }
+}
