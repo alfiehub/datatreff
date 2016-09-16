@@ -31,10 +31,13 @@
             %td
               = t.contact_person.mobile
           %td
-            - if t.users.include?(current_user) || is_admin?
+            - if (t.users.include?(current_user) || is_admin?) && !CompetitionTeam.find_by_competition_id_and_team_id(@competition.id, t.id).checked_in
               = link_to 'x', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :delete, data: {confirm: "Er du sikker på at du vil melde laget ditt av?"}
-              - if !CompetitionTeam.find_by_competition_id_and_team_id(@competition.id, t.id).checked_in && request.remote_ip.strip == Rails.application.config.event_ip
+            - if !CompetitionTeam.find_by_competition_id_and_team_id(@competition.id, t.id).checked_in && request.remote_ip.strip == Rails.application.config.event_ip
+              - if t.users.include?(current_user) || is_admin?
                 = link_to 'Sjekk inn!', CompetitionTeam.find_by_team_id_and_competition_id(t.id, @competition.id), method: :put, data: {confirm: "Er du sikker på at du vil sjekke inn laget ditt for denne konkurransen?"}
+            - elsif CompetitionTeam.find_by_competition_id_and_team_id(@competition.id, t.id).checked_in
+              &#9989
       %tr
         %td{style: 'text-align: right;'}
           %b
