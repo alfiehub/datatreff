@@ -9,7 +9,7 @@ class CompetitionTeamsController < ApplicationController
 
   def update
     comp_team = CompetitionTeam.find(params[:id])
-    if comp_teamp.team.users.include?(current_user) || is_admin?
+    if comp_team.team.users.include?(current_user) || is_admin?
       comp_team.update_attribute(:checked_in, true)
       comp_team.save
       flash[:success] = "Laget ditt har blitt sjekket inn! Følg med ved konkurransestart."
