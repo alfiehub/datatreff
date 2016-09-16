@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :teams
     resources :users
     resources :sessions
-    resources :competition_teams, only: :destroy
+    resources :competition_teams, only: [:destroy, :update]
     resources :user_teams
   end
 
