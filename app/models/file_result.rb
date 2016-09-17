@@ -14,6 +14,6 @@ class FileResult < ActiveRecord::Base
 
   before_post_process :skip_for_zip
   def skip_for_zip
-    ! %w(application/zip application/x-zip application/rar application/x-rar-compressed).include?(contribution_content_type)
+    ! %w(application/zip application/x-zip application/rar application/x-rar-compressed application/octet-stream).include?(contribution_content_type)
   end
 end
