@@ -4,7 +4,7 @@ class FileResult < ActiveRecord::Base
   belongs_to :user
 
   has_attached_file :contribution
-  validates_attachment_content_type :contribution, content_type: ["application/zip", "application/x-zip", "application/rar-compressed", "application/rar", "application/x-rar-compressed"]
+  validates_attachment_content_type :contribution, content_type: ["application/zip", "application/x-zip", "application/rar-compressed", "application/rar", "application/x-rar-compressed", "application/octet-stream"]
   validates :contribution, attachment_presence: true
 
   validates_with AttachmentPresenceValidator, attributes: :contribution
