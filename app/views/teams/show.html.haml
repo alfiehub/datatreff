@@ -13,6 +13,9 @@
           = u.name
         %td
           = link_to 'x', user_team_path(UserTeam.find_by_team_id_and_user_id(@team.id, u.id)), method: :delete, data: {confirm: 'Er du sikker på at du vil fjerne denne brukeren fra laget?'}
+        - if is_admin?
+          %td
+            = u.mobile
 
   = semantic_form_for @team do |f|
     = f.inputs :name do
