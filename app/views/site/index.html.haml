@@ -1,18 +1,12 @@
 = content_for :title, 'Forside'
 = cache(front_page_cache_key, expires_in: 5.minutes) do
-  .col-md-6
-    %h2.page-header
-      = @pages.first.title
-    = raw(kramdown(@pages.first.content))
-  .col-md-6
-    %h2.page-header @GalaxeLAN på Instagram
-    .instagram
-      - Instagram.tag_recent_media("galaxelan", {:count => 3}).each do |i|
-        = link_to image_tag(i.images.low_resolution.url), "https://instagram.com/#{i.user.username}/"
-        .text
-          = i.caption.text
-  - @pages[1..-1].each do |p|
-    .col-md-6
+  .tile
+    .tile.is-ancestor
       %h2.page-header
-        = p.title
-      = raw(kramdown(p.content))
+        = @pages.first.title
+      = raw(kramdown(@pages.first.content))
+    - @pages[1..-1].each do |p|
+      .col-md-6
+        %h2.page-header
+          = p.title
+        = raw(kramdown(p.content))

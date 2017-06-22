@@ -1,89 +1,75 @@
-%nav{class: 'navbar navbar-default navbar-static-top', style: 'margin-bottom: 0px;', role: 'navigation'}
-  .navbar-header
-    = link_to image_tag("small_no_date.png", style: "height: 50px; margin: -20px 0px 0px 0px;"), root_path, class: 'navbar-brand'
-  %p.navbar-text.navbar-left#clock{style: 'margin: 23px 5px 0px 22px;'} 
-  .navbar-default.sidebar{role: 'navigation'}
-    .sidebar-nav.navbar-collapse
-      %ul.nav#side-menu
-        %li
-          %a= "Pålogget nå: #{User.online.size}"
-        = cache (current_user.nil? ? 'nav_nil' : ['nav', current_user, current_user.teams.size, current_user.competitions.size, (not_accepted_cache_key if is_admin?)]) do
-          - if is_admin?
-            - if Result.not_accepted.any?
-              %li
-                %a{href: '#'}
-                  %i.fa.fa-lock
-                  IKKE GODKJENTE RESULTATER
-                %ul.nav.nav-second-level.collapse
-                  - Result.not_accepted.each do |r|
-                    %li
-                      = link_to r.competition.name, competition_results_path(r.competition)
-            %li.top-level
-              %a{href: '#'}
-                Admin
-                %span.fa.arrow
-              %ul.nav.nav-second-level.collapse
-                %li
-                  = link_to 'Alle artikler', pages_path
-                %li
-                  = link_to 'Alle lag', teams_path
-                %li
-                  = link_to 'Alle brukere', users_path
-  
-          - if !current_user.nil?
-            %li.top-level
-              %a{href: '#'}
-                = current_user.username
-                %span.fa.arrow
-              %ul.nav.nav-second-level.collapse
-                %li
-                  = link_to 'Nytt lag', new_team_path
-                %li
-                  = link_to 'Rediger bruker', rediger_bruker_path
-                %li
-                  = link_to 'Logg ut', logg_ut_path
-            %li.active.top-level
-              %a{href: '#'}
-                Mine lag
-                %span.fa.arrow
-              %ul.nav.nav-second-level.collapse
-                - if current_user.teams.empty?
-                  %li
-                    = link_to 'Ingen lag her, lag ditt eget!', new_team_path
-                - else
-                  - current_user.teams.each do |t, index|
-                    %li
-                      = link_to t.name, t
-            - if current_user.competitions.any?
-              %li.active.top-level
-                %a{href: '#'}
-                  = "Mine konkurranser"
-                  %span.fa.arrow
-                %ul.nav.nav-second-level.collapse
-                  - current_user.teams.each do |t|
-                    - t.competitions.each do |c|
-                      %li
-                        = link_to "#{c.name}: #{t.name}", c
-          - else
+%aside{class: 'menu'}
+  %p#clock{style: 'margin: 23px 5px 0px 22px;'} 
+  %p.menu-label
+    Stats
+  %ul.menu-list
+    %li
+      %a= "Pålogget nå: #{User.online.size}"
+    //= cache (current_user.nil? ? 'nav_nil' : ['nav', current_user, current_user.teams.size, current_user.competitions.size, (not_accepted_cache_key if is_admin?)]) do
+  - if !current_user.nil?
+    %p.menu-label
+      Personlig
+    %ul.menu-list
+      %li
+        = link_to current_user.username, rediger_bruker_path
+      %li
+        - if is_admin?
+          - if Result.not_accepted.any?
             %li
-              = link_to 'Logg inn', logg_inn_path
-        = cache [Page.main_menu.size, Competition.all.size, FileCompetition.all.size] do
-          %li.active.top-level
-            %a{href:'#'}
-              Informasjon
-              %span.fa.arrow
-            %ul.nav.nav-second-level.collapse
-              - Page.main_menu.order(:title).each do |p|
-                %li
-                  = link_to p.title, "/"+p.titledash
-          %li.active.top-level
-            %a{href:'#'}
-              Konkurranser
-              %span.fa.arrow
-            %ul.nav.nav-second-level.collapse
-              - Competition.order(:name).each do |c|
-                %li
-                  = link_to c.name, started_competition_path(c)
-              - FileCompetition.all.each do |f|
-                %li
-                  = link_to f.name, f
+              %a{href: '#'}
+                IKKE GODKJENTE RESULTATER
+              %ul
+                - Result.not_accepted.each do |r|
+                  %li
+                    = link_to r.competition.name, competition_results_path(r.competition)
+          %li
+            %a
+              Admin
+            %ul
+              %li
+                = link_to 'Alle artikler', pages_path
+              %li
+                = link_to 'Alle lag', teams_path
+              %li
+                = link_to 'Alle brukere', users_path
+              %li
+        %a
+          Lag
+      %li
+        %ul.menu-list
+          - if current_user.teams.empty?
+            %li
+              = link_to 'Vil du opprette et nytt lag?', new_team_path
+          - else
+            - current_user.teams.each do |t, index|
+              %li
+                = link_to t.name, t
+              %li
+                = link_to '+ Opprett nytt lag', new_team_path
+    - if current_user.competitions.any?
+      %li
+        %a{href: '#'}
+          = "Mine konkurranser"
+        %ul.menu-list
+          - current_user.teams.each do |t|
+            - t.competitions.each do |c|
+              %li
+                = link_to "#{c.name}: #{t.name}", c
+
+  = cache [Page.main_menu.size, Competition.all.size, FileCompetition.all.size] do
+    %p.menu-label
+      Informasjon
+    %ul.menu-list
+      - Page.main_menu.order(:title).each do |p|
+        %li
+          = link_to p.title, "/"+p.titledash
+    %p.menu-label
+      Konkurranser
+
+    %ul.menu-list
+      - Competition.order(:name).each do |c|
+        %li
+          = link_to c.name, started_competition_path(c)
+      - FileCompetition.all.each do |f|
+        %li
+          = link_to f.name, f

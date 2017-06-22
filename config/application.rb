@@ -28,9 +28,9 @@ module Datatreff
     config.active_record.raise_in_transactional_callbacks = true
 
     # Some variables for the website
-    config.event_name = "GalaxeLAN 2016"
+    config.event_name = "GalaxeLAN 2017"
     config.event_ip = "213.236.218.198"
-    config.event_start = DateTime.new(2016, 9, 16, 16, 00, 0)
+    config.event_start = DateTime.new(2017, 9, 16, 16, 00, 0)
 
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
   end

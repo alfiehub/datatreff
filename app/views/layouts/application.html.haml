@@ -12,9 +12,12 @@
       = javascript_include_tag 'analytics', 'data-turbolinks-track' => true
 
   %body
-    #wrapper
-      = cache_if(current_user.nil?, User.online.size) do
-        = render 'layouts/nav'
-      #page-wrapper
-        = render 'layouts/notice'
-        = yield
+    .container
+      = render 'layouts/header'
+      .columns
+        = cache_if(current_user.nil?, User.online.size) do
+          .column.is-one-quarter
+            = render 'layouts/nav'
+          .column
+            = render 'layouts/notice'
+            = yield

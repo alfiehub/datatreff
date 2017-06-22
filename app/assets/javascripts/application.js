@@ -17,9 +17,6 @@
 //= require "jquery.countdown.js"
 //= require "jquery-bracket"
 //= require jquery.datetimepicker
-//= require bootstrap/dist/js/bootstrap
-//= require metisMenu/dist/metisMenu
-//= require sb-admin-2
 
 var ready;
 ready = function() {
