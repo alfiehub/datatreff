@@ -25,7 +25,7 @@ ready = function() {
   });
 
   $(function() {
-    $("#clock").countdown("2016/09/16 16:00:00", {elapse: true}).on('update.countdown', function(event) {
+    $("#clock").countdown("2017/09/22 16:00:00", {elapse: true}).on('update.countdown', function(event) {
       if (event.elapsed) {
       $(this).text(event.strftime("GalaxeLAN har begynt!"));
       } else {

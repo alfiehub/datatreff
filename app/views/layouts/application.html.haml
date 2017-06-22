@@ -17,7 +17,8 @@
       .columns
         = cache_if(current_user.nil?, User.online.size) do
           .column.is-one-quarter
-            = render 'layouts/nav'
+            //= render 'layouts/nav'
           .column
             = render 'layouts/notice'
-            = yield
+            //= yield
+    = render 'layouts/wip'

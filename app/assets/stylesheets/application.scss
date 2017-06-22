@@ -1,0 +1,124 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ *= require jquery.datetimepicker
+ */
+@import "bulma";
+
+div#page-wrapper {
+  min-height: 100%;
+  overflow: auto;
+  padding-top: 40px;
+}
+
+.right-box {
+  text-align: center;
+  display: inline-block;
+  float: right;
+  margin-top: -46px;
+  margin-right: 5px;
+}
+.kiosk {
+  width: 400px;
+}
+.form {
+  width: 500px;
+  margin-top: 15px;
+}
+.notice {
+  width: 50%;
+  margin-top: 30px;
+}
+a#bold {
+  font-weight: bold;
+}
+ul#nav {
+  width: 50%;
+  margin: auto auto;
+}
+.header {
+  text-align: center;
+}
+.alert {
+  margin-top: 15px;
+}
+.footer {
+  position: fixed;
+  bottom: 10px;
+  width:100%;
+  text-align:center;
+  font-size: 125%;
+}
+#heart {
+  color: red;
+  font-size: 20px;
+}
+.table#wide {
+  width:95%;
+  height:20px;
+  min-width:600px;
+  position:absolute;
+  left:0;
+  right:0;
+  margin: auto auto;
+}
+.table#smalltext {
+  th {
+    font-size: 15px;
+  }
+  td {
+    font-size: 14px;
+  }
+}
+.center-box {
+  width: 500px;
+  margin: auto auto;
+}
+.table {
+  white-space: nowrap;
+}
+.center {
+  margin: auto auto;
+}
+
+.navbar {
+  width: 100%;
+  position: fixed !important;
+}
+
+li.top-level {
+  background-color: #52575C;
+}
+
+.nav-second-level {
+  background-color: #3a3f44;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+  background-color: inherit !important;
+}
+
+.instagram{
+  overflow: auto;
+  height: 100%;
+  text-align: center;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+  }
+  .text {
+    margin-bottom: 20px;
+  }
+}
