@@ -13,7 +13,7 @@
 
   %body
     .container
-      = render 'layouts/header'
+      //= render 'layouts/header'
       .columns
         = cache_if(current_user.nil?, User.online.size) do
           .column.is-one-quarter
