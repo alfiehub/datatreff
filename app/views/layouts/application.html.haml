@@ -12,13 +12,15 @@
       = javascript_include_tag 'analytics', 'data-turbolinks-track' => true
 
   %body
-    .container
-      //= render 'layouts/header'
-      .columns
-        = cache_if(current_user.nil?, User.online.size) do
-          .column.is-one-quarter
-            //= render 'layouts/nav'
-          .column
-            = render 'layouts/notice'
-            //= yield
-    = render 'layouts/wip'
+    %section.hero.is-fullheight.is-bold.is-dark
+      .hero-head
+        = render 'layouts/header'
+      .hero-body
+        .container
+          .title
+            Work in progress
+          .subtitle
+            Kom tilbake igjen om en uke eller to for nytt design og mer informasjon.
+            %br
+            Billetter kjøpes @
+            = link_to 'GalaxeLAN.no', 'https://galaxelan.no'

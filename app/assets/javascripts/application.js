@@ -20,20 +20,20 @@
 
 var ready;
 ready = function() {
-  $(function() {
-    $('.datetimepicker').datetimepicker();
+  $('.datetimepicker').datetimepicker();
+
+  $('.title').click(function(event) {
+    event.preventDefault();
   });
 
-  $(function() {
-    $("#clock").countdown("2017/09/22 16:00:00", {elapse: true}).on('update.countdown', function(event) {
-      if (event.elapsed) {
+  $("#clock").countdown("2017/09/22 16:00:00", {elapse: true}).on('update.countdown', function(event) {
+    if (event.elapsed) {
       $(this).text(event.strftime("GalaxeLAN har begynt!"));
-      } else {
+    } else {
       $(this).html(event.strftime('Bare <b>%-D</b> døgn, <b>%-H</b> %!H:time,timer;, <b>%-M</b> %!M:minutt,minutter; og <b>%-S</b> %!S:sekund,sekunder; igjen!'));
-      };
-    });
+    };
   });
 };
 
 $(document).ready(ready);
-$(document).on('page:load', ready);
+$(window).on("load", ready);
